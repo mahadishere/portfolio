@@ -2189,3 +2189,29 @@ input, select, textarea {
 			}
 
 		}
+
+		/* Link */
+
+		a:link {
+			color: darkslategrey;
+			background-color: transparent;
+			text-decoration: none;
+		  }
+		  
+		  a:visited {
+			color: darkslateblue;
+			background-color: transparent;
+			text-decoration: none;
+		  }
+		  
+		  a:hover {
+			color: darkolivegreen;
+			background-color: transparent;
+			text-decoration: underline;
+		  }
+		  
+		  a:active {
+			color: darkcyan;
+			background-color: transparent;
+			text-decoration: underline;
+		  }
