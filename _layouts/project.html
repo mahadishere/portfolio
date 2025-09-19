@@ -1,0 +1,15 @@
+---
+---
+<article id="{{ page.anchor_id }}" class="panel">
+	<header>
+		<a href="#work" style="float: right;"><button>Go Back</button></a>
+		<h2>{{ page.title }}</h2>
+		{% if page.external_url and page.external_label %}
+			<a href="{{ page.external_url }}" target="_blank" rel="noopener"><u>{{ page.external_label }}</u></a>
+		{% endif %}
+	</header>
+	<section>
+		{{ content }}
+	</section>
+</article>
+

@@ -1,0 +1,22 @@
+---
+layout: default
+title: Blog
+description: Engineering notes and case studies.
+---
+
+						<article id="blog" class="panel">
+							<header style="text-align: center;">
+								<h1><u>Blog</u></h1>
+							</header>
+							<section>
+								<ul>
+									{% for post in site.posts %}
+										<li>
+											<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+											<span> — {{ post.date | date: "%b %d, %Y" }}</span>
+										</li>
+									{% endfor %}
+								</ul>
+							</section>
+						</article>
+
