@@ -4,6 +4,8 @@ backend:
   branch: main
   auth_type: implicit
   app_id: Ov23liuEnkjLxD3asCap
+  auth_endpoint: https://github.com/login/oauth/authorize
+  auth_token_endpoint: https://github.com/login/oauth/access_token
 
 media_folder: "images"
 public_folder: "/images"
