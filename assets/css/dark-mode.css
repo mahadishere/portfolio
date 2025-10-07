@@ -95,6 +95,9 @@ form textarea:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
 }
 
 .theme-toggle:hover {
@@ -160,6 +163,8 @@ select:focus {
   color: var(--text-secondary);
   border-radius: 4px;
   font-size: 14px;
+  text-align: center;
+  display: block;
 }
 
 .search-box:focus {
