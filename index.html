@@ -22,11 +22,25 @@ description: Selected projects in AR/VR, apps, and games.
 									<h1><u>Projects</u></h1>
 								</header>
 								<section>
-									<div class="row aln-center">
+									<!-- Project filters -->
+									<div class="project-filters">
+										<button class="filter-btn active" data-filter="all">All</button>
+										<button class="filter-btn" data-filter="AR">AR</button>
+										<button class="filter-btn" data-filter="VR">VR</button>
+										<button class="filter-btn" data-filter="Game">Games</button>
+										<button class="filter-btn" data-filter="App">Apps</button>
+										<button class="filter-btn" data-filter="Medical">Medical</button>
+									</div>
+									
+									<!-- Search box -->
+									<input type="text" class="search-box" placeholder="Search projects..." id="project-search">
+									
+									<div class="row aln-center" id="projects-grid">
 										{% for project in site.projects %}
-											<div class="col-4">
-											<a href="#{{ project.anchor_id }}" class="image fit"><img loading="lazy" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}"></a>
+											<div class="col-4 project-card" data-tags="{{ project.tags | join: ',' }}">
+												<a href="#{{ project.anchor_id }}" class="image fit"><img loading="lazy" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}"></a>
 												<h2 style="text-align:center"><a href="#{{ project.anchor_id }}">{{ project.title }}</a></h2>
+												<p style="text-align:center; font-size: 0.9em; color: var(--text-muted);">{{ project.summary }}</p>
 											</div>
 										{% endfor %}
 									</div>

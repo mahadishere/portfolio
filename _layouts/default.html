@@ -4,6 +4,8 @@
 		{% include head.html %}
 	</head>
 	<body class="is-preload">
+		<a href="#main" class="skip-link">Skip to main content</a>
+		<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
 
 		<!-- Wrapper-->
 			<div id="wrapper">
@@ -27,6 +29,71 @@
 			<script src="{{ '/assets/js/breakpoints.min.js' | relative_url }}"></script>
 			<script src="{{ '/assets/js/util.js' | relative_url }}"></script>
 			<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+			<script>
+				// Dark mode functionality
+				function toggleTheme() {
+					const currentTheme = document.documentElement.getAttribute('data-theme');
+					const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+					document.documentElement.setAttribute('data-theme', newTheme);
+					localStorage.setItem('theme', newTheme);
+					updateThemeIcon(newTheme);
+				}
+
+				function updateThemeIcon(theme) {
+					const button = document.querySelector('.theme-toggle');
+					button.textContent = theme === 'dark' ? '☀️' : '🌙';
+				}
+
+				// Initialize theme
+				const savedTheme = localStorage.getItem('theme') || 'light';
+				document.documentElement.setAttribute('data-theme', savedTheme);
+				updateThemeIcon(savedTheme);
+
+				// Project filters and search
+				document.addEventListener('DOMContentLoaded', function() {
+					const filterButtons = document.querySelectorAll('.filter-btn');
+					const searchBox = document.getElementById('project-search');
+					const projectCards = document.querySelectorAll('.project-card');
+
+					// Filter functionality
+					filterButtons.forEach(button => {
+						button.addEventListener('click', function() {
+							// Update active button
+							filterButtons.forEach(btn => btn.classList.remove('active'));
+							this.classList.add('active');
+
+							const filter = this.getAttribute('data-filter');
+							filterProjects(filter);
+						});
+					});
+
+					// Search functionality
+					searchBox.addEventListener('input', function() {
+						const searchTerm = this.value.toLowerCase();
+						filterProjects('all', searchTerm);
+					});
+
+					function filterProjects(tagFilter, searchTerm = '') {
+						projectCards.forEach(card => {
+							const tags = card.getAttribute('data-tags').toLowerCase();
+							const title = card.querySelector('h2 a').textContent.toLowerCase();
+							const summary = card.querySelector('p').textContent.toLowerCase();
+							
+							const matchesTag = tagFilter === 'all' || tags.includes(tagFilter.toLowerCase());
+							const matchesSearch = searchTerm === '' || 
+								title.includes(searchTerm) || 
+								summary.includes(searchTerm) || 
+								tags.includes(searchTerm);
+
+							if (matchesTag && matchesSearch) {
+								card.style.display = 'block';
+							} else {
+								card.style.display = 'none';
+							}
+						});
+					}
+				});
+			</script>
 
 	</body>
 </html>
