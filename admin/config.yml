@@ -2,8 +2,7 @@ backend:
   name: github
   repo: mahadishere/portfolio
   branch: master
-  auth_type: implicit
-  app_id: Ov23liuEnkjLxD3asCap
+  site_domain: mahadishere.github.io
 
 media_folder: "images"
 public_folder: "/images"
