@@ -10,7 +10,75 @@
     <script>
       window.addEventListener('error', function (e) { console.error('GlobalError:', e.error || e.message); });
       window.addEventListener('unhandledrejection', function (e) { console.error('UnhandledRejection:', e.reason); });
+      window.CMS_MANUAL_INIT = true;
     </script>
-    <script src="https://unpkg.com/decap-cms@2.10.1/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@2.11.3/dist/decap-cms.js"></script>
+    <script>
+      (function() {
+        if (!window.CMS) return;
+        CMS.init({
+          config: {
+            backend: {
+              name: 'github',
+              repo: 'mahadishere/portfolio',
+              branch: 'master',
+              base_url: 'https://decap-oauth-nine.vercel.app',
+              auth_endpoint: '/api/auth'
+            },
+            media_folder: 'images',
+            public_folder: '/images',
+            collections: [
+              {
+                name: 'projects',
+                label: 'Projects',
+                folder: '_projects',
+                create: true,
+                slug: '{{slug}}',
+                fields: [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Anchor ID', name: 'anchor_id', widget: 'string', hint: 'Used for navigation links (e.g., hotspring)' },
+                  { label: 'Card Image', name: 'card_image', widget: 'image', hint: 'Path relative to images/ folder' },
+                  { label: 'Tags', name: 'tags', widget: 'list', hint: 'e.g., AR, VR, Game, App' },
+                  { label: 'Summary', name: 'summary', widget: 'text', hint: 'Short description for project cards' },
+                  { label: 'External URL', name: 'external_url', widget: 'string', required: false, hint: 'Link to live demo, GitHub, etc.' },
+                  { label: 'External Label', name: 'external_label', widget: 'string', required: false, hint: "Text for external link (e.g., 'Live Demo')" },
+                  { label: 'Content', name: 'body', widget: 'markdown', hint: 'Project details, images, etc.' }
+                ]
+              },
+              {
+                name: 'posts',
+                label: 'Blog Posts',
+                folder: '_posts',
+                create: true,
+                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+                fields: [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Description', name: 'description', widget: 'text', required: false },
+                  { label: 'Date', name: 'date', widget: 'datetime' },
+                  { label: 'Content', name: 'body', widget: 'markdown' }
+                ]
+              },
+              {
+                name: 'site_settings',
+                label: 'Site Settings',
+                files: [
+                  {
+                    file: '_config.yml',
+                    label: 'Site Configuration',
+                    name: 'config',
+                    fields: [
+                      { label: 'Site Title', name: 'title', widget: 'string' },
+                      { label: 'Site Description', name: 'description', widget: 'text' },
+                      { label: 'Base URL', name: 'baseurl', widget: 'string', hint: 'Leave as /portfolio for GitHub Pages' },
+                      { label: 'Site URL', name: 'url', widget: 'string', hint: 'https://mahadishere.github.io' }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
