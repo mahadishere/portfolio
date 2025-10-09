@@ -10,6 +10,26 @@
     <script>
       window.addEventListener('error', function (e) { console.error('GlobalError:', e.error || e.message); });
       window.addEventListener('unhandledrejection', function (e) { console.error('UnhandledRejection:', e.reason); });
+      // Bridge: capture OAuth messages and persist token for Decap
+      window.addEventListener('message', function (e) {
+        var data = e.data;
+        var token = null;
+        if (typeof data === 'string' && data.indexOf('authorization:github:success:') === 0) {
+          token = data.replace('authorization:github:success:', '');
+        } else if (data && typeof data === 'object' && data.type === 'authorization' && data.provider === 'github') {
+          token = data.token;
+        }
+        if (!token) return;
+        try {
+          // Store in both legacy and Decap keys; Decap will pick one
+          localStorage.setItem('netlify-cms-user', JSON.stringify({ token: token }));
+          localStorage.setItem('decap-cms-user', JSON.stringify({ token: token }));
+          // Give Decap a moment, then reload to start authenticated
+          setTimeout(function () { location.reload(); }, 50);
+        } catch (err) {
+          console.error('Failed to persist OAuth token:', err);
+        }
+      });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
