@@ -6,10 +6,11 @@
     <title>Content Manager</title>
   </head>
   <body>
-    <!-- Include the script that builds the page and powers Decap CMS -->
+
     <script>
       window.addEventListener('error', function (e) { console.error('GlobalError:', e.error || e.message); });
       window.addEventListener('unhandledrejection', function (e) { console.error('UnhandledRejection:', e.reason); });
+      window.addEventListener('message', function (e) { console.log('OAuth message received:', e.data); });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
