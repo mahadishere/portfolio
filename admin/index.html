@@ -10,7 +10,18 @@
     <script>
       window.addEventListener('error', function (e) { console.error('GlobalError:', e.error || e.message); });
       window.addEventListener('unhandledrejection', function (e) { console.error('UnhandledRejection:', e.reason); });
-      window.addEventListener('message', function (e) { console.log('OAuth message received:', e.data); });
+      window.addEventListener('message', function (e) {
+        console.log('OAuth message received:', e.data);
+        var isString = typeof e.data === 'string' && e.data.indexOf('authorization:github:success:') === 0;
+        var isObject = e.data && typeof e.data === 'object' && e.data.type === 'authorization' && e.data.provider === 'github';
+        if (isString || isObject) {
+          [250, 750, 1500, 3000].forEach(function (ms) {
+            setTimeout(function () {
+              window.postMessage(e.data, '*');
+            }, ms);
+          });
+        }
+      });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
