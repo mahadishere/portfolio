@@ -20,12 +20,15 @@
           token = data.token;
         }
         if (!token) return;
+        var payload = JSON.stringify({ token: token, backendName: 'github' });
         try {
-          // Store in both legacy and Decap keys; Decap will pick one
-          localStorage.setItem('netlify-cms-user', JSON.stringify({ token: token }));
-          localStorage.setItem('decap-cms-user', JSON.stringify({ token: token }));
+          // Store in both legacy and Decap keys and in session storage as well
+          localStorage.setItem('netlify-cms-user', payload);
+          localStorage.setItem('decap-cms-user', payload);
+          sessionStorage.setItem('netlify-cms-user', payload);
+          sessionStorage.setItem('decap-cms-user', payload);
           // Give Decap a moment, then reload to start authenticated
-          setTimeout(function () { location.reload(); }, 50);
+          setTimeout(function () { location.reload(); }, 100);
         } catch (err) {
           console.error('Failed to persist OAuth token:', err);
         }
