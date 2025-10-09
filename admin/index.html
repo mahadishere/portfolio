@@ -7,6 +7,10 @@
   </head>
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
+    <script>
+      window.addEventListener('error', function (e) { console.error('GlobalError:', e.error || e.message); });
+      window.addEventListener('unhandledrejection', function (e) { console.error('UnhandledRejection:', e.reason); });
+    </script>
     <script src="https://unpkg.com/decap-cms@2.10.1/dist/decap-cms.js"></script>
   </body>
 </html>
