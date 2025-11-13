@@ -1,29 +1,21 @@
-title: "Mahad Mufti – Portfolio"
-description: "Selected projects in AR/VR, apps, and games. Case studies, blog, and contact."
-timezone: UTC
-markdown: kramdown
 permalink: pretty
-
-# If this is a project site (username.github.io/repo), you may set baseurl: "/repo"
-# Leave blank to keep current relative paths working.
-baseurl: "/portfolio"
-url: "https://mahadishere.github.io"
-
-collections:
-  projects:
-    output: false
-    permalink: "/projects/:name/"
-
-# Defaults for posts
+markdown: kramdown
+url: https://mahadishere.github.io
 defaults:
   - scope:
       path: ""
       type: posts
     values:
       layout: post
-      author: "Mahad Mufti"
-
+      author: Mahad Mufti
+collections:
+  projects:
+    output: false
+    permalink: /projects/:name/
+title: Mahad's Portfolio
+timezone: UTC
 exclude:
   - README.txt
   - LICENSE.txt
-
+description: Hand curated projects in AR/VR, AI/MML, apps and games.
+baseurl: /portfolio
