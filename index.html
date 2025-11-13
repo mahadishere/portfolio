@@ -22,24 +22,42 @@ description: Selected projects in AR/VR, apps, and games.
 									<h1><u>Projects</u></h1>
 								</header>
 								<section>
-									<!-- Project filters -->
-									<div class="project-filters">
-										<button class="filter-btn active" data-filter="all">All</button>
-										<button class="filter-btn" data-filter="AR">AR</button>
-										<button class="filter-btn" data-filter="VR">VR</button>
-										<button class="filter-btn" data-filter="Game">Games</button>
-										<button class="filter-btn" data-filter="App">Apps</button>
-										<button class="filter-btn" data-filter="Medical">Medical</button>
+									<!-- Project search only (filters available via Work hover menu) -->
+									<div class="project-filters-modern">
+										<div class="filter-row">
+											<input type="text" class="search-box" placeholder="Search projects by name or keywords..." id="project-search">
+										</div>
+										<div id="filter-results-count" style="text-align: center; margin-top: 0.75em; font-size: 0.9em; color: var(--text-muted);"></div>
 									</div>
 									
-									<!-- Search box -->
-									<input type="text" class="search-box" placeholder="Search projects..." id="project-search">
-									
-									<div class="row aln-center" id="projects-grid">
+									<div class="row aln-center" id="projects-grid" style="margin-top: 2em;">
 										{% for project in site.projects %}
-											<div class="col-4 project-card" data-tags="{{ project.tags | join: ',' }}">
-												<a href="#{{ project.anchor_id }}" class="image fit"><img loading="lazy" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}"></a>
+											<div class="col-4 project-card" 
+												 data-xr="{{ project.xr_technology | default: 'none' }}"
+												 data-domain="{{ project.domain | join: ',' | default: 'none' }}"
+												 data-type="{{ project.project_type | join: ',' | default: 'none' }}"
+												 data-platform="{{ project.platform | default: 'none' }}"
+												 data-featured="{{ project.featured | default: false }}"
+												 data-tags="{{ project.tags | join: ',' | downcase }}"
+												 data-title="{{ project.title | downcase }}"
+												 data-summary="{{ project.summary | downcase }}">
+												<a href="#{{ project.anchor_id }}" class="image fit">
+													<img loading="lazy" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}">
+													{% if project.featured %}
+														<span class="featured-badge">★ Featured</span>
+													{% endif %}
+												</a>
 												<h2 style="text-align:center"><a href="#{{ project.anchor_id }}">{{ project.title }}</a></h2>
+												<div class="project-meta" style="text-align:center; margin-bottom: 0.5em;">
+													{% if project.xr_technology %}
+														<span class="project-badge badge-xr">{{ project.xr_technology }}</span>
+													{% endif %}
+													{% if project.domain %}
+														{% for d in project.domain %}
+															<span class="project-badge badge-domain">{{ d }}</span>
+														{% endfor %}
+													{% endif %}
+												</div>
 												<p style="text-align:center; font-size: 0.9em; color: var(--text-muted);">{{ project.summary }}</p>
 											</div>
 										{% endfor %}

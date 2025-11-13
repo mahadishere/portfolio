@@ -1,0 +1,412 @@
+# 🎨 Mahad Mufti's Portfolio Website - Cursor AI Rules
+
+> **Project Type:** Personal portfolio website showcasing AR/VR, medical imaging, and game development projects
+> **Tech Stack:** Jekyll static site generator + HTML/CSS/Sass + JavaScript (jQuery) + Netlify CMS
+> **Deployment:** GitHub Pages at `mahadishere.github.io/portfolio`
+
+---
+
+## 📐 Architecture Overview
+
+### Site Structure
+This is a **Jekyll-based static site** with the following architecture:
+
+- **Single-page application** using panel-based navigation with anchor links (`#work`, `#360lens`, etc.)
+- **Collection-based content management** via Jekyll collections (`_projects`, `_posts`)
+- **Netlify CMS integration** for non-technical content editing
+- **Dark mode support** with theme persistence via localStorage
+- **Client-side filtering & search** for project discovery
+
+### Key Directories
+
+```
+portfolio/
+├── _config.yml              # Jekyll configuration
+├── _includes/               # Reusable HTML components (head, nav, footer)
+├── _layouts/                # Page templates (default, project, case-study, post)
+├── _projects/               # Project markdown files (collection)
+├── _posts/                  # Blog post markdown files (collection)
+├── admin/                   # Netlify CMS configuration
+├── assets/                  # Compiled CSS/JS and source Sass files
+│   ├── css/                 # Compiled stylesheets
+│   ├── sass/                # Source Sass files
+│   └── js/                  # JavaScript files
+├── images/                  # Project images organized by project name
+├── blog/                    # Blog index page
+└── index.html               # Main homepage (projects showcase)
+```
+
+---
+
+## 🏗️ Architecture Patterns
+
+### 1. Content Management Pattern
+
+**Projects Collection** (`_projects/`)
+- Each project is a **markdown file with YAML frontmatter**
+- Collection configured in `_config.yml` with `output: false` (no individual pages generated)
+- Projects are rendered in `index.html` via Liquid templating
+
+**Project Frontmatter Schema (Multi-Dimensional Taxonomy):**
+```yaml
+---
+title: Project Name
+anchor_id: unique-id                # Used for anchor navigation
+card_image: images/path.png         # Thumbnail for project grid
+
+# Multi-dimensional Taxonomy (all optional)
+xr_technology: AR                   # AR, VR, MR, or XR
+domain:                             # Industry domains (can be multiple)
+  - Medical
+  - Manufacturing
+project_type:                       # Project types (can be multiple)
+  - App
+  - R&D
+  - CV
+platform: HoloLens                  # Primary platform
+featured: true                      # Mark as featured project
+
+tags: [Keywords, Additional]       # Additional keywords (optional)
+summary: Short description          # Displayed on cards
+external_url: https://...           # Optional link
+external_label: "Link Text"         # Optional label
+---
+Content goes here (Markdown)
+```
+
+**Taxonomy Categories:**
+- **XR Technology:** AR, VR, MR, XR (single value)
+- **Industry Domain:** Medical, Manufacturing, Commercial, Education, Entertainment (can be multiple)
+- **Project Type:** Game, App, R&D, CV (Computer Vision), AI (AI/ML), Tool (can be multiple)
+- **Platform:** HoloLens, Quest, PCVR, Mobile, Web, Desktop, Cross-Platform (single value)
+- **Featured:** Boolean flag to highlight important projects
+
+**Blog Posts Collection** (`_posts/`)
+- Standard Jekyll blog posts with date-based naming: `YYYY-MM-DD-slug.md`
+- Default layout: `post` (configured in `_config.yml`)
+- Default author: "Mahad Mufti"
+
+### 2. Layout System
+
+**Three main layouts:**
+
+1. **`default.html`** - Base template for all pages
+   - Includes: head, nav, footer, scripts
+   - Dark mode toggle button
+   - Wrapper structure for single-page design
+
+2. **`project.html`** - Simple project layout
+   - Minimal frontmatter requirements
+   - Back button to `#work`
+   - Used for projects that need custom HTML (currently not actively used)
+
+3. **`case-study.html`** - Advanced project layout (future use)
+   - Structured sections: Overview, Role, Tech Stack, Challenges, Results
+   - Link management
+   - Tag display
+   - Currently prepared but not actively used
+
+**Current Implementation Note:**
+- Most projects are **hardcoded directly in `index.html`** as `<article>` panels
+- This is a legacy pattern; new projects should consider using the layout system
+
+### 3. Navigation Pattern
+
+**Single-Page Anchor Navigation:**
+- Home panel: `#home`
+- Work/Projects grid: `#work`
+- Individual projects: `#360lens`, `#hotspring`, `#sldvr`, etc.
+- Each project panel includes a "Go Back" button linking to `#work`
+
+**Panel Structure:**
+```html
+<article id="unique-anchor" class="panel">
+  <header>
+    <a href="#work" style="float: right;"><button>Go Back</button></a>
+    <h2>Project Title</h2>
+    <a href="external-link" target="_blank" rel="noopener"><u>Link Label</u></a>
+  </header>
+  <section>
+    <!-- Project content -->
+  </section>
+</article>
+```
+
+### 4. Project Grid & Multi-Dimensional Filtering
+
+**Filtering System** (Dropdown-based, in `default.html` script):
+- **XR Technology Dropdown:** AR, VR, MR, XR
+- **Industry Domain Dropdown:** Medical, Manufacturing, Commercial, Education, Entertainment
+- **Project Type Dropdown:** Games, Applications, R&D, Computer Vision, AI/ML, Tools
+- **Search Box:** Text-based filtering by title, summary, and tags
+- **Reset Button:** Clears all active filters
+- **Results Counter:** Shows "Showing X of Y projects"
+
+**Multi-Dimensional Logic:**
+- Projects can belong to multiple categories (domain and project_type support arrays)
+- Filtering uses **AND logic** (all active filters must match)
+- Projects appear when they match ALL selected criteria
+- Easily manageable through Netlify CMS dropdown fields
+
+**Grid Implementation with Data Attributes:**
+```html
+<div class="row aln-center" id="projects-grid">
+  {% for project in site.projects %}
+    <div class="col-4 project-card" 
+         data-xr="{{ project.xr_technology }}"
+         data-domain="{{ project.domain | join: ',' }}"
+         data-type="{{ project.project_type | join: ',' }}"
+         data-platform="{{ project.platform }}"
+         data-featured="{{ project.featured }}"
+         data-tags="{{ project.tags | join: ',' | downcase }}"
+         data-title="{{ project.title | downcase }}"
+         data-summary="{{ project.summary | downcase }}">
+      <a href="#{{ project.anchor_id }}">
+        <img src="{{ project.card_image | relative_url }}">
+        {% if project.featured %}
+          <span class="featured-badge">★ Featured</span>
+        {% endif %}
+      </a>
+      <div class="project-meta">
+        {% if project.xr_technology %}
+          <span class="project-badge badge-xr">{{ project.xr_technology }}</span>
+        {% endif %}
+        {% for domain in project.domain %}
+          <span class="project-badge badge-domain">{{ domain }}</span>
+        {% endfor %}
+      </div>
+      <h2>{{ project.title }}</h2>
+      <p>{{ project.summary }}</p>
+    </div>
+  {% endfor %}
+</div>
+```
+
+**Visual Features:**
+- **Category Badges:** Color-coded badges for XR technology and domains
+- **Featured Badge:** Gold star badge for highlighted projects
+- **Responsive Design:** Mobile-friendly dropdown layout
+
+### 5. Theme System
+
+**Dark Mode Implementation:**
+- Toggle button in `default.html`
+- Uses `data-theme` attribute on `<html>` element
+- Persists preference in localStorage
+- CSS custom properties in `dark-mode.css`
+- Icons: 🌙 for light mode, ☀️ for dark mode
+
+### 6. Image Organization
+
+**Convention:**
+- Images stored in `/images/ProjectName/` folders
+- Organized by project (360Lens/, Apriltag/, Dicom/, etc.)
+- Referenced via Liquid relative_url filter: `{{ '/images/path.png' | relative_url }}`
+
+**Gallery Pattern:**
+```html
+<div class="gallery">
+  <h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
+  <div class="gallery-grid">
+    <a href="{{ '/images/Project/image.png' | relative_url }}" data-gallery="project-name">
+      <img loading="lazy" src="{{ '/images/Project/image.png' | relative_url }}" alt="Description">
+    </a>
+  </div>
+</div>
+```
+
+### 7. Netlify CMS Integration
+
+**Configuration** (`admin/config.yml`):
+- Backend: GitHub (repo: mahadishere/portfolio)
+- OAuth via Decap (Vercel-hosted)
+- Collections: projects, posts, site_settings
+- Media folder: `/images`
+
+**Content Editing:**
+- Non-technical users can edit via `/admin` interface
+- Changes commit directly to GitHub master branch
+- Automatic deployment via GitHub Pages
+
+---
+
+## 🎯 Development Conventions
+
+### File Naming
+- **Projects**: `lowercase-with-hyphens.md` in `_projects/`
+- **Posts**: `YYYY-MM-DD-title.md` in `_posts/`
+- **Images**: Organized in folders matching project names
+
+### Code Style
+- **HTML/Liquid**: Follow existing indentation (tabs)
+- **CSS**: Use Sass partials in `assets/sass/libs/`
+- **JavaScript**: jQuery-based, inline in `default.html`
+- **Accessibility**: Include `alt` attributes, `rel="noopener"` for external links
+
+### Adding New Projects
+
+**Option 1: Via Netlify CMS** (Recommended)
+1. Navigate to `/admin`
+2. Create new project with all required fields
+3. Content automatically added to `_projects/`
+
+**Option 2: Manual (Current Pattern)**
+1. Add project markdown file to `_projects/` with frontmatter
+2. Add project panel `<article>` to `index.html`
+3. Ensure `anchor_id` matches between both locations
+4. Add images to `/images/ProjectName/` folder
+
+**Note:** There's currently a **dual implementation** - both collection data AND hardcoded HTML. Future refactor should consolidate to use layouts exclusively.
+
+### Styling Guidelines
+- Use CSS custom properties for theming (defined in `dark-mode.css`)
+- Responsive breakpoints managed via `breakpoints.min.js`
+- Grid system: `row` with `col-*` classes
+- Utility classes: `aln-center`, `image fit`
+
+### External Links
+- Always use `target="_blank" rel="noopener"` for security
+- Use `<u>` tags for link text styling
+- Examples: "Official Webpage", "Video Demo on Youtube", "Steam Game Link"
+
+---
+
+## 🔧 Technical Constraints
+
+### Jekyll Configuration
+- **Base URL:** `/portfolio` (GitHub Pages project site)
+- **Permalink style:** `pretty` (removes .html extensions)
+- **Markdown engine:** kramdown
+- **Collections output:** `false` for projects (no individual pages)
+
+### Dependencies
+- **jQuery** for DOM manipulation
+- **Font Awesome** for icons
+- **Sass** for styling (compiled to CSS)
+- No build process required for Jekyll (GitHub Pages handles it)
+
+### Browser Support
+- Modern browsers with JavaScript enabled
+- Dark mode requires CSS custom properties support
+- LocalStorage for theme persistence
+
+---
+
+## 🚨 Important Notes
+
+### DO's ✅
+- ✅ Maintain the single-page panel navigation pattern
+- ✅ Use `anchor_id` consistently across frontmatter and HTML
+- ✅ Keep image folders organized by project name
+- ✅ Include "Go Back" buttons in project panels
+- ✅ Use lazy loading for images: `loading="lazy"`
+- ✅ Test dark mode compatibility for new styles
+- ✅ Use relative_url Liquid filter for all asset paths
+- ✅ Follow accessibility best practices
+
+### DON'Ts ❌
+- ❌ Don't break the anchor-based navigation
+- ❌ Don't modify `_config.yml` without testing build
+- ❌ Don't add projects without corresponding images
+- ❌ Don't remove the baseurl (required for GitHub Pages)
+- ❌ Don't hardcode absolute paths (use Liquid filters)
+- ❌ Don't disable the dark mode toggle
+- ❌ Don't modify CMS config without testing OAuth flow
+
+### Known Technical Debt
+1. **Dual Content System:** Projects exist both as collection files AND hardcoded HTML in `index.html`
+   - *Future:* Migrate all projects to use layout system exclusively
+2. **Case Study Layout:** Exists but not utilized
+   - *Future:* Transition complex projects to use `case-study.html`
+3. **Blog Underutilized:** Only one post exists
+   - *Future:* Consider expanding blog content or removing
+
+---
+
+## 🧪 Testing Checklist
+
+When making changes, verify:
+- [ ] Dark mode works on new/modified pages
+- [ ] Project filtering and search work correctly
+- [ ] All images load with correct relative URLs
+- [ ] External links open in new tabs
+- [ ] Anchor navigation works (no broken `#` links)
+- [ ] Responsive layout on mobile/tablet/desktop
+- [ ] Jekyll builds without errors: `bundle exec jekyll serve`
+- [ ] Changes reflect on GitHub Pages after push
+
+---
+
+## 📝 Content Strategy
+
+### Project Categories
+- **AR (Augmented Reality):** 360Lens, Hotspring, AprilTag
+- **VR (Virtual Reality):** SolidVR
+- **Medical:** 360Lens, DICOM Measurement Tools
+- **Games:** Vampire Capitalist, Zombie Tag Royale
+- **Apps:** Various utility applications
+
+### Project Information Standards
+Each project should include:
+- Clear title and summary
+- Technology stack/tools used
+- YouTube demo or external link when available
+- High-quality images (screenshots, renders)
+- Gallery for multiple images
+- Context about the project's purpose
+
+---
+
+## 🎓 Learning Resources
+
+### Jekyll Documentation
+- Jekyll Collections: https://jekyllrb.com/docs/collections/
+- Liquid Templating: https://shopify.github.io/liquid/
+- GitHub Pages: https://docs.github.com/en/pages
+
+### Project Structure
+- Study `_layouts/case-study.html` for future project structure
+- Reference `admin/config.yml` for CMS field definitions
+- See `assets/sass/libs/_vars.scss` for design system variables
+
+---
+
+## 🤖 AI Assistant Guidelines
+
+When working on this project:
+
+1. **Preserve the existing architecture** - This is a working portfolio site with a specific navigation pattern
+2. **Maintain visual consistency** - Match existing styling and layout patterns
+3. **Consider mobile users** - Ensure responsive design for all changes
+4. **Respect the content strategy** - This showcases professional AR/VR/medical work
+5. **Test dark mode** - Any CSS changes must work in both themes
+6. **Document major changes** - Update this file if architecture changes
+7. **Ask before refactoring** - Some "technical debt" may be intentional for simplicity
+
+### When Adding Projects
+- Ask if this should use the collection system or be hardcoded
+- Confirm image assets are available before creating markup
+- Verify tags for filtering compatibility
+- Check if case-study layout is appropriate vs. custom HTML
+
+### When Modifying Styles
+- Use existing Sass variables and mixins
+- Test changes in both light and dark modes
+- Verify responsive behavior across breakpoints
+- Don't break existing project layouts
+
+---
+
+## 📞 Project Context
+
+**Owner:** Mahad Mufti  
+**Domain:** AR/VR Development, Medical Imaging, Game Development  
+**Purpose:** Professional portfolio to showcase technical projects  
+**Audience:** Potential employers, collaborators, clients  
+**Deployment:** GitHub Pages (auto-deploy from master branch)
+
+---
+
+**Last Updated:** November 2025  
+**Cursor AI:** Use this file as the source of truth for all architectural decisions and patterns.
+

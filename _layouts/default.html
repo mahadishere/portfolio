@@ -49,48 +49,291 @@
 				document.documentElement.setAttribute('data-theme', savedTheme);
 				updateThemeIcon(savedTheme);
 
-				// Project filters and search
+				// Multi-dimensional project filters and search
 				document.addEventListener('DOMContentLoaded', function() {
-					const filterButtons = document.querySelectorAll('.filter-btn');
+					const xrFilter = document.getElementById('filter-xr');
+					const domainFilter = document.getElementById('filter-domain');
+					const typeFilter = document.getElementById('filter-type');
 					const searchBox = document.getElementById('project-search');
+					const resetBtn = document.getElementById('reset-filters');
 					const projectCards = document.querySelectorAll('.project-card');
+					const resultsCount = document.getElementById('filter-results-count');
+					const megaLinks = document.querySelectorAll('.mega-menu a[data-filter-kind]');
+					const workToggle = document.querySelector('.nav-item-work > a');
+					const workLink = document.querySelector('.nav-item-work > a.work-link');
+					// Internal state to support filtering even if dropdowns are hidden
+					let xrState = 'all';
+					let domainState = 'all';
+					let typeState = 'all';
 
-					// Filter functionality
-					filterButtons.forEach(button => {
-						button.addEventListener('click', function() {
-							// Update active button
-							filterButtons.forEach(btn => btn.classList.remove('active'));
-							this.classList.add('active');
-
-							const filter = this.getAttribute('data-filter');
-							filterProjects(filter);
+					// Add event listeners to all filters
+					if (xrFilter) xrFilter.addEventListener('change', applyFilters);
+					if (domainFilter) domainFilter.addEventListener('change', applyFilters);
+					if (typeFilter) typeFilter.addEventListener('change', applyFilters);
+					if (searchBox) searchBox.addEventListener('input', applyFilters);
+					if (resetBtn) {
+						resetBtn.addEventListener('click', function() {
+							if (xrFilter) xrFilter.value = 'all'; else xrState = 'all';
+							if (domainFilter) domainFilter.value = 'all'; else domainState = 'all';
+							if (typeFilter) typeFilter.value = 'all'; else typeState = 'all';
+							if (searchBox) searchBox.value = '';
+							applyFilters();
 						});
-					});
+					}
 
-					// Search functionality
-					searchBox.addEventListener('input', function() {
-						const searchTerm = this.value.toLowerCase();
-						filterProjects('all', searchTerm);
-					});
+					// Expose helper to set filters from anywhere (e.g., mega menu, deep links)
+					function applyProjectFiltersFromObject(filters) {
+						if (!filters) return;
+						if (typeof filters.xr !== 'undefined') {
+							if (xrFilter) xrFilter.value = filters.xr || 'all';
+							xrState = filters.xr || 'all';
+						}
+						if (typeof filters.domain !== 'undefined') {
+							if (domainFilter) domainFilter.value = filters.domain || 'all';
+							domainState = filters.domain || 'all';
+						}
+						if (typeof filters.type !== 'undefined') {
+							if (typeFilter) typeFilter.value = filters.type || 'all';
+							typeState = filters.type || 'all';
+						}
+						if (searchBox && typeof filters.q !== 'undefined') searchBox.value = filters.q || '';
+						applyFilters();
+					}
+					window.applyProjectFilters = applyProjectFiltersFromObject;
 
-					function filterProjects(tagFilter, searchTerm = '') {
+					// Mega menu link handling
+					if (megaLinks && megaLinks.length) {
+						megaLinks.forEach(link => {
+							link.addEventListener('click', function(e) {
+								e.preventDefault();
+								const kind = this.getAttribute('data-filter-kind'); // xr | domain | type
+								const value = this.getAttribute('data-filter-value');
+								const pending = {};
+								if (kind === 'xr') pending.xr = value;
+								if (kind === 'domain') pending.domain = value;
+								if (kind === 'type') pending.type = value;
+								// If we're already on #work, apply immediately; else store and navigate
+								if (location.hash.indexOf('#work') === 0) {
+									applyProjectFiltersFromObject({
+										xr: pending.xr || 'all',
+										domain: pending.domain || 'all',
+										type: pending.type || 'all'
+									});
+									try { sessionStorage.removeItem('pendingFilters'); } catch (_) {}
+								} else {
+									try { sessionStorage.setItem('pendingFilters', JSON.stringify(pending)); } catch (_) {}
+									location.hash = '#work';
+								}
+								if (workToggle) workToggle.setAttribute('aria-expanded', 'false');
+							});
+						});
+					}
+
+					// Toggle aria-expanded based on hover/focus state for a11y
+					if (workToggle) {
+						const workItem = workToggle.closest('.nav-item-work');
+						if (workItem) {
+							workItem.addEventListener('mouseenter', () => workToggle.setAttribute('aria-expanded', 'true'));
+							workItem.addEventListener('mouseleave', () => workToggle.setAttribute('aria-expanded', 'false'));
+							workItem.addEventListener('focusin', () => workToggle.setAttribute('aria-expanded', 'true'));
+							workItem.addEventListener('focusout', () => workToggle.setAttribute('aria-expanded', 'false'));
+						}
+					}
+
+					// Clicking Work clears filters and shows the Work panel with featured projects
+					if (workLink) {
+						workLink.addEventListener('click', function() {
+							// reset internal states
+							xrState = 'all';
+							domainState = 'all';
+							typeState = 'all';
+							// reset dropdowns if present
+							if (xrFilter) xrFilter.value = 'all';
+							if (domainFilter) domainFilter.value = 'all';
+							if (typeFilter) typeFilter.value = 'all';
+							if (searchBox) searchBox.value = '';
+							try { sessionStorage.removeItem('pendingFilters'); } catch (_) {}
+							// ensure hash is clean (#work without query)
+							setTimeout(() => {
+								if (location.hash.indexOf('#work') !== 0) {
+									location.hash = '#work';
+								} else if (location.hash !== '#work') {
+									history.replaceState(null, '', '#work');
+								}
+								applyFilters();
+							}, 0);
+						});
+					}
+
+					// Multi-dimensional filtering function
+					function applyFilters() {
+						const xrValue = xrFilter ? xrFilter.value : xrState;
+						const domainValue = domainFilter ? domainFilter.value : domainState;
+						const typeValue = typeFilter ? typeFilter.value : typeState;
+						const searchTerm = searchBox ? searchBox.value.toLowerCase() : '';
+						const noActiveFilters = (xrValue === 'all' && domainValue === 'all' && typeValue === 'all' && searchTerm === '');
+
+						let visibleCount = 0;
+						let totalCount = 0;
+
 						projectCards.forEach(card => {
-							const tags = card.getAttribute('data-tags').toLowerCase();
-							const title = card.querySelector('h2 a').textContent.toLowerCase();
-							const summary = card.querySelector('p').textContent.toLowerCase();
+							totalCount++;
 							
-							const matchesTag = tagFilter === 'all' || tags.includes(tagFilter.toLowerCase());
-							const matchesSearch = searchTerm === '' || 
-								title.includes(searchTerm) || 
-								summary.includes(searchTerm) || 
-								tags.includes(searchTerm);
+							// Get card data attributes
+							const cardXR = card.getAttribute('data-xr') || 'none';
+							const cardDomains = (card.getAttribute('data-domain') || 'none').split(',');
+							const cardTypes = (card.getAttribute('data-type') || 'none').split(',');
+							const cardFeatured = (card.getAttribute('data-featured') || 'false') === 'true';
+							const cardTags = card.getAttribute('data-tags') || '';
+							const cardTitle = card.getAttribute('data-title') || '';
+							const cardSummary = card.getAttribute('data-summary') || '';
 
-							if (matchesTag && matchesSearch) {
+							// Check XR technology filter
+							const matchesXR = xrValue === 'all' || cardXR === xrValue;
+
+							// Check domain filter (project can have multiple domains)
+							const matchesDomain = domainValue === 'all' || 
+								cardDomains.includes(domainValue) ||
+								cardDomains.includes('none');
+
+							// Check type filter (project can have multiple types)
+							const matchesType = typeValue === 'all' || 
+								cardTypes.includes(typeValue) ||
+								cardTypes.includes('none');
+
+							// Check search term
+							const matchesSearch = searchTerm === '' ||
+								cardTitle.includes(searchTerm) ||
+								cardSummary.includes(searchTerm) ||
+								cardTags.includes(searchTerm);
+
+							// Show card only if it matches ALL active filters (AND logic)
+							// Special rule: when no filters are active, show only featured projects
+							const passesFeaturedRule = noActiveFilters ? cardFeatured : true;
+
+							if (matchesXR && matchesDomain && matchesType && matchesSearch && passesFeaturedRule) {
 								card.style.display = 'block';
+								visibleCount++;
 							} else {
 								card.style.display = 'none';
 							}
 						});
+
+						// Update results count
+						if (resultsCount) {
+							if (visibleCount === totalCount) {
+								resultsCount.textContent = `Showing all ${totalCount} projects`;
+							} else {
+								resultsCount.textContent = `Showing ${visibleCount} of ${totalCount} projects`;
+							}
+						}
+					}
+
+					// Deep-linking: parse hash like #work?xr=AR&domain=Medical&type=Game&q=search
+					function syncFiltersFromHash() {
+						const hash = location.hash || '';
+						if (!hash.includes('#work')) return;
+						const qIndex = hash.indexOf('?');
+						if (qIndex === -1) {
+							// No query: apply pending filters if present, else default
+							let pending = null;
+							try { pending = JSON.parse(sessionStorage.getItem('pendingFilters') || 'null'); } catch (_) {}
+							if (pending) {
+								applyProjectFiltersFromObject({
+									xr: pending.xr || 'all',
+									domain: pending.domain || 'all',
+									type: pending.type || 'all'
+								});
+								try { sessionStorage.removeItem('pendingFilters'); } catch (_) {}
+							} else {
+								applyFilters();
+							}
+							return;
+						}
+						const qs = hash.substring(qIndex + 1);
+						const params = new URLSearchParams(qs);
+						applyProjectFiltersFromObject({
+							xr: params.get('xr') || 'all',
+							domain: params.get('domain') || 'all',
+							type: params.get('type') || 'all',
+							q: params.get('q') || ''
+						});
+					}
+					window.addEventListener('hashchange', syncFiltersFromHash);
+
+					// Initial filter application (respect deep links)
+					syncFiltersFromHash();
+
+					// ----- Faux scrollbar sync for mega menu -----
+					const catScroller = document.querySelector('.mega-categories');
+					const track = document.querySelector('.mega-scrollbar');
+					const thumb = document.querySelector('.mega-scrollbar-thumb');
+
+					function updateThumb() {
+						if (!catScroller || !track || !thumb) return;
+						const visible = catScroller.clientWidth;
+						const total = catScroller.scrollWidth;
+						const trackW = track.clientWidth;
+						const ratio = Math.max(visible / total, 0.05);
+						const thumbW = Math.max(trackW * ratio, 20);
+						const maxLeft = trackW - thumbW;
+						const scrollRatio = catScroller.scrollLeft / (total - visible || 1);
+						const left = maxLeft * scrollRatio;
+						thumb.style.width = `${thumbW}px`;
+						thumb.style.transform = `translateX(${left}px)`;
+					}
+
+					let dragging = false;
+					let dragStartX = 0;
+					let dragStartLeft = 0;
+
+					function onThumbDown(e) {
+						dragging = true;
+						dragStartX = e.clientX;
+						const matrix = new DOMMatrix(getComputedStyle(thumb).transform);
+						dragStartLeft = matrix.m41 || 0;
+						e.preventDefault();
+					}
+					function onMove(e) {
+						if (!dragging) return;
+						const trackW = track.clientWidth;
+						const thumbW = thumb.clientWidth;
+						const maxLeft = trackW - thumbW;
+						let left = Math.min(Math.max(dragStartLeft + (e.clientX - dragStartX), 0), maxLeft);
+						thumb.style.transform = `translateX(${left}px)`;
+						// Map thumb to scrollLeft
+						const total = catScroller.scrollWidth;
+						const visible = catScroller.clientWidth;
+						const scrollMax = total - visible;
+						catScroller.scrollLeft = (left / maxLeft) * scrollMax;
+					}
+					function onUp() { dragging = false; }
+
+					function onTrackClick(e) {
+						if (e.target === thumb) return; // handled by drag
+						const rect = track.getBoundingClientRect();
+						const clickX = e.clientX - rect.left;
+						const total = catScroller.scrollWidth;
+						const visible = catScroller.clientWidth;
+						const trackW = track.clientWidth;
+						const targetRatio = clickX / trackW;
+						catScroller.scrollLeft = targetRatio * (total - visible);
+					}
+
+					if (catScroller && track && thumb) {
+						catScroller.addEventListener('scroll', updateThumb, { passive: true });
+						window.addEventListener('resize', updateThumb);
+						thumb.addEventListener('mousedown', onThumbDown);
+						window.addEventListener('mousemove', onMove);
+						window.addEventListener('mouseup', onUp);
+						track.addEventListener('mousedown', onTrackClick);
+						// Update when menu opens (hover)
+						const workItem = document.querySelector('.nav-item-work');
+						if (workItem) {
+							workItem.addEventListener('mouseenter', updateThumb);
+							workItem.addEventListener('focusin', updateThumb);
+						}
+						updateThumb();
 					}
 				});
 			</script>

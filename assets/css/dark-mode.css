@@ -9,6 +9,21 @@
   --shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.25);
   --nav-bg: rgba(0, 0, 0, 0.75);
   --nav-text: #ffffff;
+  /* High-quality system font stack */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  /* High-contrast menu palette (light) */
+  --menu-bg: #ffffff;
+  --menu-card-bg: #f6f6f6;
+  --menu-border: #cfcfcf;
+  --menu-link: #333333;
+  --menu-link-hover: #111111;
+  --menu-hover-bg: #ffffff;
+  --menu-hover-border: #bdbdbd;
+  --menu-bullet: #666666;
+  --menu-scrollbar-thumb: #cfcfcf; /* light grey for visibility */
+  --menu-item-font-size: 1.0rem;
+  --menu-item-pad-top: 0.5rem;
+  --menu-item-pad-bottom: 0.5rem;
 }
 
 [data-theme="dark"] {
@@ -21,6 +36,19 @@
   --shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
   --nav-bg: rgba(255, 255, 255, 0.1);
   --nav-text: #ffffff;
+  /* High-contrast menu palette (dark) */
+  --menu-bg: #121212;
+  --menu-card-bg: #1b1b1b;
+  --menu-border: #3a3a3a;
+  --menu-link: #e0e0e0;
+  --menu-link-hover: #ffffff;
+  --menu-hover-bg: #242424;
+  --menu-hover-border: #565656;
+  --menu-bullet: #a0a0a0;
+  --menu-scrollbar-thumb: #cfcfcf; /* light grey in dark mode */
+  --menu-item-font-size: 1.0rem;
+  --menu-item-pad-top: 0.5rem;
+  --menu-item-pad-bottom: 0.5rem;
 }
 
 /* Apply variables to existing styles */
@@ -35,10 +63,22 @@
 
 body, input, textarea, select {
   color: var(--text-secondary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
 }
 
 strong, b, h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  text-rendering: optimizeLegibility;
 }
 
 header > p {
@@ -198,10 +238,426 @@ select:focus {
   min-height: 2.5em;
   display: flex;
   align-items: center;
+  justify-content: center;   /* ensure horizontal centering */
+  text-align: center;        /* center multiline text */
 }
 
 .project-card p {
   flex-grow: 1;
   margin: 0;
   padding-bottom: 1em;
+}
+
+/* Modern Dropdown Filter Styles */
+.project-filters-modern {
+  background: transparent; /* remove grey background */
+  padding: 0.75em 0;       /* slimmer padding */
+  border-radius: 0;
+  margin: 1.5em auto;
+  max-width: 900px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 200px;
+  flex: 1;
+}
+
+.filter-group label {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-dropdown {
+  width: 100%;
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-dropdown:hover {
+  border-color: var(--text-secondary);
+}
+
+.filter-dropdown:focus {
+  background: var(--bg-primary);
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+  border-color: #007acc;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 450px;
+  flex: 2;
+  margin: 0;
+  padding: 0.45em 0.8em;   /* decreased height */
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-size: 0.9em;
+  text-align: center;       /* center text and caret */
+}
+
+.search-box::placeholder { text-align: center; }
+.search-box::-webkit-input-placeholder { text-align: center; }
+.search-box::-moz-placeholder { text-align: center; }
+.search-box:-ms-input-placeholder { text-align: center; }
+
+.reset-btn {
+  padding: 0.6em 1.2em;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.reset-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+/* Project Badges */
+.project-badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  margin: 0.2em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-xr {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.badge-domain {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.project-meta {
+  min-height: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Featured Badge */
+.featured-badge {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+  color: #1a1a1a;
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.project-card a.image {
+  position: relative;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 736px) {
+  .filter-row {
+    flex-direction: column;
+    gap: 0.8em;
+  }
+  
+  .filter-group {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  .reset-btn {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  
+  .project-filters-modern {
+    padding: 1em;
+  }
+  
+  #filter-results-count {
+    font-size: 0.85em;
+    padding: 0 1em;
+  }
+}
+
+/* ---------- Nav Hover Mega Menu ---------- */
+.nav-item-work {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-item-work .mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  right: auto;
+  background: var(--menu-bg);
+  border: 1px solid var(--menu-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+  padding: 1.25rem 1rem;
+  width: min(1100px, 95vw); /* give more horizontal room for wider subcategory panes */
+  font-size: 0.9rem; /* base font size inside menu */
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 10px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+  z-index: 1000;
+}
+
+.nav-item-work:hover .mega-menu,
+.nav-item-work:focus-within .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.mega-inner {
+  overflow: visible;
+}
+
+.mega-scrollbar {
+  position: relative;
+  height: 6px;
+  margin: 6px 6px 0 6px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.08);
+}
+[data-theme="dark"] .mega-scrollbar {
+  background: rgba(255,255,255,0.12);
+}
+.mega-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--menu-scrollbar-thumb);
+  cursor: grab;
+  transition: background 120ms ease;
+}
+.mega-scrollbar-thumb:active {
+  cursor: grabbing;
+}
+
+.mega-categories {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;                 /* Firefox - thin bar */
+  scrollbar-color: var(--menu-scrollbar-thumb) transparent;
+}
+
+.mega-categories::-webkit-scrollbar {    /* WebKit horizontal bar height */
+  height: 6px;
+}
+.mega-categories::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mega-categories::-webkit-scrollbar-thumb {
+  background: var(--menu-scrollbar-thumb);
+  border-radius: 999px;
+}
+
+/* Ensure scrollbar coloring applies even if the scroller is attached to a parent */
+.mega-menu {
+  scrollbar-width: thin;
+  scrollbar-color: var(--menu-scrollbar-thumb) transparent;
+}
+.mega-menu::-webkit-scrollbar {
+  height: 6px;
+}
+.mega-menu::-webkit-scrollbar-thumb {
+  background-color: var(--menu-scrollbar-thumb) !important;
+  border-radius: 999px;
+}
+.mega-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Dark mode: force visible light-grey bar for the categories scroller */
+html[data-theme="dark"] .mega-categories {
+  scrollbar-color: #cfcfcf rgba(255,255,255,0.12) !important; /* Firefox thumb/track */
+}
+html[data-theme="dark"] .mega-categories::-webkit-scrollbar {
+  height: 8px;
+}
+html[data-theme="dark"] .mega-categories::-webkit-scrollbar-thumb {
+  background-color: #cfcfcf !important;
+  border-radius: 999px;
+}
+html[data-theme="dark"] .mega-categories::-webkit-scrollbar-track {
+  background-color: rgba(255,255,255,0.12) !important;
+}
+
+/* Dark mode: apply the same forced coloring to the menu container (some browsers attach the scrollbar to it) */
+html[data-theme="dark"] .mega-menu {
+  scrollbar-color: #cfcfcf rgba(255,255,255,0.12) !important;
+}
+html[data-theme="dark"] .mega-menu::-webkit-scrollbar {
+  height: 8px;
+}
+html[data-theme="dark"] .mega-menu::-webkit-scrollbar-thumb {
+  background-color: #cfcfcf !important;
+  border-radius: 999px;
+}
+html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
+  background-color: rgba(255,255,255,0.12) !important;
+}
+
+/* Hide native scrollbars to avoid double bars; rely on custom faux scrollbar */
+.mega-categories,
+.mega-menu {
+  scrollbar-width: none;           /* Firefox */
+  -ms-overflow-style: none;        /* IE/Edge legacy */
+}
+.mega-categories::-webkit-scrollbar,
+.mega-menu::-webkit-scrollbar {
+  display: none;                   /* WebKit */
+}
+
+.mega-category {
+  background: var(--menu-card-bg);
+  border: 1px solid var(--menu-border);
+  border-radius: 10px;
+  min-width: 320px;          /* wider subcategory content area */
+  max-width: 420px;
+  flex: 0 0 auto;
+  padding: 1rem 1.25rem;
+  overflow: visible;
+}
+
+.mega-category h4 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mega-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  overflow: visible; /* No scrolling - show all items */
+}
+
+/* Bullet-style list items with proper spacing */
+.mega-sublist li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0; /* Increased spacing between items */
+  padding: 0;
+}
+.mega-sublist li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  flex-shrink: 0;
+  align-self: center;
+  margin: 0;
+}
+
+.mega-sublist li a {
+  display: flex !important;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--menu-item-pad-top) 0.75rem var(--menu-item-pad-bottom) 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 6px;
+  line-height: 1.2;
+  font-size: var(--menu-item-font-size);
+  font-weight: 500;
+  text-align: left;
+  letter-spacing: 0.01em;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Ensure menu link colors & size respect theme and override nav defaults */
+#nav .mega-menu a {
+  color: var(--menu-link) !important;
+  font-size: var(--menu-item-font-size);       /* bind to adjustable variable */
+  line-height: 1.25;
+}
+
+.mega-sublist li a:hover,
+.mega-sublist li a:focus {
+  background: var(--menu-hover-bg);
+  color: var(--menu-link-hover);
+  outline: none;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  box-shadow: inset 0 0 0 1px var(--menu-hover-border);
+}
+
+.mega-sublist li:hover::before {
+  background: var(--menu-link-hover);
+}
+
+@media screen and (max-width: 980px) {
+  .nav-item-work .mega-menu {
+    width: 90vw;
+    left: 50%;
+    transform: translate(-50%, 10px);
+  }
+  .nav-item-work:hover .mega-menu,
+  .nav-item-work:focus-within .mega-menu {
+    transform: translate(-50%, 0);
+  }
 }

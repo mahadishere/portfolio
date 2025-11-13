@@ -18,7 +18,57 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Anchor ID", name: "anchor_id", widget: "string", hint: "Used for navigation links (e.g., hotspring)"}
       - {label: "Card Image", name: "card_image", widget: "image", hint: "Path relative to images/ folder"}
-      - {label: "Tags", name: "tags", widget: "list", hint: "e.g., AR, VR, Game, App"}
+      
+      # Multi-dimensional Taxonomy
+      - label: "XR Technology"
+        name: "xr_technology"
+        widget: "select"
+        required: false
+        options: ["AR", "VR", "MR", "XR"]
+        hint: "Select the primary XR technology category"
+      
+      - label: "Industry Domain"
+        name: "domain"
+        widget: "select"
+        required: false
+        multiple: true
+        options: 
+          - {label: "Medical / Healthcare", value: "Medical"}
+          - {label: "Manufacturing / CAD", value: "Manufacturing"}
+          - {label: "Retail / Commercial", value: "Commercial"}
+          - {label: "Education", value: "Education"}
+          - {label: "Entertainment", value: "Entertainment"}
+        hint: "Select one or more industry domains (can select multiple)"
+      
+      - label: "Project Type"
+        name: "project_type"
+        widget: "select"
+        required: false
+        multiple: true
+        options:
+          - {label: "Game", value: "Game"}
+          - {label: "Application", value: "App"}
+          - {label: "Research & Development", value: "R&D"}
+          - {label: "Computer Vision", value: "CV"}
+          - {label: "AI/ML", value: "AI"}
+          - {label: "Tool/Utility", value: "Tool"}
+        hint: "Select one or more project types (can select multiple)"
+      
+      - label: "Platform"
+        name: "platform"
+        widget: "select"
+        required: false
+        options: ["HoloLens", "Quest", "PCVR", "Mobile", "Web", "Desktop", "Cross-Platform"]
+        hint: "Primary platform/device"
+      
+      - label: "Featured Project"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Mark as a featured/highlight project"
+      
+      - {label: "Tags", name: "tags", widget: "list", required: false, hint: "Additional keywords (optional)"}
       - {label: "Summary", name: "summary", widget: "text", hint: "Short description for project cards"}
       - {label: "External URL", name: "external_url", widget: "string", required: false, hint: "Link to live demo, GitHub, etc."}
       - {label: "External Label", name: "external_label", widget: "string", required: false, hint: "Text for external link (e.g., 'Live Demo')"}
