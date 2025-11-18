@@ -6,6 +6,12 @@
 	<body class="is-preload">
 		<a href="#main" class="skip-link">Skip to main content</a>
 		<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
+		<button class="music-toggle" onclick="toggleMusic()" aria-label="Toggle background music">🔇</button>
+		<audio id="background-music" loop>
+			<source src="{{ '/assets/audio/background-music.mp3' | relative_url }}" type="audio/mpeg">
+			<source src="{{ '/assets/audio/background-music.ogg' | relative_url }}" type="audio/ogg">
+			Your browser does not support the audio element.
+		</audio>
 
 		<!-- Wrapper-->
 			<div id="wrapper">
@@ -18,10 +24,15 @@
 						{{ content }}
 					</div>
 
-			</div>
+				<!-- Footer -->
+					<div id="footer">
+						<ul class="copyright">
+							<li>&copy; {{ "now" | date: "%Y" }} {{ site.title }}</li>
+							<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+						</ul>
+					</div>
 
-			<!-- Footer -->
-				{% include footer.html %}
+			</div>
 
 		<!-- Scripts -->
 			<script src="{{ '/assets/js/jquery.min.js' | relative_url }}"></script>
@@ -49,6 +60,196 @@
 				document.documentElement.setAttribute('data-theme', savedTheme);
 				updateThemeIcon(savedTheme);
 
+				// Music functionality
+				let musicPlaying = false;
+				const audio = document.getElementById('background-music');
+				const musicButton = document.querySelector('.music-toggle');
+
+				// Load saved music preference
+				const savedMusicState = localStorage.getItem('musicPlaying');
+				const shouldAutoPlay = savedMusicState === 'true' || savedMusicState === null; // null = first visit, try autoplay
+				
+				if (shouldAutoPlay && audio) {
+					// Try to autoplay on first visit or if user previously had it playing
+					audio.play().then(() => {
+						musicPlaying = true;
+						localStorage.setItem('musicPlaying', 'true');
+						updateMusicIcon(true);
+					}).catch(e => {
+						// Autoplay blocked - user interaction required
+						console.log('Music autoplay blocked. User interaction required to play music.');
+						musicPlaying = false;
+						if (savedMusicState === null) {
+							// First visit - don't save preference yet
+						} else {
+							localStorage.setItem('musicPlaying', 'false');
+						}
+						updateMusicIcon(false);
+						
+						// Try to play on first user interaction
+						const playMusicOnInteraction = () => {
+							if (audio.paused && shouldAutoPlay) {
+								audio.play().then(() => {
+									musicPlaying = true;
+									localStorage.setItem('musicPlaying', 'true');
+									updateMusicIcon(true);
+								}).catch(e => console.log('Music play failed:', e));
+							}
+						};
+						
+						// Listen for first user interaction
+						document.addEventListener('click', playMusicOnInteraction, { once: true });
+						document.addEventListener('scroll', playMusicOnInteraction, { once: true });
+						document.addEventListener('touchstart', playMusicOnInteraction, { once: true });
+					});
+				} else if (savedMusicState === 'false') {
+					// User explicitly turned it off
+					musicPlaying = false;
+					updateMusicIcon(false);
+				}
+
+				function toggleMusic() {
+					if (musicPlaying) {
+						audio.pause();
+						musicPlaying = false;
+						localStorage.setItem('musicPlaying', 'false');
+						updateMusicIcon(false);
+					} else {
+						audio.play().then(() => {
+							musicPlaying = true;
+							localStorage.setItem('musicPlaying', 'true');
+							updateMusicIcon(true);
+						}).catch(e => {
+							console.log('Error playing music:', e);
+							musicPlaying = false;
+							updateMusicIcon(false);
+						});
+					}
+				}
+
+				function updateMusicIcon(playing) {
+					if (musicButton) {
+						musicButton.textContent = playing ? '🔊' : '🔇';
+						musicButton.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
+					}
+				}
+
+				// Update icon when audio state changes (e.g., when audio ends or errors)
+				if (audio) {
+					audio.addEventListener('play', () => {
+						musicPlaying = true;
+						updateMusicIcon(true);
+					});
+					audio.addEventListener('pause', () => {
+						musicPlaying = false;
+						updateMusicIcon(false);
+					});
+					audio.addEventListener('ended', () => {
+						musicPlaying = false;
+						updateMusicIcon(false);
+					});
+				}
+
+				// Ensure intro video plays (handle autoplay restrictions)
+				document.addEventListener('DOMContentLoaded', function() {
+					const introVideo = document.querySelector('#home .pic video');
+					if (introVideo) {
+						// Try to play the video
+						introVideo.play().catch(e => {
+							// Autoplay was blocked - this is normal in some browsers
+							// The video will play when user interacts with the page
+							console.log('Video autoplay blocked, will play on user interaction');
+						});
+						
+						// Play video on any user interaction (click, scroll, etc.)
+						const playVideo = () => {
+							if (introVideo.paused) {
+								introVideo.play().catch(e => console.log('Video play failed:', e));
+							}
+						};
+						
+						// Listen for user interactions
+						document.addEventListener('click', playVideo, { once: true });
+						document.addEventListener('scroll', playVideo, { once: true });
+						document.addEventListener('touchstart', playVideo, { once: true });
+					}
+				});
+
+				// Toggle #main width based on active panel
+				function updateMainWidth() {
+					const main = document.getElementById('main');
+					if (!main) return;
+					
+					// Check hash first for immediate feedback
+					const hash = window.location.hash || '';
+					const isHomePanel = hash === '#home' || hash === '' || hash === '#';
+					
+					if (isHomePanel) {
+						// Also verify the panel is actually visible
+						const introPanel = main.querySelector('.panel.intro');
+						if (introPanel) {
+							main.classList.add('has-intro');
+							return;
+						}
+					}
+					
+					// Check for active intro panel (not inactive and visible)
+					const introPanel = main.querySelector('.panel.intro');
+					const isIntroActive = introPanel && 
+						!introPanel.classList.contains('inactive') && 
+						introPanel.style.display !== 'none' &&
+						introPanel.offsetParent !== null; // Check if actually visible
+					
+					if (isIntroActive) {
+						main.classList.add('has-intro');
+					} else {
+						main.classList.remove('has-intro');
+					}
+				}
+
+				// Listen for hash changes and panel switches
+				window.addEventListener('hashchange', function() {
+					// Immediate check based on hash
+					updateMainWidth();
+					// Also check after panel transition completes (main.js uses 250ms + 500ms delays)
+					setTimeout(updateMainWidth, 100);
+					setTimeout(updateMainWidth, 300);
+					setTimeout(updateMainWidth, 800); // After full transition
+				});
+				
+				// Use MutationObserver to watch for panel class and style changes
+				document.addEventListener('DOMContentLoaded', function() {
+					// Initial check
+					setTimeout(updateMainWidth, 100);
+					
+					const main = document.getElementById('main');
+					if (main) {
+						const observer = new MutationObserver(function(mutations) {
+							// Debounce rapid changes
+							clearTimeout(observer.timeout);
+							observer.timeout = setTimeout(function() {
+								updateMainWidth();
+							}, 50);
+						});
+						
+						const panels = main.querySelectorAll('.panel');
+						panels.forEach(function(panel) {
+							// Watch for class changes
+							observer.observe(panel, { 
+								attributes: true, 
+								attributeFilter: ['class'],
+								attributeOldValue: false
+							});
+							// Watch for style/display changes
+							observer.observe(panel, { 
+								attributes: true, 
+								attributeFilter: ['style'],
+								attributeOldValue: false
+							});
+						});
+					}
+				});
+
 				// Multi-dimensional project filters and search
 				document.addEventListener('DOMContentLoaded', function() {
 					const xrFilter = document.getElementById('filter-xr');
@@ -65,6 +266,12 @@
 					let xrState = 'all';
 					let domainState = 'all';
 					let typeState = 'all';
+					let gameState = 'all';
+					let virtualTourState = 'all';
+					let visualization3dState = 'all';
+					let modelling3dState = 'all';
+					let aiMlState = 'all';
+					let cvState = 'all';
 
 					// Add event listeners to all filters
 					if (xrFilter) xrFilter.addEventListener('change', applyFilters);
@@ -76,6 +283,12 @@
 							if (xrFilter) xrFilter.value = 'all'; else xrState = 'all';
 							if (domainFilter) domainFilter.value = 'all'; else domainState = 'all';
 							if (typeFilter) typeFilter.value = 'all'; else typeState = 'all';
+							gameState = 'all';
+							virtualTourState = 'all';
+							visualization3dState = 'all';
+							modelling3dState = 'all';
+							aiMlState = 'all';
+							cvState = 'all';
 							if (searchBox) searchBox.value = '';
 							applyFilters();
 						});
@@ -96,6 +309,12 @@
 							if (typeFilter) typeFilter.value = filters.type || 'all';
 							typeState = filters.type || 'all';
 						}
+						if (typeof filters.game !== 'undefined') gameState = filters.game || 'all';
+						if (typeof filters['virtual-tour'] !== 'undefined') virtualTourState = filters['virtual-tour'] || 'all';
+						if (typeof filters['3d-visualization'] !== 'undefined') visualization3dState = filters['3d-visualization'] || 'all';
+						if (typeof filters['3d-modelling'] !== 'undefined') modelling3dState = filters['3d-modelling'] || 'all';
+						if (typeof filters['ai-ml'] !== 'undefined') aiMlState = filters['ai-ml'] || 'all';
+						if (typeof filters.cv !== 'undefined') cvState = filters.cv || 'all';
 						if (searchBox && typeof filters.q !== 'undefined') searchBox.value = filters.q || '';
 						applyFilters();
 					}
@@ -106,18 +325,30 @@
 						megaLinks.forEach(link => {
 							link.addEventListener('click', function(e) {
 								e.preventDefault();
-								const kind = this.getAttribute('data-filter-kind'); // xr | domain | type
+								const kind = this.getAttribute('data-filter-kind'); // xr | domain | type | game | virtual-tour | 3d-visualization | 3d-modelling | ai-ml | cv
 								const value = this.getAttribute('data-filter-value');
 								const pending = {};
 								if (kind === 'xr') pending.xr = value;
 								if (kind === 'domain') pending.domain = value;
 								if (kind === 'type') pending.type = value;
+								if (kind === 'game') pending.game = value;
+								if (kind === 'virtual-tour') pending['virtual-tour'] = value;
+								if (kind === '3d-visualization') pending['3d-visualization'] = value;
+								if (kind === '3d-modelling') pending['3d-modelling'] = value;
+								if (kind === 'ai-ml') pending['ai-ml'] = value;
+								if (kind === 'cv') pending.cv = value;
 								// If we're already on #work, apply immediately; else store and navigate
 								if (location.hash.indexOf('#work') === 0) {
 									applyProjectFiltersFromObject({
 										xr: pending.xr || 'all',
 										domain: pending.domain || 'all',
-										type: pending.type || 'all'
+										type: pending.type || 'all',
+										game: pending.game || 'all',
+										'virtual-tour': pending['virtual-tour'] || 'all',
+										'3d-visualization': pending['3d-visualization'] || 'all',
+										'3d-modelling': pending['3d-modelling'] || 'all',
+										'ai-ml': pending['ai-ml'] || 'all',
+										cv: pending.cv || 'all'
 									});
 									try { sessionStorage.removeItem('pendingFilters'); } catch (_) {}
 								} else {
@@ -125,8 +356,8 @@
 									location.hash = '#work';
 								}
 								if (workToggle) workToggle.setAttribute('aria-expanded', 'false');
-							});
 						});
+					});
 					}
 
 					// Toggle aria-expanded based on hover/focus state for a11y
@@ -147,6 +378,12 @@
 							xrState = 'all';
 							domainState = 'all';
 							typeState = 'all';
+							gameState = 'all';
+							virtualTourState = 'all';
+							visualization3dState = 'all';
+							modelling3dState = 'all';
+							aiMlState = 'all';
+							cvState = 'all';
 							// reset dropdowns if present
 							if (xrFilter) xrFilter.value = 'all';
 							if (domainFilter) domainFilter.value = 'all';
@@ -170,8 +407,14 @@
 						const xrValue = xrFilter ? xrFilter.value : xrState;
 						const domainValue = domainFilter ? domainFilter.value : domainState;
 						const typeValue = typeFilter ? typeFilter.value : typeState;
+						const gameValue = gameState;
+						const virtualTourValue = virtualTourState;
+						const visualization3dValue = visualization3dState;
+						const modelling3dValue = modelling3dState;
+						const aiMlValue = aiMlState;
+						const cvValue = cvState;
 						const searchTerm = searchBox ? searchBox.value.toLowerCase() : '';
-						const noActiveFilters = (xrValue === 'all' && domainValue === 'all' && typeValue === 'all' && searchTerm === '');
+						const noActiveFilters = (xrValue === 'all' && domainValue === 'all' && typeValue === 'all' && gameValue === 'all' && virtualTourValue === 'all' && visualization3dValue === 'all' && modelling3dValue === 'all' && aiMlValue === 'all' && cvValue === 'all' && searchTerm === '');
 
 						let visibleCount = 0;
 						let totalCount = 0;
@@ -183,6 +426,12 @@
 							const cardXR = card.getAttribute('data-xr') || 'none';
 							const cardDomains = (card.getAttribute('data-domain') || 'none').split(',');
 							const cardTypes = (card.getAttribute('data-type') || 'none').split(',');
+							const cardGame = card.getAttribute('data-game') || 'none';
+							const cardVirtualTour = card.getAttribute('data-virtual-tour') || 'none';
+							const cardVisualization3d = card.getAttribute('data-3d-visualization') || 'none';
+							const cardModelling3d = card.getAttribute('data-3d-modelling') || 'none';
+							const cardAiMl = card.getAttribute('data-ai-ml') || 'none';
+							const cardCv = card.getAttribute('data-cv') || 'none';
 							const cardFeatured = (card.getAttribute('data-featured') || 'false') === 'true';
 							const cardTags = card.getAttribute('data-tags') || '';
 							const cardTitle = card.getAttribute('data-title') || '';
@@ -201,8 +450,26 @@
 								cardTypes.includes(typeValue) ||
 								cardTypes.includes('none');
 
+							// Check game filter
+							const matchesGame = gameValue === 'all' || cardGame === gameValue;
+
+							// Check virtual tour filter
+							const matchesVirtualTour = virtualTourValue === 'all' || cardVirtualTour === virtualTourValue;
+
+							// Check 3D visualization filter
+							const matchesVisualization3d = visualization3dValue === 'all' || cardVisualization3d === visualization3dValue;
+
+							// Check 3D modelling filter
+							const matchesModelling3d = modelling3dValue === 'all' || cardModelling3d === modelling3dValue;
+
+							// Check AI/ML filter
+							const matchesAiMl = aiMlValue === 'all' || cardAiMl === aiMlValue;
+
+							// Check CV filter
+							const matchesCv = cvValue === 'all' || cardCv === cvValue;
+
 							// Check search term
-							const matchesSearch = searchTerm === '' ||
+							const matchesSearch = searchTerm === '' || 
 								cardTitle.includes(searchTerm) ||
 								cardSummary.includes(searchTerm) ||
 								cardTags.includes(searchTerm);
@@ -211,7 +478,7 @@
 							// Special rule: when no filters are active, show only featured projects
 							const passesFeaturedRule = noActiveFilters ? cardFeatured : true;
 
-							if (matchesXR && matchesDomain && matchesType && matchesSearch && passesFeaturedRule) {
+							if (matchesXR && matchesDomain && matchesType && matchesGame && matchesVirtualTour && matchesVisualization3d && matchesModelling3d && matchesAiMl && matchesCv && matchesSearch && passesFeaturedRule) {
 								card.style.display = 'block';
 								visibleCount++;
 							} else {
@@ -242,7 +509,13 @@
 								applyProjectFiltersFromObject({
 									xr: pending.xr || 'all',
 									domain: pending.domain || 'all',
-									type: pending.type || 'all'
+									type: pending.type || 'all',
+									game: pending.game || 'all',
+									'virtual-tour': pending['virtual-tour'] || 'all',
+									'3d-visualization': pending['3d-visualization'] || 'all',
+									'3d-modelling': pending['3d-modelling'] || 'all',
+									'ai-ml': pending['ai-ml'] || 'all',
+									cv: pending.cv || 'all'
 								});
 								try { sessionStorage.removeItem('pendingFilters'); } catch (_) {}
 							} else {
@@ -256,6 +529,12 @@
 							xr: params.get('xr') || 'all',
 							domain: params.get('domain') || 'all',
 							type: params.get('type') || 'all',
+							game: params.get('game') || 'all',
+							'virtual-tour': params.get('virtual-tour') || 'all',
+							'3d-visualization': params.get('3d-visualization') || 'all',
+							'3d-modelling': params.get('3d-modelling') || 'all',
+							'ai-ml': params.get('ai-ml') || 'all',
+							cv: params.get('cv') || 'all',
 							q: params.get('q') || ''
 						});
 					}

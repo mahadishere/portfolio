@@ -6,14 +6,20 @@ description: Selected projects in AR/VR, apps, and games.
 
 						<!-- Me -->
 							<article id="home" class="panel intro">
-								<header>
-									<h1>Mahad Mufti's Portfolio</h1>
-									<p>Projects</p>
-								</header>
-								<a href="#work" class="jumplink pic">
-									<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
-									<img src="{{ '/images/me.png' | relative_url }}" alt="Portrait of Mahad Mufti" />
-								</a>
+								<div class="intro-content">
+									<header>
+										<h1>Mahad's Portfolio</h1>
+									</header>
+									<a href="#work" class="jumplink pic">
+										<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
+										<video autoplay loop muted playsinline>
+											<source src="{{ '/images/intro-video.mp4' | relative_url }}" type="video/mp4">
+											<source src="{{ '/images/intro-video.webm' | relative_url }}" type="video/webm">
+											<!-- Fallback image if video is not supported -->
+											<img src="{{ '/images/me.png' | relative_url }}" alt="Portrait of Mahad Mufti" />
+										</video>
+									</a>
+								</div>
 							</article>
 
 						<!-- Work -->
@@ -36,6 +42,12 @@ description: Selected projects in AR/VR, apps, and games.
 												 data-xr="{{ project.xr_technology | default: 'none' }}"
 												 data-domain="{{ project.domain | join: ',' | default: 'none' }}"
 												 data-type="{{ project.project_type | join: ',' | default: 'none' }}"
+												 data-game="{% if project.project_type contains 'Game' %}Game{% else %}none{% endif %}"
+												 data-virtual-tour="{% if project.project_type contains 'Virtual Tour' %}Virtual Tour{% else %}none{% endif %}"
+												 data-3d-visualization="{% if project.project_type contains '3D Visualization' %}3D Visualization{% else %}none{% endif %}"
+												 data-3d-modelling="{% if project.project_type contains '3D Model' %}3D Model{% else %}none{% endif %}"
+												 data-ai-ml="{% if project.project_type contains 'AI' %}AI{% else %}none{% endif %}"
+												 data-cv="{% if project.project_type contains 'CV' %}CV{% else %}none{% endif %}"
 												 data-platform="{{ project.platform | default: 'none' }}"
 												 data-featured="{{ project.featured | default: false }}"
 												 data-tags="{{ project.tags | join: ',' | downcase }}"
@@ -68,7 +80,7 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- Hotspring -->
 					<article id="hotspring" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button>Go Back</button></a>
+							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
 							<h2>Hotspring Whirlpools</h2>
 							<a href="https://hotspring.de/whirlpool-collection/" target="_blank" rel="noopener"><u>Official Webpage</u></a>
 						</header>
@@ -94,7 +106,7 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- SolidVR -->
 					<article id="sldvr" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button>Go Back</button></a>
+							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
 							<h2>SolidVR</h2>
 							<a href="https://www.solidpro.de/solidvr/" target="_blank" rel="noopener"><u>Official Release</u></a>
 						</header>
@@ -121,7 +133,7 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- 360Lens -->
 					<article id="360lens" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button>Go Back</button></a>
+							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
 							<h2>360Lens</h2>
 							<a href="https://youtu.be/EGvS5mp_gVU" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
 							<a href="https://youtu.be/TOhFonl6oh4" target="_blank" rel="noopener"><u>Promotional Video</u></a>
@@ -146,7 +158,7 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- Dicom -->
 					<article id="dicom" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button>Go Back</button></a>
+							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
 							<h2>Dicom Measurement Tools</h2>
 							<a href="https://youtu.be/nqj3Ak4Js-U" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
 							<p>Note: Video shows an older version; latest has improved rendering speed and fidelity.</p>
@@ -179,7 +191,7 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- April Tag 3 -->
 					<article id="aprltg" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button>Go Back</button></a>
+							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
 							<h2>AprilTag 3 for Unity</h2>
 							<a href="https://youtu.be/lhwf0SVN_68" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
 							<p>Note: Special thanks to Keijiro for the AprilTag support for Unity.</p>
@@ -206,7 +218,7 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- Vampire Capitalist -->
 					<article id="VC" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button>Go Back</button></a>
+							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
 							<h2>Vampire Capitalist</h2>
 							<a href="https://youtu.be/mv0gncg3PaI" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
 						</header>
@@ -229,7 +241,7 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- Zombie Tag Royale -->
 					<article id="ztr" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button>Go Back</button></a>
+							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
 							<h2>Zombie Tag Royale</h2>
 							<a href="https://store.steampowered.com/app/1194220/Zombie_Tag_Royale/" target="_blank" rel="noopener"><u>Steam Game Link</u></a>
 							<p>Note: Beta version; development suspended thereafter.</p>

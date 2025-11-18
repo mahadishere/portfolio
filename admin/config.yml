@@ -24,7 +24,7 @@ collections:
         name: "xr_technology"
         widget: "select"
         required: false
-        options: ["AR", "VR", "MR", "XR"]
+        options: ["AR", "VR", "MR"]
         hint: "Select the primary XR technology category"
       
       - label: "Industry Domain"
@@ -35,7 +35,7 @@ collections:
         options: 
           - {label: "Medical / Healthcare", value: "Medical"}
           - {label: "Manufacturing / CAD", value: "Manufacturing"}
-          - {label: "Retail / Commercial", value: "Commercial"}
+          - {label: "Architecture", value: "Architecture"}
           - {label: "Education", value: "Education"}
           - {label: "Entertainment", value: "Entertainment"}
         hint: "Select one or more industry domains (can select multiple)"
@@ -47,7 +47,9 @@ collections:
         multiple: true
         options:
           - {label: "Game", value: "Game"}
-          - {label: "Application", value: "App"}
+          - {label: "Virtual Tour", value: "Virtual Tour"}
+          - {label: "3D Visualization", value: "3D Visualization"}
+          - {label: "3D Model", value: "3D Model"}
           - {label: "Research & Development", value: "R&D"}
           - {label: "Computer Vision", value: "CV"}
           - {label: "AI/ML", value: "AI"}

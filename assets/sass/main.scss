@@ -4,7 +4,7 @@
 @import 'libs/vendor';
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('fontawesome-all.min.css');
 
 /*
@@ -146,8 +146,8 @@
 	}
 
 	body, input, textarea, select {
-		font-family: 'Source Sans Pro', sans-serif;
-		font-weight: 300;
+		font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		font-weight: 400;
 		color: #777777;
 		font-size: 20pt;
 		line-height: 1.75em;
@@ -170,7 +170,7 @@
 	}
 
 	strong, b, h1, h2, h3, h4, h5, h6 {
-		font-weight: 400;
+		font-weight: 600;
 		color: #363636;
 	}
 
@@ -658,8 +658,15 @@
 		box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.25);
 		@include vendor('transition', (
 			'min-height 0.5s ease-in-out',
-			'max-height 0.5s ease-in-out'
+			'max-height 0.5s ease-in-out',
+			'width 0.5s ease-in-out'
 		));
+
+		&.has-intro {
+			width: 50em;
+			max-width: 100%;
+			margin: 0 auto;
+		}
 
 		> .panel {
 			@include vendor('transition', 'opacity 0.25s ease-in-out');
@@ -678,17 +685,30 @@
 
 			&.intro {
 				padding: 0;
-				height: 20em;
+				height: auto;
+				min-height: 20em;
 				@include vendor('display', 'flex');
-				@include vendor('flex-direction', 'row');
+				@include vendor('flex-direction', 'column');
 				@include vendor('align-items', 'center');
+				background: var(--bg-primary);
+				width: 50em;
+				max-width: 80%;
+				margin: 0 auto;
+
+				> .intro-content {
+					@include vendor('display', 'flex');
+					@include vendor('flex-direction', 'row');
+					@include vendor('align-items', 'center');
+					width: 100%;
+					height: 20em;
+				}
 
 				.pic {
 					text-decoration: none;
 					position: relative;
 					@include vendor('flex-grow', '0');
 					@include vendor('flex-shrink', '0');
-					width: 17em;
+					width: 25em;
 					height: 100%;
 
 					&:before {
@@ -702,7 +722,8 @@
 						z-index: 1;
 					}
 
-					img {
+					img,
+					video {
 						position: relative;
 						display: block;
 						position: absolute;
@@ -752,15 +773,23 @@
 				}
 
 				header {
-					@include vendor('flex-grow', '1');
-					@include vendor('flex-shrink', '1');
-					padding: 3.5em 2.5em;
-					margin-bottom: 0;
-					width: 100%;
+					@include vendor('flex-grow', '0');
+					@include vendor('flex-shrink', '0');
+					padding: 0;
+					margin: 0;
+					width: 25em;
+					height: 100%;
+					@include vendor('display', 'flex');
+					@include vendor('align-items', 'center');
+					@include vendor('justify-content', 'center');
+					background: var(--bg-primary);
 
 					h1 {
 						line-height: 1.25em;
-						margin-bottom: 0;
+						margin: 0;
+						padding: 1.5em 2em;
+						width: 100%;
+						text-align: center;
 					}
 
 					p {
@@ -771,8 +800,10 @@
 				}
 
 				@include breakpoint('<=medium') {
-					@include vendor('flex-direction', 'column');
-					height: auto;
+					> .intro-content {
+						@include vendor('flex-direction', 'column');
+						height: auto;
+					}
 
 					.pic {
 						height: 25em;
@@ -780,8 +811,9 @@
 					}
 
 					header {
-						padding: 4em;
+						padding: 0;
 						text-align: center;
+						width: 100%;
 					}
 				}
 
@@ -791,7 +823,7 @@
 					}
 
 					header {
-						padding: 2.75em 2em 2.5em 2em;
+						padding: 0;
 
 						p {
 							font-size: 1em;
