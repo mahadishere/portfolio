@@ -2,10 +2,10 @@
 title: SolidVR
 anchor_id: sldvr
 card_image: /images/solid-vr.png
-xr_technology: VR
 domain:
   - Manufacturing
 project_type:
+  - VR
   - Tool
   - R&D
 platform: PCVR

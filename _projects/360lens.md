@@ -2,10 +2,10 @@
 title: 360Lens
 anchor_id: 360lens
 card_image: /images/1.-360-lens-main.png
-xr_technology: AR
 domain:
   - Medical
 project_type:
+  - AR
   - App
   - R&D
   - CV

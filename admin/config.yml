@@ -29,13 +29,6 @@ collections:
         hint: "Thumbnail image. Use path like: images/360Lens/filename.png (navigate folders in image picker)"
       
       # Multi-dimensional Taxonomy
-      - label: "XR Technology"
-        name: "xr_technology"
-        widget: "select"
-        required: false
-        options: ["AR", "VR", "MR"]
-        hint: "Select the primary XR technology category"
-      
       - label: "Industry Domain"
         name: "domain"
         widget: "select"
@@ -47,6 +40,7 @@ collections:
           - {label: "Architecture", value: "Architecture"}
           - {label: "Education", value: "Education"}
           - {label: "Entertainment", value: "Entertainment"}
+          - {label: "E-Commerce", value: "E-Commerce"}
         hint: "Select one or more industry domains (can select multiple)"
       
       - label: "Project Type"
@@ -55,6 +49,12 @@ collections:
         required: false
         multiple: true
         options:
+          # XR Technologies
+          - {label: "AR (Augmented Reality)", value: "AR"}
+          - {label: "VR (Virtual Reality)", value: "VR"}
+          - {label: "MR (Mixed Reality)", value: "MR"}
+          - {label: "WebXR", value: "WebXR"}
+          # Project Types
           - {label: "Game", value: "Game"}
           - {label: "Virtual Tour", value: "Virtual Tour"}
           - {label: "3D Visualization", value: "3D Visualization"}
@@ -63,7 +63,8 @@ collections:
           - {label: "Computer Vision", value: "CV"}
           - {label: "AI/ML", value: "AI"}
           - {label: "Tool/Utility", value: "Tool"}
-        hint: "Select one or more project types (can select multiple)"
+          - {label: "App/Application", value: "App"}
+        hint: "Select one or more project types (can select multiple) - includes XR technologies and project categories"
       
       - label: "Platform"
         name: "platform"

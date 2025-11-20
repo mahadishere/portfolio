@@ -39,7 +39,7 @@ description: Selected projects in AR/VR, apps, and games.
 									<div class="row aln-center" id="projects-grid" style="margin-top: 2em;">
 										{% for project in site.projects %}
 											<div class="col-4 project-card" 
-												 data-xr="{{ project.xr_technology | default: 'none' }}"
+												 data-xr="{% if project.project_type contains 'AR' %}AR{% elsif project.project_type contains 'VR' %}VR{% elsif project.project_type contains 'MR' %}MR{% else %}none{% endif %}"
 												 data-domain="{{ project.domain | join: ',' | default: 'none' }}"
 												 data-type="{{ project.project_type | join: ',' | default: 'none' }}"
 												 data-game="{% if project.project_type contains 'Game' %}Game{% else %}none{% endif %}"
@@ -61,8 +61,14 @@ description: Selected projects in AR/VR, apps, and games.
 												</a>
 												<h2 style="text-align:center"><a href="#{{ project.anchor_id }}">{{ project.title }}</a></h2>
 												<div class="project-meta" style="text-align:center; margin-bottom: 0.5em;">
-													{% if project.xr_technology %}
-														<span class="project-badge badge-xr">{{ project.xr_technology }}</span>
+													{% if project.project_type contains 'AR' %}
+														<span class="project-badge badge-xr">AR</span>
+													{% elsif project.project_type contains 'VR' %}
+														<span class="project-badge badge-xr">VR</span>
+													{% elsif project.project_type contains 'MR' %}
+														<span class="project-badge badge-xr">MR</span>
+													{% elsif project.project_type contains 'WebXR' %}
+														<span class="project-badge badge-xr">WebXR</span>
 													{% endif %}
 													{% if project.domain %}
 														{% for d in project.domain %}

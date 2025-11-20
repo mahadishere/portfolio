@@ -2,9 +2,10 @@
 title: Hotspring Whirlpools
 anchor_id: hotspring
 card_image: /images/caldera.png
-xr_technology: AR
-domain: null
+domain:
+  - E-Commerce
 project_type:
+  - AR
   - App
 platform: Mobile
 featured: true

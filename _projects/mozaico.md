@@ -2,7 +2,11 @@
 title: Mozaico
 anchor_id: mozaico
 card_image: /images/m-main.png
-xr_technology: AR
+domain:
+  - E-Commerce
+project_type:
+  - AR
+  - App
 platform: Mobile
 featured: true
 summary: Transform Your Space with Mozaico AR
