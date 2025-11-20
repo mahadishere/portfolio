@@ -21,4 +21,4 @@ gallery_images:
   - path: /images/360lens.png
     alt: Hip implant planning demo
 ---
-This product optimizes pre-surgical planning through the power of Hololens 2 for hip, knee & shoulder implant surgeries.
+This product optimises pre-surgical planning through the power of Hololens 2 for hip, knee & shoulder implant surgeries.
