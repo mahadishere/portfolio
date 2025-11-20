@@ -1,7 +1,7 @@
 ---
 title: 360Lens
 anchor_id: 360lens
-card_image: images/projects/360lens/1.-360-lens-main.png
+card_image: /images/projects/360lens/1.-360-lens-main.png
 domain:
   - Medical
 project_type:

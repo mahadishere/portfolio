@@ -11,9 +11,9 @@ platform: Mobile
 featured: true
 summary: Transform Your Space with Mozaico AR
 gallery_images:
-  - path: images/mozaico/m-ss-01.png
+  - path: images/projects/mozaico/m-ss-01.png
     alt: "1"
-  - path: images/mozaico/m-ss-02.png
+  - path: images/projects/mozaico/m-ss-02.png
     alt: "2"
   - alt: "3"
     path: images/projects/mozaico/m-ss-03.png
