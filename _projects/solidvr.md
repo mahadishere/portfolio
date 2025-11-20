@@ -1,7 +1,7 @@
 ---
 title: SolidVR
 anchor_id: sldvr
-card_image: /images/solid-vr.png
+card_image: images/projects/solidvr/solid-vr.png
 domain:
   - Manufacturing
 project_type:
@@ -19,9 +19,9 @@ external_links:
   - url: https://www.solidpro.de/solidvr/
     label: Official Release
 gallery_images:
-  - path: /images/01_base_plate.png
+  - path: images/projects/solidvr/01_base_plate.png
     alt: SolidVR label center
-  - path: /images/solidvrmain.png
+  - path: images/projects/solidvr/solidvrmain.png
     alt: SolidVR base plate
 ---
 

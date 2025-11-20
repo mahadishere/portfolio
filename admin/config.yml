@@ -19,6 +19,10 @@ collections:
     folder: "_projects"
     create: true
     slug: "{{slug}}"
+    # Save images to project-specific folders: images/projects/[project-name]/
+    # Note: CMS interface shows images in flat list, but files are saved to folders
+    media_folder: "images/projects/{{slug}}"
+    public_folder: "/images/projects/{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Anchor ID", name: "anchor_id", widget: "string", hint: "Used for navigation links (e.g., hotspring)"}

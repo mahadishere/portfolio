@@ -1,7 +1,7 @@
 ---
 title: 360Lens
 anchor_id: 360lens
-card_image: /images/1.-360-lens-main.png
+card_image: images/projects/360lens/1.-360-lens-main.png
 domain:
   - Medical
 project_type:
@@ -22,11 +22,11 @@ external_links:
   - url: https://youtu.be/TOhFonl6oh4
     label: Promotional Video
 gallery_images:
-  - path: /images/360lens.png
+  - path: images/projects/360lens/360lens.png
     alt: 360Lens app view
-  - path: /images/360lens0.png
+  - path: images/projects/360lens/360lens0.png
     alt: 360Lens app view 2
-  - path: /images/360lens01.png
+  - path: images/projects/360lens/360lens01.png
     alt: 360Lens app view 3
 ---
 

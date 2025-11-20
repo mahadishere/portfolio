@@ -1,7 +1,7 @@
 ---
 title: Hotspring Whirlpools
 anchor_id: hotspring
-card_image: /images/caldera.png
+card_image: images/projects/hotspring/caldera.png
 domain:
   - E-Commerce
 project_type:
@@ -19,9 +19,9 @@ external_links:
   - url: https://hotspring.de/whirlpool-collection/
     label: Official Webpage
 gallery_images:
-  - path: /images/caldera01.png
+  - path: images/projects/hotspring/caldera01.png
     alt: Hotspring AR view
-  - path: /images/caldera02.png
+  - path: images/projects/hotspring/caldera02.png
     alt: Hotspring AR another view
 ---
 
