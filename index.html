@@ -12,7 +12,7 @@ description: Selected projects in AR/VR, apps, and games.
 									</header>
 									<a href="#work" class="jumplink pic">
 										<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
-										<video autoplay loop muted playsinline>
+										<video autoplay loop muted playsinline preload="metadata" poster="{{ '/images/home/me.png' | relative_url }}">
 											<source src="{{ '/images/home/intro-video.mp4' | relative_url }}" type="video/mp4">
 											<source src="{{ '/images/home/intro-video.webm' | relative_url }}" type="video/webm">
 											<!-- Fallback image if video is not supported -->
@@ -54,7 +54,7 @@ description: Selected projects in AR/VR, apps, and games.
 												 data-title="{{ project.title | downcase }}"
 												 data-summary="{{ project.summary | downcase }}">
 												<a href="#{{ project.anchor_id }}" class="image fit">
-													<img loading="lazy" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}">
+													<img loading="lazy" decoding="async" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}">
 													{% if project.featured %}
 														<span class="featured-badge">★ Featured</span>
 													{% endif %}

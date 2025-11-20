@@ -1,7 +1,7 @@
 ---
 title: Clothing Shop Virtual Tour
 anchor_id: clothing-vt
-card_image: /images/projects/clothing-shop-virtual-tour/us-apparel-02.png
+card_image: /images/projects/clothing-shop-virtual-tour/us-apparel-02.jpg
 domain:
   - Fashion
 project_type:
@@ -14,8 +14,8 @@ external_links:
     label: Video Demo
 gallery_images:
   - alt: "1"
-    path: /images/projects/clothing-shop-virtual-tour/us-apparel-01.png
+    path: /images/projects/clothing-shop-virtual-tour/us-apparel-01.jpg
   - alt: "2"
-    path: /images/projects/clothing-shop-virtual-tour/us-apparel-03.png
+    path: /images/projects/clothing-shop-virtual-tour/us-apparel-03.jpg
 ---
 Virtual Tour of a fashion store that enables the users to explore the coolest items and stores.

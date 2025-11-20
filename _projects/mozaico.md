@@ -1,7 +1,7 @@
 ---
 title: Mozaico
 anchor_id: mozaico
-card_image: images/projects/mozaico/m-main.png
+card_image: images/projects/mozaico/m-main.jpg
 domain:
   - E-Commerce
 project_type:
@@ -11,16 +11,16 @@ platform: Mobile
 featured: true
 summary: Transform Your Space with Mozaico AR
 gallery_images:
-  - path: images/projects/mozaico/m-ss-01.png
+  - path: images/projects/mozaico/m-ss-01.jpg
     alt: "1"
-  - path: images/projects/mozaico/m-ss-02.png
+  - path: images/projects/mozaico/m-ss-02.jpg
     alt: "2"
   - alt: "3"
-    path: images/projects/mozaico/m-ss-03.png
+    path: images/projects/mozaico/m-ss-03.jpg
   - alt: "4"
-    path: images/projects/mozaico/m-ss-04.png
+    path: images/projects/mozaico/m-ss-04.jpg
   - alt: "5"
-    path: images/projects/mozaico/m-ss-05.png
+    path: images/projects/mozaico/m-ss-05.jpg
 ---
 Mozaico AR lets you visualize stunning mosaic designs on your walls and floors before making a purchase. Using your phone, you can preview how different mosaics will look in your space with ease.
 
