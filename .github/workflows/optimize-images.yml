@@ -1,0 +1,71 @@
+name: Optimize Images
+
+on:
+  push:
+    paths:
+      - 'images/**'
+      - '.github/workflows/optimize-images.yml'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Optimize images
+        run: |
+          echo "🖼️ Optimizing images..."
+          
+          # Install dependencies for image optimization
+          sudo apt-get install -y jpegoptim optipng
+          
+          # Optimize JPEG files
+          find images -type f \( -name "*.jpg" -o -name "*.jpeg" \) -size +300k | while read img; do
+            echo "Optimizing JPEG: $img"
+            jpegoptim --max=85 --strip-all "$img" || true
+          done
+          
+          # Optimize PNG files (convert large ones to JPEG)
+          find images -type f -name "*.png" -size +300k | while read img; do
+            echo "Converting large PNG to JPEG: $img"
+            jpg_file="${img%.png}.jpg"
+            convert "$img" -quality 75 "$jpg_file" && rm "$img" || true
+          done
+          
+          # Resize very large images
+          find images -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" \) -size +500k | while read img; do
+            echo "Resizing: $img"
+            convert "$img" -resize '1200x1200>' "$img" || true
+          done
+          
+          echo "✅ Image optimization complete"
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit optimized images
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add images/
+          git commit -m "Auto-optimize images [skip ci]" || exit 0
+          git push
+

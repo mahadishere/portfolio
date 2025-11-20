@@ -32,7 +32,7 @@ collections:
         name: "card_image"
         widget: "image"
         choose_url: false
-        hint: "Thumbnail image. Use path like: images/projects/360lens/filename.jpg (JPEG recommended for smaller file size)"
+        hint: "Thumbnail image. Use path like: images/projects/360lens/filename.jpg (JPEG recommended). Images are auto-optimized via GitHub Actions after upload."
       
       # Multi-dimensional Taxonomy
       - label: "Industry Domain"
@@ -110,7 +110,7 @@ collections:
             name: "path"
             widget: "image"
             choose_url: false
-            hint: "Gallery image. Use path like: images/projects/360lens/filename.jpg (JPEG recommended for smaller file size)"
+            hint: "Gallery image. Use path like: images/projects/360lens/filename.jpg (JPEG recommended). Images are auto-optimized via GitHub Actions after upload."
           - {label: "Alt Text", name: "alt", widget: "string", hint: "Description for accessibility"}
         hint: "Images displayed in the project gallery"
       
