@@ -12,11 +12,13 @@ description: Selected projects in AR/VR, apps, and games.
 									</header>
 									<a href="#work" class="jumplink pic">
 										<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
-										<video autoplay loop muted playsinline preload="metadata" poster="{{ '/images/home/me.png' | relative_url }}">
+										<video id="intro-video-forward" autoplay muted playsinline preload="metadata" poster="{{ '/images/home/me.png' | relative_url }}" style="display: block;">
 											<source src="{{ '/images/home/intro-video.mp4' | relative_url }}" type="video/mp4">
-											<source src="{{ '/images/home/intro-video.webm' | relative_url }}" type="video/webm">
 											<!-- Fallback image if video is not supported -->
 											<img src="{{ '/images/home/me.png' | relative_url }}" alt="Portrait of Mahad Mufti" />
+										</video>
+										<video id="intro-video-reverse" muted playsinline preload="metadata" poster="{{ '/images/home/me.png' | relative_url }}" style="display: none;">
+											<source src="{{ '/images/home/intro-video-reversed.mp4' | relative_url }}" type="video/mp4">
 										</video>
 									</a>
 								</div>
