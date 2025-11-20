@@ -2,7 +2,7 @@
 title: 360Lens (AR)
 anchor_id: 360lens
 card_image: /images/360lensmain.png
-xr_technology: AR
+xr_technology: MR
 domain:
   - Medical
 project_type:
