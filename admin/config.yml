@@ -46,6 +46,7 @@ collections:
           - {label: "Education", value: "Education"}
           - {label: "Entertainment", value: "Entertainment"}
           - {label: "E-Commerce", value: "E-Commerce"}
+          - {label: "Fashion / Apparel", value: "Fashion"}
         hint: "Select one or more industry domains (can select multiple)"
       
       - label: "Project Type"
