@@ -20,3 +20,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Node.js (for CMS proxy server)
+node_modules/
+package-lock.json

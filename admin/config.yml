@@ -1,9 +1,14 @@
+# For local development: saves directly to local files
+# For production: saves to GitHub
 backend:
   name: github
   repo: mahadishere/portfolio
   branch: master
   base_url: https://decap-oauth-nine.vercel.app
   auth_endpoint: /api/auth
+
+# Enable local backend for development (saves to local files instead of GitHub)
+local_backend: true
 
 media_folder: "images"
 public_folder: "/images"
@@ -17,7 +22,11 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Anchor ID", name: "anchor_id", widget: "string", hint: "Used for navigation links (e.g., hotspring)"}
-      - {label: "Card Image", name: "card_image", widget: "image", hint: "Path relative to images/ folder"}
+      - label: "Card Image"
+        name: "card_image"
+        widget: "image"
+        choose_url: false
+        hint: "Thumbnail image. Use path like: images/360Lens/filename.png (navigate folders in image picker)"
       
       # Multi-dimensional Taxonomy
       - label: "XR Technology"
@@ -72,9 +81,32 @@ collections:
       
       - {label: "Tags", name: "tags", widget: "list", required: false, hint: "Additional keywords (optional)"}
       - {label: "Summary", name: "summary", widget: "text", hint: "Short description for project cards"}
-      - {label: "External URL", name: "external_url", widget: "string", required: false, hint: "Link to live demo, GitHub, etc."}
-      - {label: "External Label", name: "external_label", widget: "string", required: false, hint: "Text for external link (e.g., 'Live Demo')"}
-      - {label: "Content", name: "body", widget: "markdown", hint: "Project details, images, etc."}
+      
+      - label: "External Links"
+        name: "external_links"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "URL", name: "url", widget: "string"}
+          - {label: "Label", name: "label", widget: "string", hint: "Link text (e.g., 'Video Demo on Youtube')"}
+        hint: "Add multiple external links (demos, GitHub, etc.)"
+      
+      - {label: "Header Note", name: "header_note", widget: "text", required: false, hint: "Optional note text shown in header (e.g., 'Note: Video shows older version')"}
+      
+      - label: "Gallery Images"
+        name: "gallery_images"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Image Path"
+            name: "path"
+            widget: "image"
+            choose_url: false
+            hint: "Gallery image. Use path like: images/360Lens/filename.png (navigate folders in image picker)"
+          - {label: "Alt Text", name: "alt", widget: "string", hint: "Description for accessibility"}
+        hint: "Images displayed in the project gallery"
+      
+      - {label: "Content", name: "body", widget: "markdown", hint: "Main project description and details (supports markdown)"}
 
   - name: "posts"
     label: "Blog Posts"

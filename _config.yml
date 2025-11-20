@@ -26,4 +26,8 @@ defaults:
 exclude:
   - README.txt
   - LICENSE.txt
+  - node_modules
+  - package.json
+  - package-lock.json
+  - start-cms.sh
 

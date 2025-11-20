@@ -1,9 +1,9 @@
 ---
-title: 360Lens (AR)
+title: 360Lens
 anchor_id: 360lens
-card_image: images/360Lens/360lens3.png
+card_image: /images/1.-360-lens-main.png
 xr_technology: AR
-domain: 
+domain:
   - Medical
 project_type:
   - App
@@ -11,7 +11,24 @@ project_type:
   - CV
 platform: HoloLens
 featured: true
-tags: [HoloLens, Pre-surgical Planning, Hip Replacement]
+tags:
+  - HoloLens
+  - Pre-surgical Planning
+  - Hip Replacement
 summary: HoloLens 2-based pre-surgical planning tool for hip replacement.
+external_links:
+  - url: https://youtu.be/EGvS5mp_gVU
+    label: Video Demo on Youtube
+  - url: https://youtu.be/TOhFonl6oh4
+    label: Promotional Video
+gallery_images:
+  - path: /images/360lens.png
+    alt: 360Lens app view
+  - path: /images/360lens0.png
+    alt: 360Lens app view 2
+  - path: /images/360lens01.png
+    alt: 360Lens app view 3
 ---
+
+This product optimizes pre-surgical planning using HoloLens 2 for hip replacement. Patient-specific data is loaded without external hardware. Calculations suggest efficient post-surgery movement angles.
 

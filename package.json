@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-cms-proxy",
+  "version": "1.0.0",
+  "description": "Local proxy server for Decap CMS",
+  "scripts": {
+    "cms-proxy": "npx netlify-cms-proxy-server"
+  },
+  "devDependencies": {
+    "netlify-cms-proxy-server": "^1.3.0"
+  }
+}
+

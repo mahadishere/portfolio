@@ -34,6 +34,15 @@
         }
       });
     </script>
+    <script>
+      // Clear any cached auth tokens to force local backend
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        localStorage.removeItem('netlify-cms-user');
+        localStorage.removeItem('decap-cms-user');
+        sessionStorage.removeItem('netlify-cms-user');
+        sessionStorage.removeItem('decap-cms-user');
+      }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
 </html>

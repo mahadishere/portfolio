@@ -5,13 +5,11 @@ Place your background music file(s) in this directory.
 ## Supported Formats
 
 - **MP3** (recommended): `background-music.mp3`
-- **OGG** (fallback): `background-music.ogg`
 
 ## File Naming
 
-The music player expects files named:
-- `background-music.mp3` (primary)
-- `background-music.ogg` (fallback for better browser compatibility)
+The music player expects the file named:
+- `background-music.mp3`
 
 ## Adding Music via CMS
 

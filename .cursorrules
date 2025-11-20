@@ -95,20 +95,9 @@ Content goes here (Markdown)
    - Dark mode toggle button
    - Wrapper structure for single-page design
 
-2. **`project.html`** - Simple project layout
-   - Minimal frontmatter requirements
-   - Back button to `#work`
-   - Used for projects that need custom HTML (currently not actively used)
-
-3. **`case-study.html`** - Advanced project layout (future use)
-   - Structured sections: Overview, Role, Tech Stack, Challenges, Results
-   - Link management
-   - Tag display
-   - Currently prepared but not actively used
-
-**Current Implementation Note:**
-- Most projects are **hardcoded directly in `index.html`** as `<article>` panels
-- This is a legacy pattern; new projects should consider using the layout system
+2. **`post.html`** - Blog post layout
+   - Standard blog post template
+   - Used for blog posts in `_posts/` collection
 
 ### 3. Navigation Pattern
 
@@ -250,13 +239,13 @@ Content goes here (Markdown)
 2. Create new project with all required fields
 3. Content automatically added to `_projects/`
 
-**Option 2: Manual (Current Pattern)**
-1. Add project markdown file to `_projects/` with frontmatter
-2. Add project panel `<article>` to `index.html`
-3. Ensure `anchor_id` matches between both locations
-4. Add images to `/images/ProjectName/` folder
+**Option 2: Manual (For Developers)**
+1. Create project markdown file in `_projects/` with frontmatter
+2. Add content in the `body` field (markdown supported)
+3. Add images to `/images/ProjectName/` folder
+4. Project detail panel is automatically rendered from collection data
 
-**Note:** There's currently a **dual implementation** - both collection data AND hardcoded HTML. Future refactor should consolidate to use layouts exclusively.
+**Note:** Projects are fully CMS-manageable - all project detail panels are dynamically rendered from collection data in `index.html`. No manual HTML editing required.
 
 ### Styling Guidelines
 - Use CSS custom properties for theming (defined in `dark-mode.css`)
@@ -314,11 +303,7 @@ Content goes here (Markdown)
 - ❌ Don't modify CMS config without testing OAuth flow
 
 ### Known Technical Debt
-1. **Dual Content System:** Projects exist both as collection files AND hardcoded HTML in `index.html`
-   - *Future:* Migrate all projects to use layout system exclusively
-2. **Case Study Layout:** Exists but not utilized
-   - *Future:* Transition complex projects to use `case-study.html`
-3. **Blog Underutilized:** Only one post exists
+1. **Blog Underutilized:** Only one post exists
    - *Future:* Consider expanding blog content or removing
 
 ---
@@ -365,9 +350,9 @@ Each project should include:
 - GitHub Pages: https://docs.github.com/en/pages
 
 ### Project Structure
-- Study `_layouts/case-study.html` for future project structure
 - Reference `admin/config.yml` for CMS field definitions
 - See `assets/sass/libs/_vars.scss` for design system variables
+- See `PROJECT_MANAGEMENT.md` for complete project management guide
 
 ---
 
@@ -384,10 +369,10 @@ When working on this project:
 7. **Ask before refactoring** - Some "technical debt" may be intentional for simplicity
 
 ### When Adding Projects
-- Ask if this should use the collection system or be hardcoded
+- All projects use the collection system (fully CMS-manageable)
 - Confirm image assets are available before creating markup
 - Verify tags for filtering compatibility
-- Check if case-study layout is appropriate vs. custom HTML
+- Use markdown in the `body` field for project content
 
 ### When Modifying Styles
 - Use existing Sass variables and mixins

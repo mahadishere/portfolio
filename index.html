@@ -77,187 +77,51 @@ description: Selected projects in AR/VR, apps, and games.
 								</section>
 							</article>
 
-					<!-- Hotspring -->
-					<article id="hotspring" class="panel">
+					<!-- Dynamically rendered project detail panels -->
+					{% for project in site.projects %}
+					<article id="{{ project.anchor_id }}" class="panel">
 						<header>
-							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
-							<h2>Hotspring Whirlpools</h2>
-							<a href="https://hotspring.de/whirlpool-collection/" target="_blank" rel="noopener"><u>Official Webpage</u></a>
-						</header>
-						<section>
-                            <div class="row aln-center">
-                                <div class="col-8">
-									<h6>An AR application to showcase whirlpools. With Augmented Reality, before purchasing a hot tub, you can visualize whirlpools through your smartphone. This app gives real-world dimensions as if the pools were physically present.
-										<br></br>
-										It provides options such as seats, color, material, etc., saving significant time over traditional methods.
-									</h6>
-									<div class="gallery">
-										<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
-										<div class="gallery-grid">
-											<a href="{{ '/images/Hotsping/01.png' | relative_url }}" data-gallery="hotspring"><img loading="lazy" src="{{ '/images/Hotsping/01.png' | relative_url }}" alt="Hotspring AR view"></a>
-											<a href="{{ '/images/Hotsping/03.png' | relative_url }}" data-gallery="hotspring"><img loading="lazy" src="{{ '/images/Hotsping/03.png' | relative_url }}" alt="Hotspring AR another view"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</article>
-
-					<!-- SolidVR -->
-					<article id="sldvr" class="panel">
-						<header>
-							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
-							<h2>SolidVR</h2>
-							<a href="https://www.solidpro.de/solidvr/" target="_blank" rel="noopener"><u>Official Release</u></a>
+							<a href="#work" style="float: right;">
+								<button class="go-back-btn" aria-label="Go back to projects">
+									<i class="icon solid fa-chevron-left"></i>
+								</button>
+							</a>
+							<h2>{{ project.title }}</h2>
+							{% if project.external_links %}
+								{% for link in project.external_links %}
+									<a href="{{ link.url }}" target="_blank" rel="noopener">
+										<u>{{ link.label }}</u>
+									</a>
+									{% unless forloop.last %}&nbsp;{% endunless %}
+								{% endfor %}
+							{% endif %}
+							{% if project.header_note %}
+								<p>{{ project.header_note }}</p>
+							{% endif %}
 						</header>
 						<section>
 							<div class="row aln-center">
-							<div class="col-8">
-									<h1 style="text-align:center">Project goal</h1>
-									<h6>Optimization of the data transfer process from CAD system to VR application in real-time via direct interface.</h6>
-									<h1 style="text-align:center">Product Output</h1>
-									<h6>Typical VR solutions import CAD via exchange formats (e.g., STP/FBX), which is slow. We built a direct interface and evaluated optimization methods.</h6>
+								<div class="col-8">
+									{% if project.content %}
+										<div class="project-content">
+											{{ project.content | markdownify }}
+										</div>
+									{% endif %}
+									
+									{% if project.gallery_images and project.gallery_images.size > 0 %}
 									<div class="gallery">
 										<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
 										<div class="gallery-grid">
-											<a href="{{ '/images/SolidVR/Topex_Labelcenter.png' | relative_url }}" data-gallery="solidvr"><img loading="lazy" src="{{ '/images/SolidVR/Topex_Labelcenter.png' | relative_url }}" alt="SolidVR label center"></a>
-											<a href="{{ '/images/SolidVR/01_Base_plate.png' | relative_url }}" data-gallery="solidvr"><img loading="lazy" src="{{ '/images/SolidVR/01_Base_plate.png' | relative_url }}" alt="SolidVR base plate"></a>
-											<a href="{{ '/images/SolidVR/WaterBottle.png' | relative_url }}" data-gallery="solidvr"><img loading="lazy" src="{{ '/images/SolidVR/WaterBottle.png' | relative_url }}" alt="SolidVR water bottle"></a>
+											{% for image in project.gallery_images %}
+												<a href="{{ image.path | relative_url }}" data-gallery="{{ project.anchor_id }}">
+													<img loading="lazy" src="{{ image.path | relative_url }}" alt="{{ image.alt | default: project.title }}">
+												</a>
+											{% endfor %}
 										</div>
 									</div>
+									{% endif %}
 								</div>
 							</div>
 						</section>
 					</article>
-
-					<!-- 360Lens -->
-					<article id="360lens" class="panel">
-						<header>
-							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
-							<h2>360Lens</h2>
-							<a href="https://youtu.be/EGvS5mp_gVU" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
-							<a href="https://youtu.be/TOhFonl6oh4" target="_blank" rel="noopener"><u>Promotional Video</u></a>
-						</header>
-						<section>
-                            <div class="row aln-center">
-                                <div class="col-8">
-                                    <h6>This product optimizes pre-surgical planning using HoloLens 2 for hip replacement. Patient-specific data is loaded without external hardware. Calculations suggest efficient post-surgery movement angles.</h6>
-                                    <div class="gallery">
-									<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
-									<div class="gallery-grid">
-                                            <a href="{{ '/images/360Lens/360lens1.png' | relative_url }}" data-gallery="360lens"><img loading="lazy" src="{{ '/images/360Lens/360lens1.png' | relative_url }}" alt="360Lens app view"></a>
-										<a href="{{ '/images/360Lens/360lens0.png' | relative_url }}" data-gallery="360lens"><img loading="lazy" src="{{ '/images/360Lens/360lens0.png' | relative_url }}" alt="360Lens app view 2"></a>
-                                            <a href="{{ '/images/360Lens/360lens01.png' | relative_url }}" data-gallery="360lens"><img loading="lazy" src="{{ '/images/360Lens/360lens01.png' | relative_url }}" alt="360Lens app view 3"></a>
-									</div>
-								</div>
-								</div>
-							</div>
-						</section>
-					</article>
-
-					<!-- Dicom -->
-					<article id="dicom" class="panel">
-						<header>
-							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
-							<h2>Dicom Measurement Tools</h2>
-							<a href="https://youtu.be/nqj3Ak4Js-U" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
-							<p>Note: Video shows an older version; latest has improved rendering speed and fidelity.</p>
-						</header>
-						<section>
-							<div class="row aln-center">
-							<div class="col-8">
-									<h6>
-										Tools: Angle, scale, Cobb angle, point, orientation, ellipse, circle, etc.
-										<ul>
-											<li>Calculations respect original image resolution.</li>
-											<li>Display adapts to screen while preserving image resolution.</li>
-											<li>Lines and points can be deleted, moved, and adjusted.</li>
-										</ul>
-										Designed for pre-surgical planning.
-									</h6>
-									<div class="gallery">
-										<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
-										<div class="gallery-grid">
-											<a href="{{ '/images/Dicom/Cobbs.png' | relative_url }}" data-gallery="dicom"><img loading="lazy" src="{{ '/images/Dicom/Cobbs.png' | relative_url }}" alt="Dicom Cobbs angle tool"></a>
-											<a href="{{ '/images/Dicom/Scale.png' | relative_url }}" data-gallery="dicom"><img loading="lazy" src="{{ '/images/Dicom/Scale.png' | relative_url }}" alt="Dicom scale tool"></a>
-											<a href="{{ '/images/Dicom/Angle.png' | relative_url }}" data-gallery="dicom"><img loading="lazy" src="{{ '/images/Dicom/Angle.png' | relative_url }}" alt="Dicom angle tool"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</article>
-
-					<!-- April Tag 3 -->
-					<article id="aprltg" class="panel">
-						<header>
-							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
-							<h2>AprilTag 3 for Unity</h2>
-							<a href="https://youtu.be/lhwf0SVN_68" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
-							<p>Note: Special thanks to Keijiro for the AprilTag support for Unity.</p>
-						</header>
-						<section>
-							<div class="row aln-center">
-							<div class="col-8">
-									<h6>
-										Upgrade of AprilTag 2 for Unity by <a href="https://github.com/keijiro/jp.keijiro.apriltag" target="_blank" rel="noopener">Keijiro</a>. The <a href="https://github.com/AprilRobotics/apriltag_ros" target="_blank" rel="noopener">AprilTag 3</a> DLL enables multithreading (pthread) and better robustness across lighting conditions compared to the older DLL.
-										<br></br>
-										Key differences observed:
-										<ul>
-											<li>Faster and more robust detection with varying exposure.</li>
-											<li>Multithreading support via pthread in C++.</li>
-											<li>Arm64 UWP support.</li>
-										</ul>
-										Prototype targeting HoloLens 2.
-									</h6>
-								</div>
-							</div>
-						</section>
-					</article>
-
-					<!-- Vampire Capitalist -->
-					<article id="VC" class="panel">
-						<header>
-							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
-							<h2>Vampire Capitalist</h2>
-							<a href="https://youtu.be/mv0gncg3PaI" target="_blank" rel="noopener"><u>Video Demo on Youtube</u></a>
-						</header>
-						<section>
-							<div class="row aln-center">
-							<div class="col-8">
-									<h6>Empire-building game on a real-world map. Build a fortune, keep your vampire happy, avoid the asylum, and answer your master's demands in a blend of Simulation, Board Game, and RPG.</h6>
-									<div class="gallery">
-										<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
-										<div class="gallery-grid">
-											<a href="{{ '/images/vampire/vampire capitalist image 1.png' | relative_url }}" data-gallery="vampire"><img loading="lazy" src="{{ '/images/vampire/vampire capitalist image 1.png' | relative_url }}" alt="Vampire Capitalist gameplay"></a>
-											<a href="{{ '/images/vampire/vampire capitalist image 2.png' | relative_url }}" data-gallery="vampire"><img loading="lazy" src="{{ '/images/vampire/vampire capitalist image 2.png' | relative_url }}" alt="Vampire Capitalist gameplay 2"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</article>
-
-					<!-- Zombie Tag Royale -->
-					<article id="ztr" class="panel">
-						<header>
-							<a href="#work" style="float: right;"><button class="go-back-btn" aria-label="Go back to projects"><i class="icon solid fa-chevron-left"></i></button></a>
-							<h2>Zombie Tag Royale</h2>
-							<a href="https://store.steampowered.com/app/1194220/Zombie_Tag_Royale/" target="_blank" rel="noopener"><u>Steam Game Link</u></a>
-							<p>Note: Beta version; development suspended thereafter.</p>
-						</header>
-						<section>
-							<div class="row aln-center">
-							<div class="col-8">
-									<div class="gallery">
-										<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
-										<div class="gallery-grid">
-											<a href="{{ '/images/Zombie/thumbnaik.PNG' | relative_url }}" data-gallery="zombie"><img loading="lazy" src="{{ '/images/Zombie/thumbnaik.PNG' | relative_url }}" alt="Zombie Tag Royale screenshot"></a>
-											<a href="{{ '/images/Zombie/ZombieMain.png' | relative_url }}" data-gallery="zombie"><img loading="lazy" src="{{ '/images/Zombie/ZombieMain.png' | relative_url }}" alt="Zombie Tag Royale gameplay"></a>
-											<a href="{{ '/images/Zombie/zrr01.png' | relative_url }}" data-gallery="zombie"><img loading="lazy" src="{{ '/images/Zombie/zrr01.png' | relative_url }}" alt="Zombie Tag Royale action"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</article>
+					{% endfor %}
