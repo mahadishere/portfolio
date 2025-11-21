@@ -10,15 +10,22 @@
 		
 		if (!videoForward || !videoReverse) return;
 
-		// Preload both videos for smooth transition
+		// Only preload forward video initially (reverse will load when needed)
 		videoForward.load();
-		videoReverse.load();
 		
-		// When forward video is near the end, prepare reverse
+		// Track if reverse video has been loaded
+		let reverseVideoLoaded = false;
+		
+		// When forward video is near the end, load and prepare reverse
 		videoForward.addEventListener('timeupdate', function() {
-			if (this.duration && this.currentTime >= this.duration - 0.1) {
+			if (this.duration && this.currentTime >= this.duration - 0.5) {
+				// Load reverse video when forward is 0.5 seconds from end
+				if (!reverseVideoLoaded) {
+					videoReverse.load();
+					reverseVideoLoaded = true;
+				}
 				// Pre-start reverse video just before forward ends
-				if (videoReverse.paused) {
+				if (videoReverse.paused && reverseVideoLoaded) {
 					videoReverse.currentTime = 0;
 					videoReverse.play().catch(e => {});
 				}
@@ -27,7 +34,7 @@
 		
 		// When reverse video is near the end, prepare forward
 		videoReverse.addEventListener('timeupdate', function() {
-			if (this.duration && this.currentTime >= this.duration - 0.1) {
+			if (this.duration && this.currentTime >= this.duration - 0.5) {
 				// Pre-start forward video just before reverse ends
 				if (videoForward.paused) {
 					videoForward.currentTime = 0;
