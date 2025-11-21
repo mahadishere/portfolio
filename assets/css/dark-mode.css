@@ -494,7 +494,8 @@ select:focus {
   border-radius: 12px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
   padding: 1.25rem 1rem;
-  width: min(1100px, 95vw); /* give more horizontal room for wider subcategory panes */
+  width: auto; /* Let container fit content width */
+  max-width: min(1035px, 90vw); /* But don't exceed this limit */
   font-size: 1.2rem; /* base font size inside menu */
   opacity: 0;
   visibility: hidden;
@@ -513,14 +514,12 @@ select:focus {
 
 .mega-inner {
   overflow: visible;
+  width: fit-content; /* Make inner container fit its content */
+  min-width: 100%; /* But at least as wide as parent */
 }
 
 .mega-scrollbar {
-  position: relative;
-  height: 6px;
-  margin: 6px 1rem 0 1rem; /* Match parent left/right padding */
-  border-radius: 999px;
-  background: rgba(0,0,0,0.08);
+  display: none; /* Hide scrollbar */
 }
 [data-theme="dark"] .mega-scrollbar {
   background: rgba(255,255,255,0.12);
@@ -541,12 +540,13 @@ select:focus {
 
 .mega-categories {
   display: flex;
-  gap: 1.25rem;
+  gap: 0; /* Remove gap, use margin on items instead */
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0; /* Increased to compensate for removed scrollbar margin */
   padding-left: 0;
-  padding-right: 0;
+  padding-right: 0; /* Match scrollbar right margin */
   margin-right: 0;
+  margin-left: 0;
   scrollbar-width: thin;                 /* Firefox - thin bar */
   scrollbar-color: var(--menu-scrollbar-thumb) transparent;
 }
@@ -628,11 +628,11 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
   flex: 0 0 auto;
   padding: 1rem 1.25rem;
   overflow: visible;
+  margin-right: 1.25rem; /* Add spacing between cards */
 }
 
 .mega-category:last-child {
-  margin-right: 0;
-  padding-right: 1.25rem; /* Ensure last card has proper padding */
+  margin-right: 0 !important; /* No margin - padding is on container */
 }
 
 .mega-category h4 {

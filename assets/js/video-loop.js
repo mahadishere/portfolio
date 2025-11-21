@@ -54,14 +54,22 @@
 			}
 		}
 		
-		// Don't load video automatically - only load on user interaction or after significant delay
-		// This ensures fast initial page load (only poster image loads)
-		setTimeout(function() {
-			// Only auto-load after 2 seconds if user hasn't interacted yet
-			if (!forwardVideoLoaded) {
-				loadAndPlayForwardVideo();
-			}
-		}, 2000);
+		// Wait for entire website to load before loading videos
+		// This ensures all resources (images, CSS, JS) are loaded first
+		if (document.readyState === 'complete') {
+			// Page already fully loaded, load video immediately
+			loadAndPlayForwardVideo();
+		} else {
+			// Wait for window.load event (fires when all resources are loaded)
+			window.addEventListener('load', function() {
+				// Small delay to ensure everything is rendered
+				setTimeout(function() {
+					if (!forwardVideoLoaded) {
+						loadAndPlayForwardVideo();
+					}
+				}, 100);
+			});
+		}
 		
 		// When forward video is near the end, load and prepare reverse
 		videoForward.addEventListener('timeupdate', function() {
@@ -119,17 +127,21 @@
 		});
 		
 		// Play video on any user interaction (click, scroll, etc.) - loads video if not loaded yet
+		// But only if page is already loaded
 		const playVideo = () => {
-			if (!forwardVideoLoaded) {
-				loadAndPlayForwardVideo();
-			} else if (videoForward.style.display !== 'none' && videoForward.paused) {
-				videoForward.play().catch(e => console.log('Video play failed:', e));
-			} else if (videoReverse.style.display !== 'none' && videoReverse.paused) {
-				videoReverse.play().catch(e => console.log('Video play failed:', e));
+			// Only load video on interaction if page is fully loaded
+			if (document.readyState === 'complete') {
+				if (!forwardVideoLoaded) {
+					loadAndPlayForwardVideo();
+				} else if (videoForward.style.display !== 'none' && videoForward.paused) {
+					videoForward.play().catch(e => console.log('Video play failed:', e));
+				} else if (videoReverse.style.display !== 'none' && videoReverse.paused) {
+					videoReverse.play().catch(e => console.log('Video play failed:', e));
+				}
 			}
 		};
 		
-		// Listen for user interactions (loads video immediately on interaction)
+		// Listen for user interactions (loads video if page is loaded)
 		document.addEventListener('click', playVideo, { once: true });
 		document.addEventListener('scroll', playVideo, { once: true });
 		document.addEventListener('touchstart', playVideo, { once: true });
