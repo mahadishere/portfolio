@@ -13,8 +13,8 @@ tags:
   - Product Visualization
   - Retail
   - E-commerce
-summary: Visualize whirlpools in AR with real-world dimensions and configuration
-  options.
+summary: Visualize Whirlpools in AR with Real-World Dimensions and Configuration
+  Options.
 external_links:
   - url: https://hotspring.de/whirlpool-collection/
     label: Official Webpage
