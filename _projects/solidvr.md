@@ -9,12 +9,12 @@ project_type:
   - Tool
   - R&D
 platform: PCVR
-featured: true
+featured: false
 tags:
   - CAD
   - SolidWorks
   - Industrial Design
-summary: Real-time CAD-to-VR interface with optimized data transfer.
+summary: Real-time CAD-to-VR Interface with Optimised Data Transfer.
 external_links:
   - url: https://www.solidpro.de/solidvr/
     label: Official Release
