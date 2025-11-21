@@ -318,13 +318,14 @@ select:focus {
   .project-card h2 {
     font-size: 1.1em !important;
     min-height: 2em;
-    margin: 0.15em 0 0.1em 0 !important; /* Reduced from 0.5em top to 0.15em */
+    margin: 0 !important; /* Zero top margin to eliminate gap from thumbnail */
+    margin-bottom: 0.05em !important; /* Minimal bottom margin */
   }
   
   /* Reduce spacing in project-meta (badges) - override inline margin-bottom: 0.25em */
   .project-card .project-meta {
-    margin-top: 0.1em !important; /* Small top margin */
-    margin-bottom: 0.1em !important; /* Reduced from 0.25em */
+    margin-top: 0 !important; /* Zero top margin to eliminate gap from title */
+    margin-bottom: 0.05em !important; /* Minimal bottom margin */
     min-height: 1.5em !important;
   }
   
@@ -343,6 +344,11 @@ select:focus {
   /* Remove any extra spacing from image wrapper */
   .project-card .image {
     margin-bottom: 0 !important;
+  }
+  
+  /* Override inline styles that add spacing */
+  .project-card .project-meta[style*="margin-bottom"] {
+    margin-bottom: 0.05em !important;
   }
   
   /* Adjust summary text size */
@@ -805,16 +811,16 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
   .nav-item-work .mega-menu {
     width: calc(70vw - 2rem); /* Reduced by 30% from 100vw (100 * 0.7 = 70) */
     max-width: calc(70vw - 2rem);
-    left: auto !important; /* Remove left positioning */
-    right: 1rem !important; /* Position from right edge, 1rem from edge = moves left */
-    transform: translate(0, 10px) !important; /* No horizontal translation */
+    left: 50% !important; /* Center it */
+    right: auto;
+    transform: translate(-60%, 10px) !important; /* Move 60% left from center = slightly left of center */
     padding: 0.875rem 0.5rem;
     font-size: 1rem;
   }
   
   .nav-item-work:hover .mega-menu,
   .nav-item-work:focus-within .mega-menu {
-    transform: translate(0, 0) !important; /* No horizontal translation on hover */
+    transform: translate(-60%, 0) !important; /* Keep same position on hover */
   }
   
   .mega-inner {
