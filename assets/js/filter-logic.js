@@ -26,19 +26,36 @@
 			const cardSummary = card.getAttribute('data-summary') || '';
 
 			// Check filters
-			const matchesXR = filters.xr === 'all' || cardXR === filters.xr;
+			// All project type filters check data-type array since projects can have multiple types
+			// (e.g., a project can be both AR and Game, or MR and Virtual Tour, etc.)
+			const matchesXR = filters.xr === 'all' || 
+				cardTypes.includes(filters.xr) || 
+				cardXR === filters.xr; // Fallback to data-xr for backwards compatibility
 			const matchesDomain = filters.domain === 'all' || 
 				cardDomains.includes(filters.domain) ||
 				cardDomains.includes('none');
 			const matchesType = filters.type === 'all' || 
 				cardTypes.includes(filters.type) ||
 				cardTypes.includes('none');
-			const matchesGame = filters.game === 'all' || cardGame === filters.game;
-			const matchesVirtualTour = filters.virtualTour === 'all' || cardVirtualTour === filters.virtualTour;
-			const matchesVisualization3d = filters.visualization3d === 'all' || cardVisualization3d === filters.visualization3d;
-			const matchesModelling3d = filters.modelling3d === 'all' || cardModelling3d === filters.modelling3d;
-			const matchesAiMl = filters.aiMl === 'all' || cardAiMl === filters.aiMl;
-			const matchesCv = filters.cv === 'all' || cardCv === filters.cv;
+			// Check data-type array for all project type filters (Game, Virtual Tour, etc.)
+			const matchesGame = filters.game === 'all' || 
+				cardTypes.includes('Game') || 
+				cardGame === 'Game';
+			const matchesVirtualTour = filters.virtualTour === 'all' || 
+				cardTypes.includes('Virtual Tour') || 
+				cardVirtualTour === 'Virtual Tour';
+			const matchesVisualization3d = filters.visualization3d === 'all' || 
+				cardTypes.includes('3D Visualization') || 
+				cardVisualization3d === '3D Visualization';
+			const matchesModelling3d = filters.modelling3d === 'all' || 
+				cardTypes.includes('3D Model') || 
+				cardModelling3d === '3D Model';
+			const matchesAiMl = filters.aiMl === 'all' || 
+				cardTypes.includes('AI') || 
+				cardAiMl === 'AI';
+			const matchesCv = filters.cv === 'all' || 
+				cardTypes.includes('CV') || 
+				cardCv === 'CV';
 			const matchesSearch = filters.search === '' || 
 				cardTitle.includes(filters.search) ||
 				cardSummary.includes(filters.search) ||
