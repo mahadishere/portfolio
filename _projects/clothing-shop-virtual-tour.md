@@ -8,7 +8,7 @@ project_type:
   - Virtual Tour
 platform: Web
 featured: false
-summary: Virtual Tour of a fashion store.
+summary: Virtual Tour of a Fashion Store.
 external_links:
   - url: https://youtu.be/1pVZTRv3y4o
     label: Video Demo
