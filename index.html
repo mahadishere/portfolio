@@ -12,7 +12,7 @@ description: Selected projects in AR/VR, apps, and games.
 									</header>
 									<a href="#work" class="jumplink pic">
 										<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
-										<img id="intro-video-poster" src="{{ '/images/home/me.jpg' | relative_url }}" alt="Portrait of Mahad Mufti" style="display: block; width: 100%; height: auto;" />
+										<img id="intro-video-poster" src="{{ '/images/home/me.jpg' | relative_url }}" alt="Portrait of Mahad Mufti" style="display: block; width: 100%; height: auto;" loading="eager" fetchpriority="high" />
 										<video id="intro-video-forward" muted playsinline preload="none" poster="{{ '/images/home/me.jpg' | relative_url }}" style="display: none;" data-src="{{ '/images/home/intro-video.mp4' | relative_url }}">
 										</video>
 										<video id="intro-video-reverse" muted playsinline preload="none" poster="{{ '/images/home/me.jpg' | relative_url }}" style="display: none;" data-src="{{ '/images/home/intro-video-reversed.mp4' | relative_url }}">
@@ -53,7 +53,7 @@ description: Selected projects in AR/VR, apps, and games.
 												 data-title="{{ project.title | downcase }}"
 												 data-summary="{{ project.summary | downcase }}">
 												<a href="#{{ project.anchor_id }}" class="image fit">
-													<img loading="lazy" decoding="async" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}">
+													<img loading="lazy" decoding="async" fetchpriority="low" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}">
 													{% if project.featured %}
 														<span class="featured-badge">★ Featured</span>
 													{% endif %}
@@ -119,7 +119,7 @@ description: Selected projects in AR/VR, apps, and games.
 										<div class="gallery-grid">
 											{% for image in project.gallery_images %}
 												<a href="{{ image.path | relative_url }}" data-gallery="{{ project.anchor_id }}">
-													<img loading="lazy" src="{{ image.path | relative_url }}" alt="{{ image.alt | default: project.title }}">
+													<img loading="lazy" decoding="async" fetchpriority="low" src="{{ image.path | relative_url }}" alt="{{ image.alt | default: project.title }}">
 												</a>
 											{% endfor %}
 										</div>

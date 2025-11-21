@@ -9,8 +9,8 @@
   --shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.25);
   --nav-bg: rgba(0, 0, 0, 0.75);
   --nav-text: #ffffff;
-  /* Professional font stack with Inter */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Professional system font stack (no external requests) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* High-contrast menu palette (light) */
   --menu-bg: #ffffff;
   --menu-card-bg: #f6f6f6;

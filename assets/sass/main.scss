@@ -4,7 +4,7 @@
 @import 'libs/vendor';
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Using system fonts instead of Google Fonts for faster loading */
 @import url('fontawesome-all.min.css');
 
 /*
@@ -146,7 +146,7 @@
 	}
 
 	body, input, textarea, select {
-		font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 		font-weight: 400;
 		color: #777777;
 		font-size: 20pt;
