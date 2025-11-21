@@ -295,6 +295,37 @@ select:focus {
   text-align: center;        /* center multiline text */
 }
 
+/* Mobile: 2 columns, larger thumbnails, smaller titles */
+@media screen and (max-width: 736px) {
+  /* Change from 3 columns (col-4) to 2 columns (col-6) */
+  #projects-grid .col-4 {
+    width: 50% !important;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  
+  /* Increase thumbnail size on mobile */
+  .project-card .image {
+    height: 280px !important; /* Increased from 250px */
+  }
+  
+  .project-card .image.fit {
+    height: 280px !important;
+  }
+  
+  /* Reduce title size on mobile */
+  .project-card h2 {
+    font-size: 1.1em !important; /* Smaller than default */
+    min-height: 2em;
+    margin: 0.4em 0 0.2em 0;
+  }
+  
+  /* Adjust summary text size */
+  .project-card p {
+    font-size: 0.9em;
+  }
+}
+
 .project-card p {
   flex-grow: 1;
   margin: 0;
@@ -757,21 +788,30 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
     min-width: 100%;
   }
   
+  /* Stack cards vertically on mobile portrait */
   .mega-categories {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    flex-direction: column;
+    overflow-x: visible;
+    overflow-y: auto;
+    max-height: 70vh;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0.75rem;
   }
   
   .mega-category {
-    min-width: 260px;
-    max-width: 280px;
-    padding: 0.75rem 0.875rem;
-    margin-right: 0.75rem;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    padding: 0.875rem 1rem;
+    margin-right: 0;
+    margin-bottom: 0;
   }
   
   .mega-category:last-child {
-    margin-right: 0.5rem;
-    padding-right: 0.5rem;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding-right: 1rem;
   }
   
   .mega-category h4 {
@@ -796,11 +836,22 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
     padding: 0.75rem 0.375rem;
   }
   
+  /* Keep vertical stacking on small mobile */
+  .mega-categories {
+    flex-direction: column;
+    max-height: 65vh;
+  }
+  
   .mega-category {
-    min-width: 240px;
-    max-width: 260px;
-    padding: 0.625rem 0.75rem;
-    margin-right: 0.625rem;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    padding: 0.75rem 0.875rem;
+    margin-right: 0;
+  }
+  
+  .mega-category:last-child {
+    margin-right: 0;
   }
   
   .mega-category h4 {
@@ -809,5 +860,19 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
   
   .mega-sublist li a {
     font-size: 0.95rem;
+  }
+  
+  /* Further increase thumbnail size on very small screens */
+  .project-card .image {
+    height: 300px !important;
+  }
+  
+  .project-card .image.fit {
+    height: 300px !important;
+  }
+  
+  /* Even smaller title on very small screens */
+  .project-card h2 {
+    font-size: 1em !important;
   }
 }

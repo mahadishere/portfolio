@@ -2293,7 +2293,7 @@ input, select, textarea {
 
 @media screen and (max-width: 736px) {
 	.project-card .image.fit {
-		height: 200px;
+		height: 280px; /* Increased for mobile - overridden by dark-mode.css if needed */
 		padding: 0.35em;
 	}
 }
