@@ -5,10 +5,8 @@ card_image: /images/projects/360lens/1.-360-lens-main.jpg
 domain:
   - Medical
 project_type:
-  - AR
-  - R&D
-  - CV
   - MR
+  - AR
 platform: HoloLens
 featured: true
 tags:
