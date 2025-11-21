@@ -1,7 +1,7 @@
 ---
 title: SolidVR
 anchor_id: sldvr
-card_image: images/projects/solidvr/solid-vr.jpg
+card_image: /images/projects/solidvr/solidvrmain.jpg
 domain:
   - Manufacturing
 project_type:
