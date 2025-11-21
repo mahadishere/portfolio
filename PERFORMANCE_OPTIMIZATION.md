@@ -78,7 +78,7 @@ find images/projects -name "*.png" -exec pngquant --quality=65-80 --ext .png --f
 
 **Option 1: Poster image instead of video**
 ```html
-<img src="{{ '/images/home/me.png' | relative_url }}" alt="Portrait">
+<img src="{{ '/images/home/me.jpg' | relative_url }}" alt="Portrait">
 ```
 
 **Option 2: Lazy load video**
