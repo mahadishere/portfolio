@@ -513,9 +513,16 @@ select:focus {
 }
 
 .mega-inner {
-  overflow: visible;
-  width: fit-content; /* Make inner container fit its content */
+  overflow: hidden; /* Prevent cards from falling out on mobile */
+  width: 100%; /* Full width of parent on mobile */
   min-width: 100%; /* But at least as wide as parent */
+}
+
+@media screen and (min-width: 981px) {
+  .mega-inner {
+    overflow: visible;
+    width: fit-content; /* Make inner container fit its content on desktop */
+  }
 }
 
 .mega-scrollbar {
@@ -542,6 +549,7 @@ select:focus {
   display: flex;
   gap: 0; /* Remove gap, use margin on items instead */
   overflow-x: auto;
+  overflow-y: hidden;
   padding-bottom: 0; /* Increased to compensate for removed scrollbar margin */
   padding-left: 0;
   padding-right: 0; /* Match scrollbar right margin */
@@ -549,6 +557,7 @@ select:focus {
   margin-left: 0;
   scrollbar-width: thin;                 /* Firefox - thin bar */
   scrollbar-color: var(--menu-scrollbar-thumb) transparent;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .mega-categories::-webkit-scrollbar {    /* WebKit horizontal bar height */
@@ -716,11 +725,89 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
 @media screen and (max-width: 980px) {
   .nav-item-work .mega-menu {
     width: 90vw;
+    max-width: 90vw;
     left: 50%;
     transform: translate(-50%, 10px);
+    padding: 1rem 0.75rem;
   }
   .nav-item-work:hover .mega-menu,
   .nav-item-work:focus-within .mega-menu {
     transform: translate(-50%, 0);
+  }
+  
+  .mega-category {
+    min-width: 280px;
+    max-width: 320px;
+    padding: 0.875rem 1rem;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .nav-item-work .mega-menu {
+    width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+    left: 50%;
+    right: auto;
+    padding: 0.875rem 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .mega-inner {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  .mega-categories {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .mega-category {
+    min-width: 260px;
+    max-width: 280px;
+    padding: 0.75rem 0.875rem;
+    margin-right: 0.75rem;
+  }
+  
+  .mega-category:last-child {
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .mega-category h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mega-sublist li {
+    margin: 0.75rem 0;
+  }
+  
+  .mega-sublist li a {
+    font-size: 1rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-item-work .mega-menu {
+    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
+    padding: 0.75rem 0.375rem;
+  }
+  
+  .mega-category {
+    min-width: 240px;
+    max-width: 260px;
+    padding: 0.625rem 0.75rem;
+    margin-right: 0.625rem;
+  }
+  
+  .mega-category h4 {
+    font-size: 1.1rem;
+  }
+  
+  .mega-sublist li a {
+    font-size: 0.95rem;
   }
 }

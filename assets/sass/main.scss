@@ -5,7 +5,7 @@
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
 /* Using system fonts instead of Google Fonts for faster loading */
-@import url('fontawesome-all.min.css');
+/* FontAwesome moved to separate link tag in head.html for better performance */
 
 /*
 	Astral by HTML5 UP
