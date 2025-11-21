@@ -314,21 +314,21 @@ select:focus {
     height: 280px !important;
   }
   
-  /* Reduce title size on mobile */
+  /* Reduce title size on mobile - override base margin of 0.5em */
   .project-card h2 {
-    font-size: 1.1em !important; /* Smaller than default */
+    font-size: 1.1em !important;
     min-height: 2em;
-    margin: 0.1em 0 0.1em 0 !important; /* Further reduced margins to decrease distance from thumbnail */
+    margin: 0.15em 0 0.1em 0 !important; /* Reduced from 0.5em top to 0.15em */
   }
   
-  /* Reduce spacing in project-meta (badges) */
+  /* Reduce spacing in project-meta (badges) - override inline margin-bottom: 0.25em */
   .project-card .project-meta {
-    margin-top: 0.1em !important;
-    margin-bottom: 0.15em !important;
-    min-height: 1.5em !important; /* Reduce min-height */
+    margin-top: 0.1em !important; /* Small top margin */
+    margin-bottom: 0.1em !important; /* Reduced from 0.25em */
+    min-height: 1.5em !important;
   }
   
-  /* Reduce padding on image container to bring everything closer */
+  /* Reduce padding on image container */
   .project-card .image.fit {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
@@ -336,6 +336,12 @@ select:focus {
   
   /* Reduce spacing between image and title */
   .project-card a.image {
+    margin-bottom: 0 !important;
+    display: block;
+  }
+  
+  /* Remove any extra spacing from image wrapper */
+  .project-card .image {
     margin-bottom: 0 !important;
   }
   
@@ -799,16 +805,16 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
   .nav-item-work .mega-menu {
     width: calc(70vw - 2rem); /* Reduced by 30% from 100vw (100 * 0.7 = 70) */
     max-width: calc(70vw - 2rem);
-    left: 1rem; /* Move to left instead of centered */
-    right: auto;
-    transform: translate(0, 10px); /* Remove centering transform */
+    left: auto !important; /* Remove left positioning */
+    right: 1rem !important; /* Position from right edge, 1rem from edge = moves left */
+    transform: translate(0, 10px) !important; /* No horizontal translation */
     padding: 0.875rem 0.5rem;
     font-size: 1rem;
   }
   
   .nav-item-work:hover .mega-menu,
   .nav-item-work:focus-within .mega-menu {
-    transform: translate(0, 0); /* Remove centering transform */
+    transform: translate(0, 0) !important; /* No horizontal translation on hover */
   }
   
   .mega-inner {
