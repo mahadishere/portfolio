@@ -30,6 +30,9 @@ jobs:
           # Install dependencies for image optimization
           sudo apt-get install -y jpegoptim optipng
           
+          # Track converted PNG files for markdown updates
+          CONVERTED_FILES=""
+          
           # Optimize JPEG files
           find images -type f \( -name "*.jpg" -o -name "*.jpeg" \) -size +300k | while read img; do
             echo "Optimizing JPEG: $img"
@@ -40,7 +43,10 @@ jobs:
           find images -type f -name "*.png" -size +300k | while read img; do
             echo "Converting large PNG to JPEG: $img"
             jpg_file="${img%.png}.jpg"
-            convert "$img" -quality 75 "$jpg_file" && rm "$img" || true
+            if convert "$img" -quality 75 "$jpg_file" && rm "$img"; then
+              # Track the conversion for markdown updates
+              echo "${img%.png}.jpg|${img}" >> /tmp/converted_images.txt || true
+            fi
           done
           
           # Resize very large images
@@ -51,6 +57,30 @@ jobs:
           
           echo "✅ Image optimization complete"
 
+      - name: Update markdown files with new image paths
+        run: |
+          echo "📝 Updating markdown files..."
+          
+          if [ -f /tmp/converted_images.txt ]; then
+            # Update all markdown files to replace .png with .jpg for converted images
+            find _projects -name "*.md" -type f | while read md_file; do
+              # Read each conversion pair
+              while IFS='|' read -r jpg_file png_file; do
+                # Get just the filename (basename) to match in markdown
+                png_basename=$(basename "$png_file")
+                jpg_basename=$(basename "$jpg_file")
+                
+                # Replace .png with .jpg in the markdown file
+                # This handles paths like /images/.../file.png or images/.../file.png
+                sed -i "s|${png_basename}|${jpg_basename}|g" "$md_file" || true
+              done < /tmp/converted_images.txt
+            done
+            
+            echo "✅ Markdown files updated with new image paths"
+          else
+            echo "No PNG files were converted, skipping markdown updates"
+          fi
+
       - name: Check for changes
         id: verify-changed-files
         run: |
@@ -60,12 +90,12 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit optimized images
+      - name: Commit optimized images and updated markdown
         if: steps.verify-changed-files.outputs.changed == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add images/
-          git commit -m "Auto-optimize images [skip ci]" || exit 0
+          git add images/ _projects/
+          git commit -m "Auto-optimize images and update references [skip ci]" || exit 0
           git push
 
