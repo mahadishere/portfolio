@@ -6,9 +6,9 @@ domain:
   - Medical
 project_type:
   - AR
-  - App
   - R&D
   - CV
+  - MR
 platform: HoloLens
 featured: true
 tags:
