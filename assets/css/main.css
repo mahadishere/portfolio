@@ -1992,7 +1992,7 @@ input, select, textarea {
 			#main > .panel.intro {
 				padding: 0;
 				height: auto;
-				min-height: 20em;
+				min-height: 12em; /* Reduced from 20em */
 				display: -moz-flex;
 				display: -webkit-flex;
 				display: -ms-flex;
@@ -2025,7 +2025,7 @@ input, select, textarea {
 					-ms-align-items: center;
 					align-items: center;
 					width: 100%;
-					height: 20em;
+					height: 16em; /* Reduced from 20em */
 				}
 
 				#main > .panel.intro .pic {
@@ -2155,7 +2155,7 @@ input, select, textarea {
 					}
 
 						#main > .panel.intro .pic {
-							height: 25em;
+							height: 15em; /* Reduced from 25em */
 							width: 100%;
 						}
 
@@ -2170,7 +2170,7 @@ input, select, textarea {
 				@media screen and (max-width: 736px) {
 
 					#main > .panel.intro .pic {
-						height: 20em;
+						height: 12em; /* Reduced from 20em */
 					}
 
 					#main > .panel.intro header {
@@ -2280,11 +2280,12 @@ input, select, textarea {
 
 .project-card .image.fit img {
 	width: 100%;
-	height: auto;
+	height: 100%; /* Changed from auto to 100% to fill container */
 	max-height: 100%;
-	object-fit: contain;
+	object-fit: cover; /* Changed from contain to cover for consistent sizing */
 	object-position: center;
 	transition: transform .3s ease-in-out;
+	display: block; /* Remove inline spacing */
 }
 
 .project-card .image.fit:hover img {
@@ -2300,8 +2301,18 @@ input, select, textarea {
 
 @media screen and (max-width: 736px) {
 	.project-card .image.fit {
-		height: 280px; /* Increased for mobile - overridden by dark-mode.css if needed */
-		padding: 0.35em;
+		height: 200px !important; /* Fixed height for mobile */
+		max-height: 200px !important;
+		min-height: 200px !important;
+		padding: 0; /* Remove padding that causes auto-adjustment */
+		overflow: hidden; /* Prevent content overflow */
+	}
+	
+	.project-card .image.fit img {
+		height: 200px !important; /* Fixed height - no auto */
+		max-height: 200px !important;
+		min-height: 200px !important;
+		object-fit: cover !important;
 	}
 }
 
@@ -2351,7 +2362,7 @@ input, select, textarea {
 }
 .gallery-grid img {
 	width: 100%;
-	height: 180px;
+	height: 200px;
 	object-fit: cover;
 	transition: transform .2s ease-in-out;
 	display: block;

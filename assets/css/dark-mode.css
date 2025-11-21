@@ -284,6 +284,7 @@ select:focus {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block; /* Remove inline spacing */
 }
 
 .project-card h2 {
@@ -305,30 +306,47 @@ select:focus {
     max-width: 50% !important;
   }
   
-  /* Increase thumbnail size on mobile */
+  /* Reduce thumbnail size on mobile to reduce spacing - fix height to prevent auto-adjustment */
   .project-card .image {
-    height: 280px !important; /* Increased from 250px */
+    height: 200px !important; /* Fixed height - no auto adjustment */
+    max-height: 200px !important;
+    min-height: 200px !important;
+    overflow: hidden !important; /* Ensure content doesn't overflow */
   }
   
   .project-card .image.fit {
-    height: 280px !important;
+    height: 200px !important; /* Fixed height */
+    max-height: 200px !important;
+    min-height: 200px !important;
+    overflow: hidden !important;
   }
   
-  /* Reduce title size on mobile - override base margin of 0.5em */
+  /* Ensure image inside doesn't auto-adjust */
+  .project-card .image img,
+  .project-card .image.fit img {
+    height: 200px !important; /* Fixed height - override any auto */
+    max-height: 200px !important;
+    min-height: 200px !important;
+    width: 100% !important;
+    object-fit: cover !important; /* Maintain aspect ratio while filling container */
+    display: block !important;
+  }
+  
+  /* Reduce title size on mobile - add small margins for spacing */
   .project-card h2 {
     font-size: 1.1em !important;
     min-height: 2em;
-    margin: 0 !important; /* Zero top margin to eliminate gap from thumbnail */
-    margin-bottom: 0 !important; /* Zero bottom margin */
-    padding-top: 0 !important; /* Remove any padding */
+    margin-top: 0.4em !important; /* Small margin from thumbnail */
+    margin-bottom: 0.3em !important; /* Small margin to badges */
+    padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
   
-  /* Reduce spacing in project-meta (badges) - override inline margin-bottom: 0.25em */
+  /* Reduce spacing in project-meta (badges) - add small margins */
   .project-card .project-meta {
-    margin-top: 0 !important; /* Zero top margin to eliminate gap from title */
-    margin-bottom: 0 !important; /* Zero bottom margin */
-    padding-top: 0 !important; /* Remove any padding */
+    margin-top: 0.2em !important; /* Small margin from title */
+    margin-bottom: 0.3em !important; /* Small margin to description */
+    padding-top: 0 !important;
     padding-bottom: 0 !important;
     min-height: 1.5em !important;
   }
@@ -340,16 +358,16 @@ select:focus {
     padding: 0 !important; /* Override main.css padding: 0.5em */
   }
   
-  /* Reduce spacing between image and title */
+  /* Small margin between image and title */
   .project-card a.image {
-    margin-bottom: 0 !important;
+    margin-bottom: 0 !important; /* Let h2 margin-top handle spacing */
     margin-top: 0 !important;
     padding-bottom: 0 !important;
     padding-top: 0 !important;
     display: block;
   }
   
-  /* Remove any extra spacing from image wrapper */
+  /* Remove extra spacing from image wrapper */
   .project-card .image {
     margin-bottom: 0 !important;
     margin-top: 0 !important;
@@ -369,10 +387,11 @@ select:focus {
     display: block;
   }
   
-  /* Adjust summary text size */
+  /* Adjust summary text size with small margin */
   .project-card p {
     font-size: 0.9em;
-    margin-top: 0.2em !important;
+    margin-top: 0.3em !important; /* Small margin from badges */
+    margin-bottom: 0 !important;
   }
 }
 
@@ -577,8 +596,8 @@ select:focus {
   border-radius: 12px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
   padding: 1.25rem 1rem;
-  width: auto; /* Let container fit content width */
-  max-width: min(1035px, 90vw); /* But don't exceed this limit */
+  width: min(1035px, 90vw); /* Fixed width instead of auto */
+  max-width: min(1035px, 90vw);
   font-size: 1.2rem; /* base font size inside menu */
   opacity: 0;
   visibility: hidden;
@@ -597,14 +616,16 @@ select:focus {
 
 .mega-inner {
   overflow: hidden; /* Prevent cards from falling out on mobile */
-  width: 100%; /* Full width of parent on mobile */
-  min-width: 100%; /* But at least as wide as parent */
+  width: 100%; /* Fixed width - full width of parent */
+  min-width: 100%;
+  max-width: 100%; /* Prevent auto expansion */
 }
 
 @media screen and (min-width: 981px) {
   .mega-inner {
     overflow: visible;
-    width: fit-content; /* Make inner container fit its content on desktop */
+    width: 100%; /* Fixed width - no auto or fit-content */
+    max-width: 100%;
   }
 }
 
@@ -852,24 +873,26 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
     overflow-x: visible;
     overflow-y: auto;
     max-height: 70vh;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0.5rem; /* Add small padding */
+    padding-right: 0.5rem;
     gap: 0.75rem;
   }
   
   .mega-category {
-    min-width: 100%;
-    max-width: 100%;
-    width: 100%;
-    padding: 0.875rem 1rem;
+    min-width: calc(100% - 1rem); /* Reduce width by 1rem (padding on both sides) */
+    max-width: calc(100% - 1rem);
+    width: calc(100% - 1rem); /* Narrower cards */
+    padding: 0.875rem 0.75rem; /* Slightly reduce padding */
     margin-right: 0;
     margin-bottom: 0;
+    margin-left: 0.5rem; /* Center the narrower card */
+    margin-right: 0.5rem;
   }
   
   .mega-category:last-child {
-    margin-right: 0;
+    margin-right: 0.5rem;
     margin-bottom: 0;
-    padding-right: 1rem;
+    padding-right: 0.75rem;
   }
   
   .mega-category h4 {
