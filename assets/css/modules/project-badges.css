@@ -1,0 +1,84 @@
+/* Project Badges */
+.project-badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  margin: 0.2em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-xr {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.badge-domain {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.project-meta {
+  min-height: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.25em; /* Small top margin */
+  margin-bottom: 0.25em; /* Small bottom margin */
+}
+
+/* Featured Badge */
+.featured-badge {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+  color: #1a1a1a;
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.project-card a.image {
+  position: relative;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 736px) {
+  .filter-row {
+    flex-direction: column;
+    gap: 0.8em;
+  }
+  
+  .filter-group {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  .reset-btn {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  
+  .project-filters-modern {
+    padding: 1em;
+  }
+  
+  #filter-results-count {
+    font-size: 0.85em;
+    padding: 0 1em;
+  }
+}
+

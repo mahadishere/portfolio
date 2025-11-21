@@ -6,9 +6,40 @@
 <link rel="dns-prefetch" href="https://mahadishere.github.io" />
 <link rel="preconnect" href="https://mahadishere.github.io" crossorigin />
 <link rel="stylesheet" href="{{ '/assets/css/fontawesome-all.min.css' | relative_url }}" />
-<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-<link rel="stylesheet" href="{{ '/assets/css/dark-mode.css' | relative_url }}" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="{{ '/assets/css/dark-mode.css' | relative_url }}" /></noscript>
+<!-- Modular CSS files (refactored from main.css and dark-mode.css) -->
+<!-- Core -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/variables.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/reset.css' | relative_url }}" />
+<!-- Grid System -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/grid-base.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/grid-responsive.css' | relative_url }}" />
+<!-- Typography -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/typography.css' | relative_url }}" />
+<!-- Components -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/tables.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/forms.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/sections.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/images.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/buttons.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/lists.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/actions.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/icons.css' | relative_url }}" />
+<!-- Layout -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/wrapper.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/main-panel.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/footer.css' | relative_url }}" />
+<!-- Navigation -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/nav-base.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/mega-menu.css' | relative_url }}" />
+<!-- Projects -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/project-cards.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/project-filters.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/modules/project-badges.css' | relative_url }}" />
+<!-- Gallery -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/gallery.css' | relative_url }}" />
+<!-- Theme -->
+<link rel="stylesheet" href="{{ '/assets/css/modules/theme.css' | relative_url }}" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="{{ '/assets/css/modules/theme.css' | relative_url }}" /></noscript>
 <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
 <link rel="icon" href="{{ '/images/home/me.jpg' | relative_url }}" />
 <meta property="og:type" content="website" />

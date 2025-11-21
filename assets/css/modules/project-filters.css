@@ -1,0 +1,356 @@
+/* Project filter styles */
+.project-filters {
+  text-align: center;
+  margin: 2em 0 0.5em 0;
+}
+
+.filter-btn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.5em 1em;
+  margin: 0.25em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.search-box {
+  width: 60%;
+  max-width: 300px;
+  margin: 0.5em auto;
+  padding: 0.5em 0.75em;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+}
+
+.search-box:focus {
+  background: var(--bg-primary);
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+}
+
+/* Project grid symmetry */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card .image {
+  flex-shrink: 0;
+  height: 250px;
+  overflow: hidden;
+  margin-bottom: 0; /* Remove default margin */
+}
+
+.project-card .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; /* Remove inline spacing */
+}
+
+.project-card h2 {
+  flex-shrink: 0;
+  margin: 0.5em 0 0.25em 0;
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* ensure horizontal centering */
+  text-align: center;        /* center multiline text */
+}
+
+/* Mobile: 2 columns, larger thumbnails, smaller titles */
+@media screen and (max-width: 736px) {
+  /* Change from 3 columns (col-4) to 2 columns (col-6) */
+  #projects-grid .col-4 {
+    width: 50% !important;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+  
+  /* Reduce thumbnail size on mobile to reduce spacing - fix height to prevent auto-adjustment */
+  .project-card .image {
+    height: 200px !important; /* Fixed height - no auto adjustment */
+    max-height: 200px !important;
+    min-height: 200px !important;
+    overflow: hidden !important; /* Ensure content doesn't overflow */
+  }
+  
+  .project-card .image.fit {
+    height: 200px !important; /* Fixed height */
+    max-height: 200px !important;
+    min-height: 200px !important;
+    overflow: hidden !important;
+  }
+  
+  /* Ensure image inside doesn't auto-adjust */
+  .project-card .image img,
+  .project-card .image.fit img {
+    height: 200px !important; /* Fixed height - override any auto */
+    max-height: 200px !important;
+    min-height: 200px !important;
+    width: 100% !important;
+    object-fit: cover !important; /* Maintain aspect ratio while filling container */
+    display: block !important;
+  }
+  
+  /* Reduce title size on mobile - add small margins for spacing */
+  .project-card h2 {
+    font-size: 1.1em !important;
+    min-height: 2em;
+    margin-top: 0.4em !important; /* Small margin from thumbnail */
+    margin-bottom: 0.3em !important; /* Small margin to badges */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  /* Reduce spacing in project-meta (badges) - add small margins */
+  .project-card .project-meta {
+    margin-top: 0.2em !important; /* Small margin from title */
+    margin-bottom: 0.3em !important; /* Small margin to description */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 1.5em !important;
+  }
+  
+  /* Reduce padding on image container - be aggressive, override main.css padding: 0.5em */
+  .project-card .image.fit {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 !important; /* Override main.css padding: 0.5em */
+  }
+  
+  /* Small margin between image and title */
+  .project-card a.image {
+    margin-bottom: 0 !important; /* Let h2 margin-top handle spacing */
+    margin-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+  
+  /* Remove extra spacing from image wrapper */
+  .project-card .image {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* Override inline styles that add spacing */
+  .project-card .project-meta[style*="margin-bottom"] {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Remove line-height spacing that might add gaps */
+  .project-card h2 a {
+    line-height: 1.2 !important; /* Tight line height */
+    display: block;
+  }
+  
+  /* Adjust summary text size with small margin */
+  .project-card p {
+    font-size: 0.9em;
+    margin-top: 0.3em !important; /* Small margin from badges */
+    margin-bottom: 0 !important;
+  }
+}
+
+.project-card p {
+  flex-grow: 1;
+  margin: 0;
+  padding-bottom: 0.5em;
+}
+
+/* Modern Dropdown Filter Styles */
+.project-filters-modern {
+  background: transparent; /* remove grey background */
+  padding: 0.75em 0;       /* slimmer padding */
+  border-radius: 0;
+  margin: 1.5em auto;
+  max-width: 900px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 200px;
+  flex: 1;
+}
+
+.filter-group label {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-dropdown {
+  width: 100%;
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-dropdown:hover {
+  border-color: var(--text-secondary);
+}
+
+.filter-dropdown:focus {
+  background: var(--bg-primary);
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+  border-color: #007acc;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 450px;
+  flex: 2;
+  margin: 0;
+  padding: 0.45em 0.8em;   /* decreased height */
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-size: 0.9em;
+  text-align: center;       /* center text and caret */
+}
+
+.search-box::placeholder { text-align: center; }
+.search-box::-webkit-input-placeholder { text-align: center; }
+.search-box::-moz-placeholder { text-align: center; }
+.search-box:-ms-input-placeholder { text-align: center; }
+
+.reset-btn {
+  padding: 0.6em 1.2em;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.reset-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+/* Project Badges */
+.project-badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  margin: 0.2em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-xr {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.badge-domain {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.project-meta {
+  min-height: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.25em; /* Small top margin */
+  margin-bottom: 0.25em; /* Small bottom margin */
+}
+
+/* Featured Badge */
+.featured-badge {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+  color: #1a1a1a;
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.project-card a.image {
+  position: relative;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 736px) {
+  .filter-row {
+    flex-direction: column;
+    gap: 0.8em;
+  }
+  
+  .filter-group {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  .reset-btn {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  
+  .project-filters-modern {
+    padding: 1em;
+  }
+  
+  #filter-results-count {
+    font-size: 0.85em;
+    padding: 0 1em;
+  }
+}
+

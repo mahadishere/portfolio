@@ -1,0 +1,51 @@
+/* Project card thumbnails */
+.project-card .image.fit {
+	position: relative;
+	overflow: hidden;
+	border-radius: 8px;
+	background: var(--bg-primary, #ffffff);
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5em;
+}
+
+.project-card .image.fit img {
+	width: 100%;
+	height: 100%; /* Changed from auto to 100% to fill container */
+	max-height: 100%;
+	object-fit: cover; /* Changed from contain to cover for consistent sizing */
+	object-position: center;
+	transition: transform .3s ease-in-out;
+	display: block; /* Remove inline spacing */
+}
+
+.project-card .image.fit:hover img {
+	transform: scale(1.05);
+}
+
+@media screen and (max-width: 980px) {
+	.project-card .image.fit {
+		height: 220px;
+		padding: 0.5em;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	.project-card .image.fit {
+		height: 200px !important; /* Fixed height for mobile */
+		max-height: 200px !important;
+		min-height: 200px !important;
+		padding: 0; /* Remove padding that causes auto-adjustment */
+		overflow: hidden; /* Prevent content overflow */
+	}
+	
+	.project-card .image.fit img {
+		height: 200px !important; /* Fixed height - no auto */
+		max-height: 200px !important;
+		min-height: 200px !important;
+		object-fit: cover !important;
+	}
+}
+
