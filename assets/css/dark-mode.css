@@ -277,6 +277,7 @@ select:focus {
   flex-shrink: 0;
   height: 250px;
   overflow: hidden;
+  margin-bottom: 0; /* Remove default margin */
 }
 
 .project-card .image img {
@@ -317,12 +318,31 @@ select:focus {
   .project-card h2 {
     font-size: 1.1em !important; /* Smaller than default */
     min-height: 2em;
-    margin: 0.2em 0 0.15em 0; /* Reduced top margin to decrease distance from thumbnail */
+    margin: 0.1em 0 0.1em 0 !important; /* Further reduced margins to decrease distance from thumbnail */
+  }
+  
+  /* Reduce spacing in project-meta (badges) */
+  .project-card .project-meta {
+    margin-top: 0.1em !important;
+    margin-bottom: 0.15em !important;
+    min-height: 1.5em !important; /* Reduce min-height */
+  }
+  
+  /* Reduce padding on image container to bring everything closer */
+  .project-card .image.fit {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  /* Reduce spacing between image and title */
+  .project-card a.image {
+    margin-bottom: 0 !important;
   }
   
   /* Adjust summary text size */
   .project-card p {
     font-size: 0.9em;
+    margin-top: 0.2em !important;
   }
 }
 
@@ -454,6 +474,8 @@ select:focus {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  margin-top: 0.25em; /* Small top margin */
+  margin-bottom: 0.25em; /* Small bottom margin */
 }
 
 /* Featured Badge */
@@ -777,10 +799,16 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
   .nav-item-work .mega-menu {
     width: calc(70vw - 2rem); /* Reduced by 30% from 100vw (100 * 0.7 = 70) */
     max-width: calc(70vw - 2rem);
-    left: 50%;
+    left: 1rem; /* Move to left instead of centered */
     right: auto;
+    transform: translate(0, 10px); /* Remove centering transform */
     padding: 0.875rem 0.5rem;
     font-size: 1rem;
+  }
+  
+  .nav-item-work:hover .mega-menu,
+  .nav-item-work:focus-within .mega-menu {
+    transform: translate(0, 0); /* Remove centering transform */
   }
   
   .mega-inner {
