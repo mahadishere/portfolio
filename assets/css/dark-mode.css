@@ -493,8 +493,7 @@ select:focus {
   border: 1px solid var(--menu-border);
   border-radius: 12px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
-  padding: 1.25rem 1rem 1.25rem 1rem;
-  padding-right: 0; /* Remove right padding to eliminate extra space */
+  padding: 1.25rem 1rem;
   width: min(1100px, 95vw); /* give more horizontal room for wider subcategory panes */
   font-size: 1.2rem; /* base font size inside menu */
   opacity: 0;
@@ -519,7 +518,7 @@ select:focus {
 .mega-scrollbar {
   position: relative;
   height: 6px;
-  margin: 6px 6px 0 6px;
+  margin: 6px 1rem 0 1rem; /* Match parent left/right padding */
   border-radius: 999px;
   background: rgba(0,0,0,0.08);
 }
@@ -545,7 +544,8 @@ select:focus {
   gap: 1.25rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
-  padding-right: 1rem; /* Add padding back since parent padding-right was removed */
+  padding-left: 0;
+  padding-right: 0;
   margin-right: 0;
   scrollbar-width: thin;                 /* Firefox - thin bar */
   scrollbar-color: var(--menu-scrollbar-thumb) transparent;

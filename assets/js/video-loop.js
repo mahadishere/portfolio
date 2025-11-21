@@ -17,6 +17,14 @@
 		// Function to load and start forward video
 		function loadAndPlayForwardVideo() {
 			if (!forwardVideoLoaded) {
+				// Add source element only when we want to load the video
+				const src = videoForward.getAttribute('data-src');
+				if (src && !videoForward.querySelector('source')) {
+					const source = document.createElement('source');
+					source.src = src;
+					source.type = 'video/mp4';
+					videoForward.appendChild(source);
+				}
 				videoForward.load();
 				forwardVideoLoaded = true;
 				// Wait for video to be ready, then play
@@ -28,6 +36,21 @@
 				}, { once: true });
 			} else if (videoForward.paused) {
 				videoForward.play().catch(e => console.log('Video play failed:', e));
+			}
+		}
+		
+		// Function to load reverse video
+		function loadReverseVideo() {
+			if (!reverseVideoLoaded) {
+				const src = videoReverse.getAttribute('data-src');
+				if (src && !videoReverse.querySelector('source')) {
+					const source = document.createElement('source');
+					source.src = src;
+					source.type = 'video/mp4';
+					videoReverse.appendChild(source);
+				}
+				videoReverse.load();
+				reverseVideoLoaded = true;
 			}
 		}
 		
@@ -44,14 +67,20 @@
 		videoForward.addEventListener('timeupdate', function() {
 			if (this.duration && this.currentTime >= this.duration - 0.5) {
 				// Load reverse video when forward is 0.5 seconds from end
-				if (!reverseVideoLoaded) {
-					videoReverse.load();
-					reverseVideoLoaded = true;
-				}
+				loadReverseVideo();
 				// Pre-start reverse video just before forward ends
-				if (videoReverse.paused && reverseVideoLoaded) {
+				if (reverseVideoLoaded && videoReverse.paused) {
 					videoReverse.currentTime = 0;
 					videoReverse.play().catch(e => {});
+				} else if (!reverseVideoLoaded) {
+					// Wait for video to load first
+					videoReverse.addEventListener('canplay', function playOnce() {
+						if (videoReverse.paused) {
+							videoReverse.currentTime = 0;
+							videoReverse.play().catch(e => {});
+						}
+						videoReverse.removeEventListener('canplay', playOnce);
+					}, { once: true });
 				}
 			}
 		});
