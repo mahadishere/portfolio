@@ -317,7 +317,7 @@ select:focus {
   .project-card h2 {
     font-size: 1.1em !important; /* Smaller than default */
     min-height: 2em;
-    margin: 0.4em 0 0.2em 0;
+    margin: 0.2em 0 0.15em 0; /* Reduced top margin to decrease distance from thumbnail */
   }
   
   /* Adjust summary text size */
@@ -755,8 +755,8 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
 
 @media screen and (max-width: 980px) {
   .nav-item-work .mega-menu {
-    width: 90vw;
-    max-width: 90vw;
+    width: 72vw; /* Reduced by 20% from 90vw (90 * 0.8 = 72) */
+    max-width: 72vw;
     left: 50%;
     transform: translate(-50%, 10px);
     padding: 1rem 0.75rem;
@@ -775,8 +775,8 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
 
 @media screen and (max-width: 736px) {
   .nav-item-work .mega-menu {
-    width: calc(100vw - 2rem);
-    max-width: calc(100vw - 2rem);
+    width: calc(70vw - 2rem); /* Reduced by 30% from 100vw (100 * 0.7 = 70) */
+    max-width: calc(70vw - 2rem);
     left: 50%;
     right: auto;
     padding: 0.875rem 0.5rem;

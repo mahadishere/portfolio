@@ -1959,6 +1959,13 @@ input, select, textarea {
 			margin: 0 auto;
 		}
 
+		/* Mobile: Make home panel smaller than work panel */
+		@media screen and (max-width: 736px) {
+			#main.has-intro {
+				max-width: 85%; /* Smaller than work panel which uses full width */
+			}
+		}
+
 		#main > .panel {
 			-moz-transition: opacity 0.25s ease-in-out;
 			-webkit-transition: opacity 0.25s ease-in-out;
