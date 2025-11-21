@@ -31,17 +31,14 @@
 			}
 		}
 		
-		// Load video after page is interactive (faster initial load)
-		if (document.readyState === 'complete') {
-			// Page already loaded, load video immediately
-			loadAndPlayForwardVideo();
-		} else {
-			// Wait for page to be interactive, then load video
-			window.addEventListener('load', function() {
-				// Small delay to let other critical resources load first
-				setTimeout(loadAndPlayForwardVideo, 100);
-			});
-		}
+		// Don't load video automatically - only load on user interaction or after significant delay
+		// This ensures fast initial page load (only poster image loads)
+		setTimeout(function() {
+			// Only auto-load after 2 seconds if user hasn't interacted yet
+			if (!forwardVideoLoaded) {
+				loadAndPlayForwardVideo();
+			}
+		}, 2000);
 		
 		// When forward video is near the end, load and prepare reverse
 		videoForward.addEventListener('timeupdate', function() {
