@@ -10,6 +10,11 @@ project_type:
 platform: Mobile
 featured: true
 summary: Transform Your Space with Mozaico AR
+external_links:
+  - url: https://apps.apple.com/pk/app/mozaico-ar/id6742782310 Mozaico AR
+    label: Download on App Store
+  - label: Download on Play Store
+    url: https://play.google.com/store/apps/details?id=com.mozaicoar.app&pcampaignid=web_share
 gallery_images:
   - path: images/projects/mozaico/m-ss-01.jpg
     alt: "1"
