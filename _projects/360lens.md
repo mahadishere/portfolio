@@ -15,7 +15,7 @@ tags:
   - HoloLens
   - Pre-surgical Planning
   - Hip Replacement
-summary: HoloLens 2-based pre-surgical planning tool for hip replacement.
+summary: HoloLens 2-Based Pre-Surgical Planning Tool for Hip Replacement.
 external_links:
   - url: https://youtu.be/EGvS5mp_gVU
     label: Video Demo on Youtube
