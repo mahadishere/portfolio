@@ -10,6 +10,9 @@ project_type:
 platform: Web
 featured: true
 summary: Marina Virtual Tour using Unreal Engine 5.5 & Pixel Streaming
+external_links:
+  - url: https://youtu.be/GJSLo4zMYcc
+    label: Demo Video
 gallery_images:
   - path: /images/projects/marina-yachts-virtual-tour/screenshot-2025-11-21-at-5.14.28 pm.jpg
     alt: "1"
