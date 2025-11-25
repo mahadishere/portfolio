@@ -1935,11 +1935,11 @@ form textarea:focus {
 			@media screen and (max-width: 736px) {
 
 				#main > .panel.intro {
-					min-height: 6em; /* Further reduced for mobile portrait */
+					min-height: 4em; /* Reduced for mobile portrait */
 				}
 
 				#main > .panel.intro .pic {
-					height: 8em; /* Further reduced from 10em for mobile portrait */
+					height: 6em; /* Reduced height for mobile portrait */
 				}
 
 					#main > .panel.intro header {
