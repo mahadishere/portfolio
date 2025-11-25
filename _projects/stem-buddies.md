@@ -1,7 +1,7 @@
 ---
 title: Stem Buddies
 anchor_id: stem-buddies
-card_image: /images/projects/stem-buddies/sb-main-img.png
+card_image: /images/projects/stem-buddies/sb-main-img.jpg
 domain:
   - Education
 project_type:
@@ -22,7 +22,7 @@ gallery_images:
   - alt: "2"
     path: /images/projects/stem-buddies/sb-sc-03.jpg
   - alt: "3"
-    path: /images/projects/stem-buddies/sb-sc-04.png
+    path: /images/projects/stem-buddies/sb-sc-04.jpg
 ---
 ► Interactive Learning for Tomorrow's InnovatorsIt's a known fact: children thrive when engaged interactively.
 
