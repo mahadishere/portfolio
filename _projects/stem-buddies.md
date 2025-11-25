@@ -17,10 +17,10 @@ external_links:
     url: https://apps.apple.com/pk/app/stem-buddies-kids-learning-app/id1380413683
 header_note: ""
 gallery_images:
-  - path: /images/projects/stem-buddies/sb-sc-02.jpg
+  - path: /images/projects/stem-buddies/sb-sc-02.png
     alt: "1"
   - alt: "2"
-    path: /images/projects/stem-buddies/sb-sc-03.jpg
+    path: /images/projects/stem-buddies/sb-sc-03.png
   - alt: "3"
     path: /images/projects/stem-buddies/sb-sc-04.png
 ---
