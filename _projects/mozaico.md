@@ -11,7 +11,7 @@ platform: Mobile
 featured: true
 summary: Transform Your Space with Mozaico AR
 external_links:
-  - url: https://apps.apple.com/pk/app/mozaico-ar/id6742782310 Mozaico AR
+  - url: https://apps.apple.com/pk/app/mozaico-ar/id6742782310
     label: Download on App Store
   - label: Download on Play Store
     url: https://play.google.com/store/apps/details?id=com.mozaicoar.app&pcampaignid=web_share
