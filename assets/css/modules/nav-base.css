@@ -9,7 +9,8 @@
 		#nav a {
 			position: relative;
 			display: inline-block;
-			color: #ffffff;
+			color: #ffffff; /* Always white */
+			background: none; /* No background */
 			width: 1em;
 			height: 1em;
 			line-height: 0.9em;
@@ -23,8 +24,15 @@
 			transition: opacity .25s ease-in-out;
 		}
 
+			/* Icons are always white, no background */
+			#nav a.icon {
+				color: #ffffff;
+				background: none;
+			}
+
 			#nav a.icon:before {
 				padding-right: 0;
+				background-color: #ffffff; /* Always white - needed for mask-image */
 			}
 
 			#nav a:before {

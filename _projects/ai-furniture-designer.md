@@ -1,7 +1,7 @@
 ---
 title: AI Furniture Designer
 anchor_id: ai-furniture-designer
-card_image: /images/projects/ai-furniture-designer/01.jpg
+card_image: /images/projects/ai-furniture-designer/03.jpg
 domain:
   - Manufacturing
   - Architecture
