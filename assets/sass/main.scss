@@ -817,10 +817,10 @@
 					}
 				}
 
-				@include breakpoint('<=small') {
-					.pic {
-						height: 20em;
-					}
+			@include breakpoint('<=small') {
+				.pic {
+					height: 10em;
+				}
 
 					header {
 						padding: 0;

@@ -193,12 +193,13 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
   /* Stack cards vertically on mobile portrait */
   .mega-categories {
     flex-direction: column;
-    overflow-x: visible;
+    overflow-x: hidden; /* Restrict horizontal scrolling */
     overflow-y: auto;
     max-height: 70vh;
     padding-left: 0.5rem; /* Add small padding */
     padding-right: 0.5rem;
     gap: 0.75rem;
+    align-items: center; /* Center items horizontally */
   }
   
   .mega-category {
@@ -208,12 +209,12 @@ html[data-theme="dark"] .mega-menu::-webkit-scrollbar-track {
     padding: 0.875rem 0.75rem; /* Slightly reduce padding */
     margin-right: 0;
     margin-bottom: 0;
-    margin-left: 0.5rem; /* Center the narrower card */
-    margin-right: 0.5rem;
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto;
   }
   
   .mega-category:last-child {
-    margin-right: 0.5rem;
+    margin-right: auto; /* Keep centered */
     margin-bottom: 0;
     padding-right: 0.75rem;
   }

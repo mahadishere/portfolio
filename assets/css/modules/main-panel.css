@@ -226,11 +226,15 @@
 
 				}
 
-				@media screen and (max-width: 736px) {
+			@media screen and (max-width: 736px) {
 
-					#main > .panel.intro .pic {
-						height: 12em; /* Reduced from 20em */
-					}
+				#main > .panel.intro {
+					min-height: 10em; /* Reduced for mobile portrait */
+				}
+
+				#main > .panel.intro .pic {
+					height: 10em; /* Reduced from 12em for mobile portrait */
+				}
 
 					#main > .panel.intro header {
 						padding: 0;
