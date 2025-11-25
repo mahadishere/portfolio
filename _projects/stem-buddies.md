@@ -17,14 +17,14 @@ external_links:
     url: https://apps.apple.com/pk/app/stem-buddies-kids-learning-app/id1380413683
 header_note: ""
 gallery_images:
-  - path: /images/projects/stem-buddies/sb-sc-02.jpg
-    alt: "1"
+  - alt: "1"
+    path: /images/projects/stem-buddies/sb-sc-02.jpg
   - alt: "2"
     path: /images/projects/stem-buddies/sb-sc-03.jpg
   - alt: "3"
     path: /images/projects/stem-buddies/sb-sc-04.png
 ---
-► Interactive Learning for Tomorrow's Innovators It's a known fact: children thrive when engaged interactively.
+► Interactive Learning for Tomorrow's InnovatorsIt's a known fact: children thrive when engaged interactively.
 
 Introducing the STEM Buddies: Doc, Victor, Helix, Cookie, and their tech-savvy dog Issy.
 

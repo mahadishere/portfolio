@@ -148,33 +148,50 @@ select:focus {
 
 /* Go Back Button */
 .go-back-btn {
-  padding: 0.7em 0.9em !important;
+  padding: 0.5em !important;
   font-size: 0.9em !important;
-  min-width: 2em;
-  min-height: 2em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
+  width: 2em !important;
+  height: 2em !important;
+  min-width: 2em !important;
+  min-height: 2em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
   transition: all 0.3s ease;
-  background: none !important; /* No background */
-  border: none !important;
-  color: var(--text-primary, #ffffff) !important;
+  background: rgba(0, 0, 0, 0.3) !important; /* Semi-transparent background for visibility */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  cursor: pointer;
+  opacity: 0.8;
+  margin: 0;
 }
 
 .go-back-btn .icon {
   font-size: 1em;
-  margin: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   color: #ffffff !important; /* Always white */
   background: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .go-back-btn .icon:before {
   background-color: #ffffff !important; /* Always white - needed for mask-image */
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .go-back-btn:hover {
   transform: translateX(-2px);
-  background-color: var(--bg-primary, #333333) !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
