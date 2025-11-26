@@ -1,7 +1,7 @@
 ---
 title: Road Crack Segmentation
 anchor_id: road-crack
-card_image: /images/projects/road-crack-segmentation/gemini_generated_image_1i9uei1i9uei1i9u.png
+card_image: /images/projects/road-crack-segmentation/gemini_generated_image_1i9uei1i9uei1i9u.jpg
 domain:
   - ITS
 project_type:
@@ -12,11 +12,11 @@ summary: AI-Powered Road Crack & Distress Detection System
 header_note: ""
 gallery_images:
   - alt: "1"
-    path: /images/projects/road-crack-segmentation/screenshot-2025-11-26-at-5.02.51 pm.png
+    path: /images/projects/road-crack-segmentation/screenshot-2025-11-26-at-5.02.51 pm.jpg
   - alt: "2"
-    path: /images/projects/road-crack-segmentation/screenshot-2025-11-26-at-5.02.30 pm.png
+    path: /images/projects/road-crack-segmentation/screenshot-2025-11-26-at-5.02.30 pm.jpg
   - alt: "3"
-    path: /images/projects/road-crack-segmentation/screenshot-2025-11-26-at-5.02.18 pm.png
+    path: /images/projects/road-crack-segmentation/screenshot-2025-11-26-at-5.02.18 pm.jpg
 ---
 This project showcases an advanced, AI-assisted pavement inspection tool designed to automatically identify road cracks and major surface distresses using deep learning–based semantic segmentation.
 
