@@ -6,10 +6,10 @@
 <link rel="dns-prefetch" href="https://mahadishere.github.io" />
 <link rel="preconnect" href="https://mahadishere.github.io" crossorigin />
 <!-- Preload critical CSS -->
-<link rel="preload" href="{{ '/assets/css/optimized/critical.css' | relative_url }}" as="style" />
+<link rel="preload" href="{{ '/assets/css/optimized/critical.css' | relative_url }}?v={{ site.time | date: '%s' }}" as="style" />
 <!-- Combined CSS files (reduces HTTP requests from 20+ to 3) -->
 <!-- Critical CSS (core, layout, navigation) -->
-<link rel="stylesheet" href="{{ '/assets/css/optimized/critical.css' | relative_url }}" />
+<link rel="stylesheet" href="{{ '/assets/css/optimized/critical.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
 <!-- Components CSS (tables, forms, buttons, projects, gallery) -->
 <link rel="stylesheet" href="{{ '/assets/css/optimized/components.css' | relative_url }}" />
 <!-- Theme CSS (loaded asynchronously) -->

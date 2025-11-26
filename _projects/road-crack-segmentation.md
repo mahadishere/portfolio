@@ -6,6 +6,7 @@ domain:
   - ITS
 project_type:
   - AI
+  - CV
 platform: Desktop
 featured: false
 summary: AI-Powered Road Crack & Distress Detection System

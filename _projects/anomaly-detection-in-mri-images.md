@@ -1,7 +1,7 @@
 ---
 title: Anomaly detection in MRI images
 anchor_id: anomaly-mri
-card_image: /images/projects/anomaly-detection-in-medical-mri-images/screenshot-2025-11-26-at-5.21.09 pm.jpg
+card_image: /images/projects/anomaly-detection-in-mri-images/02.jpg
 domain:
   - Medical
 project_type:
@@ -10,7 +10,7 @@ platform: Desktop
 featured: false
 summary: AI-Powered Medical Anomaly Detection System
 gallery_images:
-  - path: /images/projects/anomaly-detection-in-mri-images/screenshot-2025-11-26-at-5.19.19 pm.png
+  - path: /images/projects/anomaly-detection-in-mri-images/01.jpg
     alt: "1"
 ---
 It is designed to detect anomalies in medical imaging with high precision.

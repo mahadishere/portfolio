@@ -1358,7 +1358,7 @@ input, select, textarea {
 
 	body {
 		background-color: var(--bg-page);
-		background-image: url("images/overlay.png"), url("images/bg.png");
+		background-image: url("/portfolio/images/overlay.png"), url("/portfolio/images/bg.png");
 		background-repeat: repeat, no-repeat;
 		background-size: auto, 100% 100%;
 		background-attachment: fixed;
@@ -1804,7 +1804,7 @@ form textarea:focus {
 						position: absolute;
 						top: 0;
 						left: 0;
-						background: url("images/overlay.png");
+						background: url("/portfolio/images/overlay.png");
 						width: 100%;
 						height: 100%;
 						z-index: 1;
