@@ -11,7 +11,7 @@ featured: false
 summary: Intelligent PDF Summarization & Technical Document Understanding
 gallery_images:
   - alt: "1"
-    path: /images/projects/intelligent-pdf-summarization/screenshot-2025-11-26-at-5.30.54 pm.png
+    path: /images/projects/intelligent-pdf-summarization/screenshot-2025-11-26-at-5.30.54 pm.jpg
 ---
 It is designed to extract, interpret, and summarize complex technical information from PDF documents—particularly those related to mechanical instruments and engineering specifications.
 
