@@ -1,7 +1,7 @@
 ---
 title: Anomaly detection in MRI images
 anchor_id: anomaly-mri
-card_image: /images/projects/anomaly-detection-in-medical-mri-images/screenshot-2025-11-26-at-5.21.09 pm.png
+card_image: /images/projects/anomaly-detection-in-medical-mri-images/screenshot-2025-11-26-at-5.21.09 pm.jpg
 domain:
   - Medical
 project_type:
