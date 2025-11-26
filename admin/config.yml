@@ -48,6 +48,15 @@ collections:
           - {label: "Entertainment", value: "Entertainment"}
           - {label: "E-Commerce", value: "E-Commerce"}
           - {label: "Fashion / Apparel", value: "Fashion"}
+          - {label: "Intelligent Transportation Systems (ITS)", value: "ITS"}
+          - {label: "Real Estate / Property", value: "Real Estate"}
+          - {label: "Automotive", value: "Automotive"}
+          - {label: "Tourism / Hospitality", value: "Tourism"}
+          - {label: "Retail", value: "Retail"}
+          - {label: "Construction / Engineering", value: "Construction"}
+          - {label: "Gaming", value: "Gaming"}
+          - {label: "Aerospace / Aviation", value: "Aerospace"}
+          - {label: "Government / Public Sector", value: "Government"}
         hint: "Select one or more industry domains (can select multiple)"
       
       - label: "Project Type"
