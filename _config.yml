@@ -4,10 +4,11 @@ timezone: UTC
 markdown: kramdown
 permalink: pretty
 
-# If this is a project site (username.github.io/repo), you may set baseurl: "/repo"
-# Leave blank to keep current relative paths working.
-baseurl: "/portfolio"
-url: "https://mahadishere.github.io"
+# Site URL configuration
+# Now using custom domain mahadmufti.com as the primary URL.
+# With a custom domain, we serve the site from the root, so baseurl is blank.
+baseurl: ""
+url: "https://mahadmufti.com"
 
 collections:
   projects:
