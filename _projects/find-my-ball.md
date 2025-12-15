@@ -12,6 +12,9 @@ featured: false
 tags: []
 summary: AI-powered golf ball finder that spots your ball instantly in grass,
   trees, or rough.
+external_links:
+  - url: https://apps.apple.com/pk/app/find-my-ball/id6753210539
+    label: App Store
 gallery_images:
   - alt: "1"
     path: /images/projects/find-my-ball/0x0ss.jpg
