@@ -10,7 +10,7 @@
 
 	body {
 		background-color: var(--bg-page);
-		background-image: url("/portfolio/images/overlay.png"), url("/portfolio/images/bg.png");
+		background-image: url("../images/overlay.png"), url("../images/bg.png");
 		background-repeat: repeat, no-repeat;
 		background-size: auto, 100% 100%;
 		background-attachment: fixed;
