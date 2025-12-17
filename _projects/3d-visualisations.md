@@ -8,7 +8,7 @@ domain:
 project_type:
   - 3D Visualization
 platform: Desktop
-featured: true
+featured: false
 summary: 3D Visualisation Samples
 gallery_images:
   - alt: "1"
