@@ -25,6 +25,22 @@
   --menu-item-font-size: 1.2rem;
   --menu-item-pad-top: 0.5rem;
   --menu-item-pad-bottom: 0.5rem;
+  /* Watermark overlay (used on project & gallery images) */
+  --watermark-text: "mm";
+  /* Center watermark look */
+  --watermark-center-fg: rgba(255, 255, 255, 0.48);
+  --watermark-center-stroke: rgba(0, 0, 0, 0.30);
+  --watermark-center-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
+  --watermark-center-rotation: -12deg;
+  /* Halo behind watermark for consistent contrast */
+  --watermark-halo: rgba(0, 0, 0, 0.35);
+  --watermark-halo-size: 72%;
+  --watermark-halo-blur: 14px;
+  /* Corner pill watermark look (fallback/optional) */
+  --watermark-fg: rgba(255, 255, 255, 0.92);
+  --watermark-bg: rgba(0, 0, 0, 0.36);
+  --watermark-border: rgba(255, 255, 255, 0.18);
+  --watermark-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
 }
 
 [data-theme="dark"] {
@@ -51,6 +67,22 @@
   --menu-item-font-size: 1.2rem;
   --menu-item-pad-top: 0.5rem;
   --menu-item-pad-bottom: 0.5rem;
+  /* Watermark overlay (used on project & gallery images) */
+  --watermark-text: "mm";
+  /* Center watermark look */
+  --watermark-center-fg: rgba(255, 255, 255, 0.42);
+  --watermark-center-stroke: rgba(0,  0,  0,  0.32);
+  --watermark-center-shadow: 0 7px 24px rgba(0, 0, 0, 0.34);
+  --watermark-center-rotation: -12deg;
+  /* Halo behind watermark for consistent contrast */
+  --watermark-halo: rgba(0, 0, 0, 0.44);
+  --watermark-halo-size: 74%;
+  --watermark-halo-blur: 16px;
+  /* Corner pill watermark look (fallback/optional) */
+  --watermark-fg: rgba(255, 255, 255, 0.92);
+  --watermark-bg: rgba(0, 0, 0, 0.46);
+  --watermark-border: rgba(255, 255, 255, 0.14);
+  --watermark-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 /*
 	Astral by HTML5 UP
