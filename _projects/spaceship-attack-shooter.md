@@ -14,12 +14,12 @@ external_links:
     label: Play Store
 gallery_images:
   - alt: "1"
-    path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_15-55-33.png
-  - path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_15-54-59.png
+    path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_15-55-33.jpg
+  - path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_15-54-59.jpg
     alt: "2"
   - alt: "3"
-    path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_15-56-49.png
+    path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_15-56-49.jpg
   - alt: "4"
-    path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_16-00-30.png
+    path: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_16-00-30.jpg
 ---
 Whether you’re into cool shooting games or you’re just bored with all other games, Spaceship Attack Shooter is there for you! This space shooter can hook up your fingertups to your phone or tablet for hours – you’ll be left wondering where the time went!
