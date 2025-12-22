@@ -1,14 +1,14 @@
 ---
 title: Spaceship Attack Shooter
 anchor_id: sas
-card_image: /images/projects/spaceship-attack-shooter/icon2.png
+card_image: /images/projects/spaceship-attack-shooter/screen_2560x1440_2017-08-11_15-55-33.jpg
 domain:
   - Gaming
 project_type:
   - Game
 platform: Mobile
 featured: false
-summary: Blast 2D spaceship shooter arcade!
+summary: Blast 2D Spaceship Shooter Arcade!
 external_links:
   - url: https://play.google.com/store/apps/details?id=com.ozaar.sas&pcampaignid=web_share
     label: Play Store
