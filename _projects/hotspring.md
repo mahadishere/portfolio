@@ -8,7 +8,7 @@ project_type:
   - AR
   - App
 platform: Mobile
-featured: true
+featured: false
 tags:
   - Product Visualization
   - Retail
