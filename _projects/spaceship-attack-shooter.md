@@ -20,6 +20,6 @@ gallery_images:
   - alt: "3"
     path: /images/projects/spaceship-attack-shooter/4.png
   - alt: "4"
-    path: /images/projects/spaceship-attack-shooter/5.png
+    path: /images/projects/spaceship-attack-shooter/5.jpg
 ---
 Whether you’re into cool shooting games or you’re just bored with all other games, Spaceship Attack Shooter is there for you! This space shooter can hook up your fingertups to your phone or tablet for hours – you’ll be left wondering where the time went!
