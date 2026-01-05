@@ -37,8 +37,6 @@
 				</div>
 			{% endif %}
 			
-			{% include project_metadata.html project=project %}
-			
 			{% if project.gallery_images and project.gallery_images.size > 0 %}
 			<div class="gallery">
 				<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
@@ -51,6 +49,10 @@
 				</div>
 			</div>
 			{% endif %}
+			
+			{% include project_metadata.html project=project %}
+			
+			{% include related_projects.html project=project %}
 		</div>
 	</div>
 </section>

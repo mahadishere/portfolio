@@ -1,6 +1,6 @@
 {% assign project = include.project %}
 {% if project.platform or project.domain or project.project_type or project.tags or project.featured %}
-<section class="project-metadata" style="margin-top: 2em; padding: 1.5em; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;">
+<section class="project-metadata" style="margin-top: 2em;">
 	<h3 style="margin-bottom: 1em; font-size: 1.1em;">Project Details</h3>
 	<dl style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin: 0;">
 		{% if project.platform %}

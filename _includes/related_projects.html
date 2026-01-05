@@ -1,0 +1,57 @@
+{% assign current = include.project %}
+{% assign related = site.projects | where_exp: "p", "p.url != current.url" %}
+{% assign matches = '' | split: '' %}
+
+{% for p in related %}
+	{% assign is_related = false %}
+	{% if current.domain and p.domain %}
+		{% for d in current.domain %}
+			{% if p.domain contains d %}
+				{% assign is_related = true %}
+				{% break %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	{% unless is_related %}
+		{% if current.project_type and p.project_type %}
+			{% for t in current.project_type %}
+				{% if p.project_type contains t %}
+					{% assign is_related = true %}
+					{% break %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endunless %}
+	{% if is_related %}
+		{% assign matches = matches | push: p %}
+	{% endif %}
+{% endfor %}
+
+{% if matches.size > 0 %}
+<section class="related-projects" style="margin-top: 2.5em;">
+	<h3 style="text-align: center; margin-bottom: 1.25em;"><u>Related Projects</u></h3>
+	<div class="row aln-center">
+		{% for p in matches limit: 6 %}
+		<div class="col-4" style="margin-bottom: 1.5em;">
+			<a href="{{ p.url | relative_url }}" style="text-decoration: none; display: block;">
+				<div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+					<img loading="lazy"
+						 decoding="async"
+						 fetchpriority="low"
+						 src="{{ p.card_image | relative_url }}"
+						 alt="{{ p.title }}"
+						 style="width: 100%; height: 180px; object-fit: cover; display: block;">
+					<div style="padding: 1em;">
+						<h4 style="margin: 0 0 0.5em 0; font-size: 1.1em; color: var(--text-primary);">{{ p.title }}</h4>
+						{% if p.summary %}
+						<p style="margin: 0; font-size: 0.9em; color: var(--text-muted); line-height: 1.4;">{{ p.summary }}</p>
+						{% endif %}
+					</div>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+{% endif %}
+
