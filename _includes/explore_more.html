@@ -5,11 +5,13 @@
 
 	<div class="row aln-center" style="margin-top: 1.25em;">
 		<div class="col-10">
-			<div class="explore-more-scroller" style="display: flex; gap: 1rem; overflow-x: auto; padding: 0.25rem 0 0.75rem; scroll-snap-type: x mandatory;">
+			<div class="explore-more-wrapper">
+				<div class="explore-more-scroller" style="display: flex; gap: 1rem; overflow-x: auto; padding: 0.25rem 0 0.75rem; scroll-snap-type: x mandatory;">
 				{% for p in site.projects %}
 					{% if p.url != page.url %}
 						<a href="{{ p.url | relative_url }}"
-						   style="flex: 0 0 260px; scroll-snap-align: start; text-decoration: none;"
+						   class="explore-more-card"
+						   style="flex: 0 0 260px; scroll-snap-align: start; text-decoration: none; --i: {{ forloop.index0 }};"
 						   aria-label="Open project: {{ p.title }}">
 							<div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; overflow: hidden;">
 								<img loading="lazy"
@@ -30,6 +32,7 @@
 						</a>
 					{% endif %}
 				{% endfor %}
+				</div>
 			</div>
 			<p style="text-align: center; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.9em;">
 				Tip: scroll horizontally to browse projects.

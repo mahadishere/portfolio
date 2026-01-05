@@ -171,6 +171,89 @@ select:focus {
   background: #e0e0e0;
 }
 
+/* Explore more carousel animations */
+.explore-more-wrapper {
+  position: relative;
+}
+
+/* Soft edge fades to hint horizontal scroll */
+.explore-more-wrapper:before,
+.explore-more-wrapper:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 42px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.explore-more-wrapper:before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-primary), rgba(0,0,0,0));
+}
+
+.explore-more-wrapper:after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-primary), rgba(0,0,0,0));
+}
+
+.explore-more-scroller {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes exploreMoreNudge {
+  0% { transform: translateX(0); }
+  55% { transform: translateX(-14px); }
+  100% { transform: translateX(0); }
+}
+
+/* Gentle one-time nudge on load (visual hint) */
+.explore-more-scroller {
+  animation: exploreMoreNudge 900ms ease-out 1;
+}
+
+@keyframes exploreMoreCardIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.explore-more-card {
+  display: block;
+  transform: translateZ(0);
+  animation: exploreMoreCardIn 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+.explore-more-card > div {
+  transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.explore-more-card:hover > div {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.30);
+  border-color: rgba(224,224,224,0.35);
+}
+
+.explore-more-card:focus-visible > div {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 2px rgba(207,207,207,0.85), 0 14px 34px rgba(0,0,0,0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explore-more-scroller {
+    scroll-behavior: auto;
+    animation: none;
+  }
+  .explore-more-card {
+    animation: none;
+  }
+  .explore-more-card > div {
+    transition: none;
+  }
+}
+
 /* Go Back Button */
 .go-back-btn {
   padding: 0.5em !important;
