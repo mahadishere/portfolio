@@ -43,10 +43,6 @@
 			<!-- Combined custom scripts (reduces HTTP requests from 8 to 1) -->
 			<script src="{{ '/assets/js/optimized/custom.js' | relative_url }}" defer></script>
 
-			{% if page.url == '/' or page.url == '/projects/' or page.layout == 'project' %}
-				{% include response_padding.html %}
-			{% endif %}
-
 	</body>
 </html>
 

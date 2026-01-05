@@ -14,23 +14,9 @@ layout: default
 				<a href="{{ '/projects/' | relative_url }}"><u>All Project Pages</u></a>
 			</p>
 		</header>
-
-		<div class="row aln-center" style="margin-top: 1.5em;">
-			<div class="col-10">
-				<details>
-					<summary style="cursor: pointer;">Browse all project pages</summary>
-					<ul style="margin-top: 1em;">
-						{% for p in site.projects %}
-							<li style="margin-bottom: 0.5em;">
-								<a href="{{ p.url | relative_url }}"><u>{{ p.title }}</u></a>
-								{% if p.summary %}<span style="color: var(--text-muted);"> — {{ p.summary }}</span>{% endif %}
-							</li>
-						{% endfor %}
-					</ul>
-				</details>
-			</div>
-		</div>
 	</section>
+
+	{% include projects_directory.html %}
 </article>
 
 

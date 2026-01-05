@@ -1,0 +1,46 @@
+<section style="margin-top: 2em;">
+	<header style="text-align: center;">
+		<h3><u>Project directory</u></h3>
+		<p style="margin: 0.5em 0 0; color: var(--text-muted);">
+			A detailed index of all projects (helps link checkers and makes projects easier to browse).
+		</p>
+	</header>
+
+	<div class="row aln-center" style="margin-top: 1.5em;">
+		<div class="col-10">
+			<details>
+				<summary style="cursor: pointer;">Expand full directory</summary>
+				<div style="margin-top: 1em;">
+					{% for p in site.projects %}
+						<article style="margin-bottom: 2em; padding-bottom: 1.25em; border-bottom: 1px solid rgba(255,255,255,0.08);">
+							<h3 style="margin-bottom: 0.25em;">
+								<a href="{{ p.url | relative_url }}"><u>{{ p.title }}</u></a>
+							</h3>
+							{% if p.summary %}
+								<p style="margin: 0.25em 0 0.75em; color: var(--text-muted);">{{ p.summary }}</p>
+							{% endif %}
+
+							<p style="margin: 0 0 0.75em;">
+								<a href="{{ '/' | relative_url }}#{{ p.anchor_id }}"><u>View in Single-Page</u></a>
+								{% if p.external_links and p.external_links.size > 0 %}
+									&nbsp;|&nbsp;
+									{% for link in p.external_links %}
+										<a href="{{ link.url }}" target="_blank" rel="noopener"><u>{{ link.label }}</u></a>{% unless forloop.last %}&nbsp;{% endunless %}
+									{% endfor %}
+								{% endif %}
+							</p>
+
+							{% if p.content %}
+								<div class="project-content">
+									{{ p.content | markdownify }}
+								</div>
+							{% endif %}
+						</article>
+					{% endfor %}
+				</div>
+			</details>
+		</div>
+	</div>
+</section>
+
+
