@@ -665,6 +665,10 @@
 			megaLinks.forEach(link => {
 				link.addEventListener('click', function(e) {
 					e.preventDefault();
+					// On non-home pages, we need to navigate back to the homepage (#work panel)
+					// because the panel system only exists there.
+					const workHref = workLink ? workLink.getAttribute('href') : '/#work';
+					const homeBase = (workHref && workHref.indexOf('#') !== -1) ? workHref.split('#')[0] : (workHref || '/');
 					const kind = this.getAttribute('data-filter-kind');
 					const value = this.getAttribute('data-filter-value');
 					const pending = {};
@@ -677,8 +681,9 @@
 					if (kind === '3d-modelling') pending['3d-modelling'] = value;
 					if (kind === 'ai-ml') pending['ai-ml'] = value;
 					if (kind === 'cv') pending.cv = value;
-					// If we're already on #work, apply immediately; else store and navigate
-					if (location.hash.indexOf('#work') === 0) {
+					// If we're already on the homepage #work, apply immediately; else store and navigate
+					const onHomeBase = (location.pathname === (new URL(homeBase, location.origin)).pathname);
+					if (onHomeBase && location.hash.indexOf('#work') === 0) {
 						applyProjectFiltersFromObject({
 							xr: pending.xr || 'all',
 							domain: pending.domain || 'all',
@@ -693,7 +698,8 @@
 						try { sessionStorage.removeItem('pendingFilters'); } catch (_) {}
 					} else {
 						try { sessionStorage.setItem('pendingFilters', JSON.stringify(pending)); } catch (_) {}
-						location.hash = '#work';
+						// Go to homepage work panel (works from dedicated project pages too)
+						location.href = homeBase + '#work';
 					}
 					if (workToggle) workToggle.setAttribute('aria-expanded', 'false');
 				});
@@ -720,6 +726,11 @@
 				if (typeFilter) typeFilter.value = 'all';
 				if (searchBox) searchBox.value = '';
 				try { sessionStorage.removeItem('pendingFilters'); } catch (_) {}
+				// If Work points to a different page (e.g., we're on /projects/*), let normal navigation occur.
+				const workHref = workLink.getAttribute('href') || '/#work';
+				const homeBase = (workHref && workHref.indexOf('#') !== -1) ? workHref.split('#')[0] : (workHref || '/');
+				const onHomeBase = (location.pathname === (new URL(homeBase, location.origin)).pathname);
+				if (!onHomeBase) return;
 				setTimeout(() => {
 					if (location.hash.indexOf('#work') !== 0) {
 						location.hash = '#work';
