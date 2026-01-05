@@ -1,5 +1,6 @@
 {% assign project = include.project %}
 {% assign back_href = include.back_href | default: '#work' %}
+{% assign render_markdown = include.render_markdown | default: true %}
 
 <header>
 	<a href="{{ back_href }}" style="float: right;">
@@ -28,7 +29,11 @@
 	<div class="col-8">
 			{% if project.content %}
 				<div class="project-content">
-					{{ project.content | markdownify }}
+					{% if render_markdown %}
+						{{ project.content | markdownify }}
+					{% else %}
+						{{ project.content }}
+					{% endif %}
 				</div>
 			{% endif %}
 			

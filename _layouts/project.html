@@ -4,7 +4,7 @@ layout: default
 
 <article class="panel project-page">
 	{% assign back_href = '/' | relative_url | append: '#work' %}
-	{% include project_detail.html project=page back_href=back_href %}
+	{% include project_detail.html project=page back_href=back_href render_markdown=false %}
 
 	{% include explore_more.html current_project=page %}
 </article>
