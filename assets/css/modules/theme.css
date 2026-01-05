@@ -176,6 +176,11 @@ select:focus {
   position: relative;
 }
 
+/* Placeholder background while explore-more thumbnails lazy-load */
+img.explore-more-img[data-src] {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 /* Soft edge fades to hint horizontal scroll */
 .explore-more-wrapper:before,
 .explore-more-wrapper:after {

@@ -4,6 +4,46 @@
 (function() {
 	'use strict';
 
+	/**
+	 * Explore more carousel: aggressive lazy-loading for thumbnails.
+	 * Native loading=lazy is inconsistent inside overflow-x containers across browsers,
+	 * so we swap in the real src when the image is near-visible.
+	 */
+	function initExploreMoreLazyImages() {
+		const imgs = document.querySelectorAll('img.explore-more-img[data-src]');
+		if (!imgs || !imgs.length) return;
+
+		function load(img) {
+			const src = img.getAttribute('data-src');
+			if (!src) return;
+			// Avoid re-setting if already loaded
+			if (img.getAttribute('src') === src) return;
+			img.setAttribute('src', src);
+			img.removeAttribute('data-src');
+		}
+
+		if (!('IntersectionObserver' in window)) {
+			imgs.forEach(load);
+			return;
+		}
+
+		const io = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (!entry.isIntersecting) return;
+				load(entry.target);
+				io.unobserve(entry.target);
+			});
+		}, { root: null, rootMargin: '200px 0px', threshold: 0.01 });
+
+		imgs.forEach(img => io.observe(img));
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initExploreMoreLazyImages, { once: true });
+	} else {
+		initExploreMoreLazyImages();
+	}
+
 	function toggleTheme() {
 		const currentTheme = document.documentElement.getAttribute('data-theme');
 		const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
