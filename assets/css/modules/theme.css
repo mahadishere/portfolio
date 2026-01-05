@@ -259,6 +259,27 @@ img.explore-more-img[data-src] {
   }
 }
 
+/* Mobile: Make explore-more cards smaller to fit 3 in viewport */
+@media screen and (max-width: 736px) {
+  .explore-more-card {
+    flex: 0 0 calc((100% - 2rem) / 3) !important;
+    min-width: 0;
+  }
+  .explore-more-card img {
+    height: 100px !important;
+  }
+  .explore-more-card > div {
+    padding: 0.6rem 0.7rem !important;
+  }
+  .explore-more-card > div > div:first-child {
+    font-size: 0.9em;
+  }
+  .explore-more-card > div > div:last-child {
+    font-size: 0.8em;
+    margin-top: 0.25rem;
+  }
+}
+
 /* Go Back Button */
 .go-back-btn {
   padding: 0.5em !important;
