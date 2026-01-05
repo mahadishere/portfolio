@@ -1,6 +1,5 @@
 {% assign project = include.project %}
 {% assign back_href = include.back_href | default: '#work' %}
-{% assign show_permalink = include.show_permalink | default: false %}
 
 <header>
 	<a href="{{ back_href }}" style="float: right;">
@@ -9,10 +8,6 @@
 		</button>
 	</a>
 	<h2>{{ project.title }}</h2>
-
-	{% if show_permalink and project.url %}
-		<a href="{{ project.url | relative_url }}"><u>Dedicated Page</u></a>&nbsp;
-	{% endif %}
 
 	{% if project.external_links %}
 		{% for link in project.external_links %}
