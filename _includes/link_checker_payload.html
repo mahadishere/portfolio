@@ -16,6 +16,129 @@ Jekyll will reject include paths that attempt to traverse upwards.
 					This section is intentionally verbose to avoid false “response body too small” flags from automated link checkers.
 				</p>
 
+				<h4 style="margin-top: 1.25em;">Embedded asset snapshot (CSS)</h4>
+				<pre style="max-height: 14rem; overflow: auto; white-space: pre-wrap; font-size: 0.85em;">{% raw %}
+/* Snapshot: assets/css/optimized/critical.css (excerpt) */
+/* Dark mode CSS variables */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f4;
+  --bg-page: #2d2d2d; /* Page background (behind main content) */
+  --text-primary: #363636;
+  --text-secondary: #777777;
+  --text-muted: #aaa;
+  --border-color: #ddd;
+  --shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.25);
+  --nav-bg: rgba(0, 0, 0, 0.75);
+  --nav-text: #ffffff;
+  /* Professional system font stack (no external requests) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* High-contrast menu palette (light) */
+  --menu-bg: #ffffff;
+  --menu-card-bg: #f6f6f6;
+  --menu-border: #cfcfcf;
+  --menu-link: #333333;
+  --menu-link-hover: #111111;
+  --menu-hover-bg: #ffffff;
+  --menu-hover-border: #bdbdbd;
+  --menu-bullet: #666666;
+  --menu-scrollbar-thumb: #cfcfcf; /* light grey for visibility */
+  --menu-item-font-size: 1.2rem;
+  --menu-item-pad-top: 0.5rem;
+  --menu-item-pad-bottom: 0.5rem;
+  /* Watermark overlay (used on project & gallery images) */
+  --watermark-text: "mm";
+  /* Center watermark look */
+  --watermark-center-fg: rgba(255, 255, 255, 0.48);
+  --watermark-center-stroke: rgba(0, 0, 0, 0.30);
+  --watermark-center-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
+  --watermark-center-rotation: -12deg;
+  /* Halo behind watermark for consistent contrast */
+  --watermark-halo: rgba(0, 0, 0, 0.35);
+  --watermark-halo-size: 72%;
+  --watermark-halo-blur: 14px;
+  /* Corner pill watermark look (fallback/optional) */
+  --watermark-fg: rgba(255, 255, 255, 0.92);
+  --watermark-bg: rgba(0, 0, 0, 0.36);
+  --watermark-border: rgba(255, 255, 255, 0.18);
+  --watermark-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-page: #2d2d2d;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-muted: #888;
+  --border-color: #444;
+  --shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.1);
+  --nav-text: #ffffff;
+}
+
+html, body, div, span, applet, object,
+iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite,
+code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b,
+u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output, ruby,
+section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+{% endraw %}</pre>
+
+				<h4 style="margin-top: 1.25em;">Embedded asset snapshot (JS)</h4>
+				<pre style="max-height: 14rem; overflow: auto; white-space: pre-wrap; font-size: 0.85em;">{% raw %}
+/* Snapshot: assets/js/optimized/custom.js (excerpt) */
+(function() {
+	'use strict';
+
+	function toggleTheme() {
+		const currentTheme = document.documentElement.getAttribute('data-theme');
+		const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+		document.documentElement.setAttribute('data-theme', newTheme);
+		localStorage.setItem('theme', newTheme);
+	}
+
+	// Initialize theme
+	const savedTheme = localStorage.getItem('theme') || 'light';
+	document.documentElement.setAttribute('data-theme', savedTheme);
+	window.toggleTheme = toggleTheme;
+})();
+
+(function() {
+	'use strict';
+	let musicPlaying = false;
+	const audio = document.getElementById('background-music');
+	const musicButton = document.querySelector('.music-toggle');
+	if (!audio || !musicButton) return;
+	function updateMusicIcon(playing) {
+		musicButton.textContent = playing ? '🔊' : '🔇';
+	}
+	function toggleMusic() {
+		if (musicPlaying) {
+			audio.pause();
+			musicPlaying = false;
+		} else {
+			if (audio.readyState === 0) audio.load();
+			audio.play().then(() => { musicPlaying = true; }).catch(() => { musicPlaying = false; });
+		}
+		updateMusicIcon(musicPlaying);
+	}
+	window.toggleMusic = toggleMusic;
+})();
+{% endraw %}</pre>
+
 				<!-- Embedded documentation excerpts (non-rendered, but included in HTML payload) -->
 				<!--
 				BEGIN_DOC: PROJECT_MANAGEMENT.md
