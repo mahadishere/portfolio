@@ -12,7 +12,7 @@ url: "https://mahadmufti.com"
 
 collections:
   projects:
-    output: false
+    output: true
     permalink: "/projects/:name/"
 
 # Defaults for posts
@@ -23,6 +23,11 @@ defaults:
     values:
       layout: post
       author: "Mahad Mufti"
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
 
 exclude:
   - README.txt

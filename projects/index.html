@@ -1,0 +1,39 @@
+---
+layout: default
+title: Projects
+description: Dedicated project pages for Mahad Mufti’s portfolio.
+permalink: /projects/
+---
+
+<article class="panel">
+	<header style="text-align: center;">
+		<h1><u>Projects</u></h1>
+		<p style="margin-top: 0.5em;">
+			<a href="{{ '/' | relative_url }}#work"><u>Back to Homepage Grid</u></a>
+		</p>
+	</header>
+
+	<section>
+		<div class="row aln-center" style="margin-top: 2em;">
+			{% for project in site.projects %}
+				<div class="col-4 project-card">
+					<a href="{{ project.url | relative_url }}" class="image fit">
+						<img loading="lazy" decoding="async" fetchpriority="low" src="{{ project.card_image | relative_url }}" alt="{{ project.title }}">
+						{% if project.featured %}
+							<span class="featured-badge">★ Featured</span>
+						{% endif %}
+					</a>
+					<h2 style="text-align:center">
+						<a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+					</h2>
+					<p style="text-align:center; font-size: 0.9em; color: var(--text-muted);">{{ project.summary }}</p>
+					<p style="text-align:center; margin-top: 0.5em;">
+						<a href="{{ '/' | relative_url }}#{{ project.anchor_id }}"><u>View in Single-Page</u></a>
+					</p>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+</article>
+
+

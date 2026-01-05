@@ -85,48 +85,6 @@ description: Selected projects in AR/VR, apps, and games.
 					<!-- Dynamically rendered project detail panels -->
 					{% for project in site.projects %}
 					<article id="{{ project.anchor_id }}" class="panel">
-						<header>
-							<a href="#work" style="float: right;">
-								<button class="go-back-btn" aria-label="Go back to projects">
-									<i class="icon solid fa-chevron-left"></i>
-								</button>
-							</a>
-							<h2>{{ project.title }}</h2>
-							{% if project.external_links %}
-								{% for link in project.external_links %}
-									<a href="{{ link.url }}" target="_blank" rel="noopener">
-										<u>{{ link.label }}</u>
-									</a>
-									{% unless forloop.last %}&nbsp;{% endunless %}
-								{% endfor %}
-							{% endif %}
-							{% if project.header_note %}
-								<p>{{ project.header_note }}</p>
-							{% endif %}
-						</header>
-						<section>
-							<div class="row aln-center">
-							<div class="col-8">
-									{% if project.content %}
-										<div class="project-content">
-											{{ project.content | markdownify }}
-										</div>
-									{% endif %}
-									
-									{% if project.gallery_images and project.gallery_images.size > 0 %}
-									<div class="gallery">
-										<h3 style="text-align:center; margin-bottom: 0.75em;">Gallery</h3>
-										<div class="gallery-grid">
-											{% for image in project.gallery_images %}
-												<a href="{{ image.path | relative_url }}" data-gallery="{{ project.anchor_id }}">
-													<img loading="lazy" decoding="async" fetchpriority="low" src="{{ image.path | relative_url }}" alt="{{ image.alt | default: project.title }}">
-												</a>
-											{% endfor %}
-										</div>
-									</div>
-									{% endif %}
-								</div>
-							</div>
-						</section>
+						{% include project_detail.html project=project back_href='#work' show_permalink=true %}
 					</article>
 					{% endfor %}
