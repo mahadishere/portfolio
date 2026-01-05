@@ -1,0 +1,45 @@
+<section style="margin-top: 2.25em;">
+	<header style="text-align: center;">
+		<h3><u>Explore more</u></h3>
+		<p style="margin: 0.5em 0 0;">
+			<a href="{{ '/' | relative_url }}#work"><u>Back to Homepage Grid</u></a>&nbsp;|&nbsp;
+			<a href="{{ '/projects/' | relative_url }}"><u>All Project Pages</u></a>
+		</p>
+	</header>
+
+	<div class="row aln-center" style="margin-top: 1.25em;">
+		<div class="col-10">
+			<div style="display: flex; gap: 1rem; overflow-x: auto; padding: 0.25rem 0 0.75rem; scroll-snap-type: x mandatory;">
+				{% for p in site.projects %}
+					{% if p.url != page.url %}
+						<a href="{{ p.url | relative_url }}"
+						   style="flex: 0 0 260px; scroll-snap-align: start; text-decoration: none;"
+						   aria-label="Open project: {{ p.title }}">
+							<div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; overflow: hidden;">
+								<img loading="lazy"
+									 decoding="async"
+									 fetchpriority="low"
+									 src="{{ p.card_image | relative_url }}"
+									 alt="{{ p.title }}"
+									 style="width: 100%; height: 150px; object-fit: cover; display: block;">
+								<div style="padding: 0.85rem 0.9rem;">
+									<div style="font-weight: 700; line-height: 1.2;">{{ p.title }}</div>
+									{% if p.summary %}
+										<div style="margin-top: 0.35rem; font-size: 0.9em; color: var(--text-muted); line-height: 1.35;">
+											{{ p.summary }}
+										</div>
+									{% endif %}
+								</div>
+							</div>
+						</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<p style="text-align: center; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.9em;">
+				Tip: scroll horizontally to browse projects.
+			</p>
+		</div>
+	</div>
+</section>
+
+

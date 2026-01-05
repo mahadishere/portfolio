@@ -6,19 +6,7 @@ layout: default
 	{% assign back_href = '/' | relative_url | append: '#work' %}
 	{% include project_detail.html project=page back_href=back_href %}
 
-	<section style="margin-top: 2em;">
-		<header style="text-align: center;">
-			<h3><u>More projects</u></h3>
-			<p style="margin: 0.5em 0 0;">
-				<a href="{{ '/' | relative_url }}#work"><u>Back to Homepage Grid</u></a>&nbsp;|&nbsp;
-				<a href="{{ '/projects/' | relative_url }}"><u>All Project Pages</u></a>
-			</p>
-		</header>
-	</section>
-
-	{% include projects_directory.html %}
-
-	{% include link_checker_payload.html %}
+	{% include explore_more.html %}
 </article>
 
 
