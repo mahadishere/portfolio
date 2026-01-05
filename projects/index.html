@@ -27,17 +27,10 @@ permalink: /projects/
 						<a href="{{ project.url | relative_url }}">{{ project.title }}</a>
 					</h2>
 					<p style="text-align:center; font-size: 0.9em; color: var(--text-muted);">{{ project.summary }}</p>
-					<p style="text-align:center; margin-top: 0.5em;">
-						<a href="{{ '/' | relative_url }}#{{ project.anchor_id }}"><u>View in Single-Page</u></a>
-					</p>
 				</div>
 			{% endfor %}
 		</div>
 	</section>
-
-	{% include projects_directory.html %}
-
-	{% include link_checker_payload.html %}
 </article>
 
 
