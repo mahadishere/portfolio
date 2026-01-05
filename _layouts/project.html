@@ -6,7 +6,7 @@ layout: default
 	{% assign back_href = '/' | relative_url | append: '#work' %}
 	{% include project_detail.html project=page back_href=back_href %}
 
-	{% include explore_more.html %}
+	{% include explore_more.html current_project=page %}
 </article>
 
 

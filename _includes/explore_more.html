@@ -8,6 +8,9 @@
 			<div class="explore-more-wrapper">
 				<div class="explore-more-scroller" style="display: flex; gap: 1rem; overflow-x: auto; padding: 0.25rem 0 0.75rem; scroll-snap-type: x mandatory;">
 				{% for p in site.projects %}
+					{% if include.current_project and p.url == include.current_project.url %}
+						{% continue %}
+					{% endif %}
 					{% if p.url != page.url %}
 						<a href="{{ p.url | relative_url }}"
 						   class="explore-more-card"

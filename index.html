@@ -86,5 +86,6 @@ description: Selected projects in AR/VR, apps, and games.
 					{% for project in site.projects %}
 					<article id="{{ project.anchor_id }}" class="panel">
 						{% include project_detail.html project=project back_href='#work' show_permalink=true %}
+						{% include explore_more.html current_project=project %}
 					</article>
 					{% endfor %}
