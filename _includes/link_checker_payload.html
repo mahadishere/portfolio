@@ -3,7 +3,8 @@ Link-checker payload (Jekyll-safe, no Liquid file includes):
 Some automated link checkers appear to judge "brokenness" using the *compressed* (gzipped) HTML byte size.
 To prevent false negatives, we include a collapsed <details> with embedded (hidden) technical text.
 
-Important: Do NOT use `{% include_relative ../... %}` here — Jekyll disallows `..` in include paths.
+Important: Do NOT use Liquid include tags with parent-directory traversal (dot-dot) in this file.
+Jekyll will reject include paths that attempt to traverse upwards.
 -->
 
 <section style="margin-top: 2em;">
