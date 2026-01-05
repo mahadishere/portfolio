@@ -259,10 +259,10 @@ img.explore-more-img[data-src] {
   }
 }
 
-/* Mobile: Make explore-more cards smaller to fit 3 in viewport */
+/* Mobile: Make explore-more cards smaller to fit 2 in viewport */
 @media screen and (max-width: 736px) {
   .explore-more-card {
-    flex: 0 0 calc((100% - 2rem) / 3) !important;
+    flex: 0 0 calc((100% - 2rem) / 2) !important;
     min-width: 0;
   }
   .explore-more-card img {
