@@ -146,6 +146,31 @@ select:focus {
   outline-offset: 2px;
 }
 
+/* Explore more horizontal scroller scrollbar (light grey) */
+.explore-more-scroller {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--menu-scrollbar-thumb) transparent; /* Firefox */
+}
+
+.explore-more-scroller::-webkit-scrollbar {
+  height: 10px;
+}
+
+.explore-more-scroller::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.explore-more-scroller::-webkit-scrollbar-thumb {
+  background: var(--menu-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+.explore-more-scroller::-webkit-scrollbar-thumb:hover {
+  background: #e0e0e0;
+}
+
 /* Go Back Button */
 .go-back-btn {
   padding: 0.5em !important;

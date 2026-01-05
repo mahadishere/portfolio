@@ -1,15 +1,11 @@
 <section style="margin-top: 2.25em;">
 	<header style="text-align: center;">
 		<h3><u>Explore more</u></h3>
-		<p style="margin: 0.5em 0 0;">
-			<a href="{{ '/' | relative_url }}#work"><u>Back to Homepage Grid</u></a>&nbsp;|&nbsp;
-			<a href="{{ '/projects/' | relative_url }}"><u>All Project Pages</u></a>
-		</p>
 	</header>
 
 	<div class="row aln-center" style="margin-top: 1.25em;">
 		<div class="col-10">
-			<div style="display: flex; gap: 1rem; overflow-x: auto; padding: 0.25rem 0 0.75rem; scroll-snap-type: x mandatory;">
+			<div class="explore-more-scroller" style="display: flex; gap: 1rem; overflow-x: auto; padding: 0.25rem 0 0.75rem; scroll-snap-type: x mandatory;">
 				{% for p in site.projects %}
 					{% if p.url != page.url %}
 						<a href="{{ p.url | relative_url }}"
