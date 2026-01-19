@@ -8,7 +8,8 @@ project_type:
   - VR
   - Virtual Tour
 platform: Quest
-featured: false
+featured: true
+show_on_ozaar: true
 summary: Virtual Tour of a Cabin House in the Woods
 external_links:
   - url: https://youtu.be/-x58hS8tkI4
