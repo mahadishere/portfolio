@@ -7,7 +7,7 @@ domain:
 project_type:
   - AI
 platform: Web
-featured: true
+featured: false
 summary: Unsupervised Anomaly Detection for Cheater Identification in Online Games
 gallery_images:
   - path: /images/projects/cheater-identification-in-online-games/image-1-.png
