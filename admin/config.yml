@@ -95,6 +95,20 @@ collections:
         default: false
         required: false
         hint: "Mark as a featured/highlight project"
+
+      - label: "Featured Order"
+        name: "featured_order"
+        widget: "number"
+        default: 0
+        required: false
+        hint: "Lower numbers appear first in featured section"
+
+      - label: "Show on Ozaar"
+        name: "show_on_ozaar"
+        widget: "boolean"
+        default: true
+        required: false
+        hint: "Toggle visibility for Ozaar site"
       
       - {label: "Tags", name: "tags", widget: "list", required: false, hint: "Additional keywords (optional)"}
       - {label: "Summary", name: "summary", widget: "text", hint: "Short description for project cards"}
