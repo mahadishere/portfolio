@@ -8,7 +8,8 @@ domain:
 project_type:
   - 3D Model
 platform: Desktop
-featured: false
+featured: true
+show_on_ozaar: true
 summary: 3D Modeling Samples
 gallery_images:
   - alt: "1"
