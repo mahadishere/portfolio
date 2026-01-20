@@ -8,6 +8,7 @@ project_type:
   - Game
 platform: Mobile
 featured: false
+show_on_ozaar: false
 summary: Blast 2D Spaceship Shooter Arcade!
 external_links:
   - url: https://play.google.com/store/apps/details?id=com.ozaar.sas&pcampaignid=web_share
