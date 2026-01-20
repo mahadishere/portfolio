@@ -8,6 +8,7 @@ project_type:
   - Game
 platform: Desktop
 featured: false
+show_on_ozaar: false
 summary: Survive Until Your Last Breath !
 external_links:
   - label: Download on Steam
