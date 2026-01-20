@@ -9,6 +9,7 @@ project_type:
   - AI
 platform: Web
 featured: false
+show_on_ozaar: false
 summary: AI Furniture Designer to Create Your Dream Spaces
 gallery_images:
   - path: /images/projects/ai-furniture-designer/01.jpg
