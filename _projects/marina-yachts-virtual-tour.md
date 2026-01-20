@@ -9,6 +9,7 @@ project_type:
   - Virtual Tour
 platform: Web
 featured: true
+show_on_ozaar: true
 summary: Marina Virtual Tour using Unreal Engine 5.5 & Pixel Streaming
 external_links:
   - url: https://youtu.be/GJSLo4zMYcc
