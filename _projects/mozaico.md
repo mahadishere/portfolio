@@ -9,6 +9,7 @@ project_type:
   - App
 platform: Mobile
 featured: true
+show_on_ozaar: true
 summary: Transform Your Space with Mozaico AR
 external_links:
   - url: https://apps.apple.com/pk/app/mozaico-ar/id6742782310
