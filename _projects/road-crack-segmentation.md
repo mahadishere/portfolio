@@ -9,6 +9,7 @@ project_type:
   - CV
 platform: Desktop
 featured: false
+show_on_ozaar: false
 summary: AI-Powered Road Crack & Distress Detection System
 header_note: ""
 gallery_images:
