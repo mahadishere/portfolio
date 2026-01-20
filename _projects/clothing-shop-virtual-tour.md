@@ -8,6 +8,7 @@ project_type:
   - Virtual Tour
 platform: Web
 featured: false
+show_on_ozaar: true
 summary: Virtual Tour of a Fashion Store.
 external_links:
   - url: https://youtu.be/1pVZTRv3y4o
