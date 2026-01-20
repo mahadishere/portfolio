@@ -9,6 +9,7 @@ project_type:
   - AR
 platform: HoloLens
 featured: true
+show_on_ozaar: true
 tags:
   - HoloLens
   - Pre-surgical Planning
