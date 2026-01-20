@@ -9,6 +9,7 @@ project_type:
   - App
 platform: Mobile
 featured: false
+show_on_ozaar: true
 tags:
   - Product Visualization
   - Retail
