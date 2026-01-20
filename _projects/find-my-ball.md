@@ -9,6 +9,7 @@ project_type:
   - AI
 platform: Mobile
 featured: false
+show_on_ozaar: true
 tags: []
 summary: AI-powered golf ball finder that spots your ball instantly in grass,
   trees, or rough.
