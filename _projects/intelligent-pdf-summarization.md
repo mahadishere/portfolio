@@ -8,6 +8,7 @@ project_type:
   - AI
 platform: Desktop
 featured: false
+show_on_ozaar: false
 summary: Intelligent PDF Summarization & Technical Document Understanding
 gallery_images:
   - alt: "1"
