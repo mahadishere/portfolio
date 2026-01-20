@@ -10,6 +10,7 @@ project_type:
   - R&D
 platform: PCVR
 featured: false
+show_on_ozaar: true
 tags:
   - CAD
   - SolidWorks
