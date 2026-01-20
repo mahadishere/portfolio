@@ -8,6 +8,7 @@ project_type:
   - AI
 platform: Desktop
 featured: false
+show_on_ozaar: false
 summary: AI-Powered Medical Anomaly Detection System
 gallery_images:
   - path: /images/projects/anomaly-detection-in-mri-images/01.jpg
