@@ -9,6 +9,7 @@ project_type:
   - App
 platform: Mobile
 featured: false
+show_on_ozaar: true
 summary: Educational Gamified App for Child Enthusiasts
 external_links:
   - url: https://play.google.com/store/apps/details?id=com.stem_buddies.ar&pcampaignid=web_share
